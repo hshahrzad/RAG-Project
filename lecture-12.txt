@@ -1,0 +1,666 @@
+and so today to kind of help you a little bit in uh some of the uh coding
+parts of the homework NES will give a lecture and talk a little bit about py and Associated uh things so uh before n
+starts any questions for
+me okay so NES why don't you take it over okay thank
+youit um so as uh you said like today
+we'll be talking about in general Hands-On machine learning we'll be looking at
+like uh how do we want to design our machine learning experiment like what
+are the key questions we need to First even ask ourselves uh before going ahead and then
+like we'll discuss some of the tools that are commonly used to to achieve our
+goals achieve like Implement our solution and uh also document them
+properly so here like some of the key tools that we'll be discussing is going
+to be pytorch of course that's the Deep learning framework that we'll be using in the class and which it's also the
+most open source and widely used uh machine learning
+framework uh we'll also be actually uh going discussing uh
+a bit about one B which is a machine learning documenting tool here
+like and uh other than this we will look
+essentially into uh we'll like look at a demo problem which is similar to what
+what you have in your homework as well but it's it's a simpler one and we'll look of like what a life of an ml
+experiment looks like when we when we go about solving this uh demo
+problem so yeah let's uh go ahead uh so a life
+of an ml experiment uh is like far from just training a model like it
+encompasses an entire life cycle uh that includes problem formulation data Gathering
+pre-processing model building training evaluation and a continuous iteration
+like among each of these components so in this notebook so it's
+it's a it's going to be a live demo kind of a lecture so I'll will like at some
+places like I will on the Fly will write the code as well and feel free to stop
+me anywhere in the during the lecture like if something is confusing or something is not clear how it happen
+so yeah and here for for the demo problem here we'll be using um a subset
+of the CFR 10 where we want to identify images of cats from images of dogs so
+we'll be dealing with a binary image classification task and uh we'll see like how how we build a neural network
+uh and train it and visualize some of the the key parametrics that we want to
+look at so uh the first let's discuss like what
+are the key stages in the ml experiment life cycle so one is you define your
+problem so here like you the core things that you want to do is like understand
+the problem that you are trying to solve and Define clear objectives and metrics that will be used to assess success so
+um then you want to Define Your solution like what is on what is the backbone of
+your solution going to look like so here like the key things you want to do is you want to want to concretize the data
+presentation your model your loss and your optimiz optimization choice and uh
+this stage essentially involves mapping the problem to a concrete machine learning
+setup and then you go about uh doing like implementing a solution where like
+there are like multiple steps but of course like you begin with setting up the envirment like deciding which
+framework to use um you you you want to prepare your data in a format which is
+amable to your machine learning framework and then you want to set up
+the model and optimization process uh then you train your model you evaluate
+and you like continuously log some of the key metrics uh so that like you can
+make judgments of how how your training went uh and for that like we will use
+experiment tracking tools like WB as I said earlier and then like you you based on the feedback that you get like you
+iterate over your experiments so we'll be going into a detail of each of these
+components of course like we'll be like delving a lot much deeper on the implementing part so but that's going to
+be the overview of this lecture and um let's begin by like how
+what what questions we want to we ask ourself when we go about defining a problem so for as I said like the demo
+problem that we'll be using is we want to classify images of dogs versus cats
+so first U there are like three I think main questions that we want to ask like
+what is my input going to look like uh and here like most of in most of the
+machine learning that we typically do there is some form of predictiveness like we've given for an input like we
+want to predict some output um this is not always true there
+are going to be some machines learning problems where you don't have a output you like it's not predictive in nature
+but that's still a small part and so far the things that we have seen are of this
+nature so like I'm just uh just just uh
+using that large class of problems to uh Define these questions but yeah uh be
+aware that okay like uh right now I have one of the questions that I have listed is what is my output it may not always
+be true that you have some output to predict on but for the large class of ml problems you it will be the case so so
+first question is what is my input X and for this demo problem the input is going to be an image of a dog or a
+cat and then like you want to ask like what is my output so the output is going
+to be a label indicate indicating whether the image is a cat or a dog and
+and how do I want to measure success in this case one Natural Choice is we measure the accuracy over some set of
+data points um where accuracy is defined as the percentage of correctly
+classified images so
+for for this simplistic simple example of uh uh just doing this binary
+classification it this this Choice uh this uh these answers do make
+sense um and like they they they are a good enough choice but uh maybe like one
+exercise problem that we can see is like what if you want to build chat GPT uh then in that case like what is
+like how will you go about answering these questions so I mean like
+uh there is maybe like not uh like a clear answer to these questions but like
+uh if anyone still wants to take stab at it and like maybe uh interactively we
+can try to answer or like at least list some of the potential choices so I guess first thing we we
+need to just poize the input so we can you know work with some numerical values
+as we usually do so and then uh uh this
+is not you know I'm coming up it but you know like a background knowledge that
+basically uh giving some tokens and predicting the next so in in that sense
+if we penize the text Data then we can have uh like some numerical vectors as
+an input and based on whatever uh window size that you want like we can say you
+know let's look at 16 tokens and generate or predict the next one or look
+at 16,000 tokens and generate the next one but basically that's probably how it
+plays out so you are right in a sense but like
+I think that's that's still like going too ahead what I would say is like what you are describing is a is is is the
+component of a solution like how how you want to go about solving that problem
+but here like we are like still at a even a b more basic step that like for
+this problem that like okay like uh I am a company and to me someone gave me a problem that like you I I should build
+chat GPT then like what does even my input is going to be like like how how
+do I Define this problem like build chat GPT is very vague problem right like
+what is my inputs so I mean you're correct that that I understand that's what what I mentioned was just the
+language model which is still far from like a conversational system and all
+that because you know like that model just predict the next word but then you
+know how do you answer you know something you know how how many words you're going to predict and then you're
+going to stop and all these I guess becomes uh like the the the more more uh
+the details about the problem and we're still far from what you just mentioned
+which is how do we frame the whole thing right yeah how do you even frame like
+how do you even like concretize this like statement build CH GPT so here of
+course like uh what is my input like in the like at least uh a couple of years
+ago like uh I mean everything was mostly like it was a conversational chat bot
+which which uh where your input is uh almost all of the times like just text
+so like one option could be like your input is going to be a text it can be any generic text uh but okay these days
+like it's not just text like it could be text and images like combined
+so we can uh uh I mean like these are like
+uh yeah these are like some of the particular options like what ises my input X can look like uh for for this
+problem but uh again like this this may not be the exhaustive list like you you
+might want to consume like any Media or any kind of uh thing that can be
+captured like in in by by your computer so like it can be videos it can be a
+document like in some special format so yeah but but these are like some of
+the simple choices maybe that we can take to answer this question and
+then uh for about the output uh in in the case of chat GPT I
+guess like it's it's uh still going to be something similar as your input because like it it kind of is operating
+in the same domain as your input so it like the I think the same applies like it's either the text or it could be a
+text and a image or like any kind of multimedia so so here I think maybe I can answer it
+like this but then like how do I measure success like for for this V problem like
+what is my measure of success like uh is it uh is it going to be something
+similar to accuracy that I defined earlier that uh uh I have some some
+some gold answers and I I just compare it whatever
+my model predicted was exactly equal to the gold answer or not so like accuracy
+is one option but uh yeah of course like uh it's it's
+uh it doesn't feel right because like
+uh it's uh it's like there are in in in the such a general case like uh there is
+no one definition of the gold answer so um one
+uh thing that we can uh think of is like maybe like we we uh
+generate uh multiple answers from our
+model and uh rate it using an
+expert so I'm just listing some of the uh things uh that that we can do in this
+case but uh yeah I'm also realizing that I may be taking too much time in
+discussing this so uh yeah I'll if if there's any question like I'll stop here
+otherwise like maybe like we should jump into defining our Solutions and how do we go about implementing it
+okay so let's come to like how do we want to
+Define our solution so when in defining our solution like uh I feel like these
+are the questions that we want to answer and uh this may not be an exhaustive
+list so like if you if you by by going over this lecture like if you feel like there is something else like we want to
+Define like yeah do let me know but uh so the first thing is like how do I make
+a collection of such inputs and outputs like also known as like how do I create my data set uh so for the demo example
+that we saw we can gather images of cats and dogs from various sources and manually label them someone has already
+done this for us so like the CFR 10 data set exists and
+we'll be just using a subset of that data set and our case but uh typically
+for a general ml problem like uh that's where you start like you have defined like what your X and Y is going to look
+like now you want to collect your data and then the question you want to you want to ask is like how do you
+represent your input X in numbers because uh as we have seen like machine
+learning algorithms like just consume numbers like they can't consume like any other format so in in this case we can
+represent an image as a 3D tensor or tensor is just a n dimensional array so
+we'll be using tensors quite a lot in this in this lecture but yeah just know that like tensor is just a n dimensional
+array um and I say 3D tensor because like an image like is typically represented by its height and width and
+there are like three channels for RBG so that's how we can potentially
+like represent an image and that itself like gives us a like a like a tensor of
+numbers uh uh which which is a good represent which
+which mathematical model can consume then we come to how do I represent my
+output in numbers so here we can uh represent the output as a single number
+we can assign zero for cat one for dog and we want to predict either zero or
+one and this is like we have seen in binary classification task and then like we come to how do I map my input to my
+output so this is also known as like what is my model so in this case like of course like there are multiple choices
+any mathematical functions which takes you from a 3D tensor to a like a scalar
+output like works here but as we have seen like maybe like neural networks are
+one good choice so we'll be using a simple fully connected neural network with one headden layer um then we come
+to how do I measure success in a differentiable way because like we want to optimize this so this is also known
+as like what is my loss function so we have already seen in the class that binary crossentropy for binary
+classification task is a a good choice and note that like you like again like
+we quantify the opposite of success that is the cost of making a mistake when we are defining the loss
+functions so and the last question is like how do I train my model like I have the my solution Define like what is my
+training process is going to look like so also like what is my Optimizer so
+here like we'll be using stochastic gradient descent to minimize the loss uh
+remember the stochastic gradient descent is just a mini batch version of gradient descent which operates on like uh small
+samples of your data set u once at a time like at at one one time
+so uh these are the choices that we are making for our solution for this problem
+of uh classifying the images of dogs from cats uh I think these questions you can
+ask for any kind of ml problems that you go about solving and um they will like
+kind of set up your solution like logically that like this is what you want to do now let's uh look at like how
+how do we uh go about implementing such a solution um using
+current and most popular Frameworks that exist so we first go into setting up the
+envirment so here like we'll be doing a bunch of imports so the most of the
+Imports are like for p torch which you import it like this import torch and uh
+so these are the primary libraries used for building and training neural networks so and then like there are like
+sub modules in this Library the important ones are which I have
+imported here is ts. NN which contains the building blocks for creating neural
+networks and then there is nn. functional which provides functions for
+that are used as building blocks in neural networks then another one important one is the tor. optim this
+usually provides implementations uh of various optimization algorithms such as
+uh SGD and then there is uh t.s. data which
+simplifies the it provides abstraction over your data loading process for doing training and
+evaluation um in this case since we are using the C 10 data set which is a very popular data set available inside this
+torch vision. data sets so that's also something that what we are importing so
+let's just run this block to have all of these libraries in
+our environment and now like another set of uh um
+Library not set but another library that we'll be using to kind of track our
+experiment is this w b which is which is short for weights and biases uh it is it
+is um pretty neat um a library to like log metrics visualize results store them
+in the cloud and uh like just we will will as we go like we'll see like how
+power like what all we can do with it uh it's a um I mean it does require you to
+like create an account and then like you when the first time you run it like you have to enter some of your credentials
+so that like it can store uh like on the cloud you can also run without logging in but that way like you'll be only
+storing your data locally here like I have already set it up this envirment so
+like it won't ask me to log in but like it will say that currently logged in as
+uh my username and then it creates a run for this experiment uh which is
+available here uh so when you're try initializing this Library like these are
+the key things that you want to mention uh first the project so project is just
+like assume imagine like it is just a folder for your experiment uh and you
+give a name to it here like it's handson ml live demo and then you define the config so config is where you store your
+hyper parameters so these are the variables that you might want to iterate over so with so that like you just like
+give it as a config so so uh here like I
+know like I'll be using learning rate number of epo bat size these kind of things later as a as my hyper parameter
+so I have listed them here uh they don't need to be fixed like often times like
+you uh EXP experiment and then you realize maybe something else like you want to introduce as a hyper parameter
+so like over the life of an ml experiment like you can you keep modifying
+it so uh here there are some links that it gives like it it it gives you the
+link of view project at this and so on M live demo and view the run here so if I
+click here okay it's opening the
+[Music] so so it opens up like this and there
+like there is only one run which is this like it gives a name fresh rain there are no metrics logged yet so nothing
+appears here but as we'll see like later like it will this this thing will starts
+getting populated as we start writing um our data here so
+yeah coming back to our notebook we can just like um it's just
+our config I've just printed here so now like our envirment is uh uh like we have
+set up set it up our envirment and then like comes the data preparation part so
+here um as I said like we'll be using a subset of the ca 10 data set and and uh
+since we are dealing with images like typically like uh there is some form of
+pre-processing you want to do over over uh um over over images so that like your
+neural networks uh performs in a generalizable way and that you can
+Define using this like transforms uh uh module provided by uh
+pytorch so here we have composed two transforms to be applied on an image
+first is like it it converts it into the tensor the second it like it normalizes
+your um uh it normalizes your image by this mean and this uh standard deviation
+so uh and that like we like in the next cell we'll see like how do you pass this
+function so it it like it just creates a transform function here here and then you can also like
+optionally um pass this target transform uh so function which which will map your
+targets uh to like from one value to another so we are using it for like as
+you can see like it's a very simple function here it it uh it gives you zero if x equal to 3 other if the input is
+three otherwise it gives one so because like we want to to map cats to zero and
+dogs to one and in CA 10 like cats take the label three and dogs take the label
+five so that's why like we have just like made this target transform which will because we'll be subsetting our CA
+hold CA 10 data set to just to cats and dogs so that's why like we we have this
+target transform which will map it to just zero and one so this is about the
+transformation functions that you can typically use then like you you load the
+data set using this data sets. CA 10
+um uh as you can see like you like give the the transform and Target transform
+functions here uh and so let me just
+this so it if if if the data is not already downloaded it will download it
+and like cach it in some local Direct or like some cash directory here I have already have the data downloaded so uh
+yeah just reuse that so here if you can see like uh these uh two statements are
+just like loading the full data set and then like I'm trying I'm identifying
+which are the indexes which correspond to classes three and five so class three
+is cat class 5 is dog and uh I'm just like uh doing my training data set now
+is is the subset of the full data set subset it over the like the three and
+five indexes so and similarly I'm subsetting the test data set and then like we
+create a validation data set so we choose that okay like 80% of the data points from the training set we'll be
+using at as we'll be using as uh training points
+and 20% of them will be using as validation data set validation data set
+is used to like while you keep while you iterating over your hyper parameters
+trying to find the um the the best hyper parameter for your
+experiment like you use your validation data set to validate those choices so here like 8020 split is a
+common choice that people typically make so that's what we are doing and uh this
+this uh command like does a random split of your train data set of sizes train
+size and Val size so that will give me my train data set and my validation data set so here like U it's always a good
+good good practice to like kind of like just see your data set and see like if
+how does it look so we can try to visualize like some sample images from the data set as you can see like there
+are not very like High Fidelity images but like they do resemble like some of
+them are cats some of them are dogs and that's what our data set is
+so uh you can also do like more um like Advanced analysis and try to figure out
+like how many uh data points correspond to like a particular class and maybe
+something else but here like I'm just giving you a sample visualization that you may want to do when you're are
+working with um uh with with your uh data set that you have
+created so after this like now we have the data
+set in our um space and then like what you want to create is something called a
+data loader a data loader is uh like another abstraction over your data set
+which is it's it's it's a it gives you functionality to load data in batches as
+I said like typically in deep learning or machine learning when when we are doing any any kind of gradient descent
+we are typically doing the stochastic version of the gradient descent or like the mini batch version of it so like we
+load our data in batches and then we like run our model or like our training
+or evaluation on on batches so this because like this is such a common
+operation so there's a like like a dedicated functionality given for by P
+torch which which uh lets you uh wrap around your data set in the
+data loader object and here like the some of the key um arguments that you
+want to pass here is uh you want to pass
+U um your what's your bat size is going to be so here so here I'm just using my
+config dobat size which I defined when I was defining my want B environment so
+here I'm using the 32 bat size and
+[Music] sorry right and then like uh another key
+argument that you want to Define is like whether you want to shuffle this data set or not every time like you are
+iterating over your data loader so for training like uh you do always kind of
+want to shuffle your data set and for validation in test you want to uh keep
+it to false and that's what we have done so like we have created this data loader strain loader Val loader and test loader
+so that concludes our data processing steps that are involved um are there any questions so
+far yeah okay so let's let's uh look into like
+setting up our model loss and Optimizer which which are like the key components
+of our solution um sorry just give me
+SEC yeah okay so any kind of neural network
+that you any kind of model that you define in in in py
+you like you define it as a class which sub subclasses this NN do module of uh NN do
+module is just like a easy wrapper uh that that py torch provides which which
+uh uh lets you like makes your life quite easy like in terms of like
+organizing all the parameters in one's place and uh working through them so
+here like as I said like we so like we have created this class simple binary net and we have subclassed it from the
+nn. module so any kind of mod like neural network class that you create
+like you want to Define two main functions one is the init and the other one is the forward in it kind defines
+like what are your parameters going to look like like what what what are your
+moduel parameters actually are and then in the forward like as as the name suggests like you are doing the forward
+pass of your network so like it takes your input and it Returns the
+um uh the the output which is expected from your model so here like I have uh
+like U like uh like I have left it empty like
+to implement on the fly but I do realize that maybe like I'm running out of time
+so I'll just like um uh like just just
+give write the code here directly and then like we can uh go over what are the
+important components of it so just give me a
+second okay so this is um um so here this is like
+the completed implementation of this new network so as you can see in in it we
+have essentially four parameters first is W1 which is
+a matrix from of of of shape input size
+cross hidden size uh input size is one of the arguments to this init function
+and it is of the shape 3 cross 32 CR 32 which is going to be the shape of our
+image and then like we have the hidden size um so hidden size like can also be
+passed as an argument and uh remember that like in when I was defining my hyper parameters I had this hidden size
+like what was one of the components to it so I can programmatically pass that hidden size to my
+network uh so if if you look at it like um so how you want to define a par
+parameter inside your model like you you you you just create a tensor of that
+shape so for example like here I'm doing creating this this
+um okay for example let's for this one like I'm just want to demonstrate like
+one okay view so here like the if you do tor. randn
+like it just gives you like random values of the shape 4 cross 8 so that's what we are doing here like we are
+creating like a random Matrix of shape input size plus hidden size but
+you will notice that like I'm also sort of normalizing it by some quantity and in your homework as well as
+like maybe if there is some time like we will see that like this form of normalization which is kind of like how
+you're initializing your parameters is uh kind important and uh but right now
+like this is like one one way to like uh appropriately initialize um u u
+uh MLP inside your neural network but there are like other ways
+proposed in literature as well uh which you are going to kind of explore uh as
+part one of as one part of your homework but uh yeah right now like I have just
+the right implementation here so everything works but uh yeah just wanted to point out that like this form of
+normalization is important when you are initializing a parameter so so we have this U W1 which is like a
+parameter of shape input size cross hidden size then we have the bias parameter for this layer which is just
+zeros of shape hidden size and then we have W2 and uh which is the your your
+output layer uh so this takes the this consumes the outputs of the first layer
+as its input and then it just gives like one scale so that's why it's of the size
+hidden size cross one and even this like we are initializing it properly so uh
+our neural network works um and then like we can have a bias parameter here
+and then like uh we I've just defined my hidden activation function so I'm this
+also like I'm passing it as an argument like if it's sigmoid I I use the F do sigmoid function otherwise I'm using f.r
+IF intive is relu uh you can yeah just add anything that you want here like any
+function so now let's look at the forward function so in the forward function like we we get the input X
+which is a input tensor of shave bat size cross 3 cross 32 cross 32
+so [Music] um here um um because like we can maybe
+okay like later we'll see one example of a bat so there like I can show you that the shape is of this like it's uh uh
+actually like it's wrong it should be B comma 32 so it's it's a four dimensional
+tensor of bath size cross 3 cross 32 cross 32 so first we flatten it out like
+uh we we uh so this is an operation that can be done like it's it's just you're
+reshaping it you're keeping the first uh um first axis and then you are
+flattening out all of the uh other axises and this you typically do by uh
+denoting it by minus one so all the rest of the axis gets U um concatenated on
+this this this second axis so in this uh in this this lecture
+like I'm not going into like details of all of the operations that P torch offers but the goal is to like kind of
+give you an overview of how an ml xent or X ml implementation looks like
+so uh that's why I'm not going too much detail into like how how this is like operating under the hood but uh yeah
+just uh uh take the word that like this operation is flattening the image into
+the shape of bad size comma uh all the other uh Dimensions concatenated which
+is going to be 3 * 32 * 32 and then in our forward pass like uh
+if you remember from the like last to last lecture last like yeah last to last
+to last lecture that we did on introduction to deep learning like in The Matrix notations we write it we do
+the matrix multiplication between X and W1 and then we add the B1 so this will
+give us a a a tensor which is of shape bad size cross hidden
+size and uh this is our Z1 then we apply
+our hidden activation function on Z1 to get our A1 um then we take A1 and do the same
+operation as Z1 but like this time we hit we multiply it by W2 and we add the
+bias B2 as well and this gives us the Z2 and ideally like
+um like maybe we should have done like A2 equal to uh self do hidden activation
+function of Z2 but and then like we should have returned the A2 because like
+uh these these like neurons all of these neurons also have the
+nonlinearity but typically like when like at the output layer most of the times the nonlinearities are kind of
+hidden inside your loss function your loss function already like just like includes the final hidden activation
+that is going to be used so and in this case also it is true that's why like we are not adding any like the the hidden
+activation after Z2 so like we'll be just returning Z2 here and that's our forward function and
+we have defined this class we are instantiating it by simple binary net we
+give the hidden size we get the hidden activation and then this is something interesting which one B allows us to do
+like we are adding this model uh like in the WB doat function
+what it does is like we'll see later that like it it lets us visualize how our parameters or like the gradients
+that the parameters it is receiving over time like that it allows us to visualize
+that and like there are certain parameters that you can set like what you want to visualize so you we here
+like all means that we we are visualizing both the gradients and the model parameters and then there is this
+log frequency which is like at at like after how many steps we want to visualize it because like this is like
+uh will will kind of store all your parameters and all your gradients so maybe you you don't want to do it U
+after every step so that's why we Define this frequency we will'll see those visualizations like when we actually run
+our network but yeah just wanted to mention that that's what this wb. watch
+is doing and why is it and uh why do we want to do it maybe like if
+there is time like we can go into when we are debugging this new network but um
+yeah these um like just visualizing like having a visualization of how your parameters are evolving and what kind of
+gradients they are getting is very helpful when you are debugging on your network so any questions so far
+okay so let's uh run this
+cell yeah and then we Define our loss function and Optimizer
+so uh the loss function that we are using like typically it's named Criterion uh I'm not really sure like
+what's what's the background behind naming it Criterion is but uh that's uh what it is and that's uh what Ive also
+used so we are defining this loss function like it's already provided to
+you um like all of the standard loss functions is already given to you uh by
+by pytorch but like if you want to implement your own loss function you are free to do that like it's it's this BC
+with logits loss is just uh like your binary cross entropy loss which also has
+a sigmo operation prepended to it so it will take its predict it's it takes two
+as we'll see like it takes two arguments one is your prediction one and the other is your target values uh which is your
+Gold Label and then like it it applies sigmoid to your predictions and then
+like it it U like applies the binary crossentropy loss function to which
+which takes your Y and Y hat which is your goal Target and prediction predicted
+values in in the function fun so that's been already wrapped around for you by
+the py torch library and similarly the the optimization process the optimizer
+is also wrapped around for you and the optim do SGD so to to any Optimizer you
+want to pass the model do parameters and the uh the the kind of the hyper
+parameters that this uh particular Optimizer is going to be using in case of SGD it is pretty simple it just takes
+the learning rate as U as its argument so let's just uh run this and now maybe
+let's look at like uh like okay it's as as I said like when when we defined our
+data set like it's it's always good to visualize what our data is looking like so here as well like once we have
+defined our Network like it's always a good idea to visualize like what exactly
+is that network doing and uh like how are things looking so so to visualize
+that like there is a nice Library called torch Wiz which lets you you visualize
+kind of the forward pass of of a model your neural network for that it needs a
+sample of uh your data to operate on so we'll just
+get I didn't run it we will get a sample batch from our data
+loader and uh maybe let's also briefly look like what is our sample bat so it's
+actually it's uh let's print it's let's print its type it's a
+list uh the list is of length two let's um look at what its first element is so
+first element is a tensor you can see see its shape so as you can see like
+it's it's of the shape 32 cross 3 cross 32 cross 32 so that's your size of your
+image and this is your batch size so and let's look like what our
+second element to our batch is and as you can see like it's just a tensor of zeros and ones which is of shape 32 so
+because like we have 32 bat size so that's what your data loader outputs uh
+this is a sample batch and to visualize it like we will make a prediction on
+this sample batch so the model our model takes the the first the x of my batch
+and maybe like I could have also written it like this x comma y = to sample
+batch here I could this makes clearer than this is my
+f so yeah Let's uh you'll need the index zero for
+the sample patch why do I need so I mean I'm running on a batch of examples okay yeah
+yeah because like uh my mom my forward pass is written for a batch input so I
+do need the bats access got it um right so as you can see like this is what like
+it neatly visualizes like what my forward pass looks like and for this simple Network like it is
+uh still like not that complicated but it can get pretty complicated uh like if you have like uh
+very complex networks uh but still like it's it's a good youtility to have and
+you can I think there are ways to like neatly organize those complex networks
+uh within this Library as well but here we can see that like um like all of the
+leaf nodes or the trainable parameters are denoted in this blue box which is
+your W1 B1 W2 B2 all of your trainable parameters are here and then at the end
+like we have this loss function which is getting computed so you can trace trace
+this gra and like you can verify that it is actually doing what What U it should
+be doing just a note on this accumulate grad thing like uh so it's just
+implementation detail that like this this Library actually what it does is
+like it analyzes the backward pass of your model and then like it it takes
+that that backward pass graph to uh do
+this visualization and in the backward pass like U before every parameter like
+after every parameter there is this accumulate grad function which is um
+just simple function which is like adding the gradients the new gradients that appears to your existing gradients
+of your model so I don't think that detail is necessary but like if you just wondering like why why is this weird
+thing showing up in this graph that's the reason so yeah I mean we we we kind of
+looked at our computational graph and it makes sense uh so let's um go ahead and
+let's see um uh like let's set up our training and evaluation Loops
+so uh even here like I thought like I'll go over and write these code but yeah I
+don't really have uh too much time left so I'll just go ahead and copy
+so just quickly going over our train function so this is uh the function which takes our model our device so
+device like py torch is a very powerful Library like which lets you use uh uh
+gpus and tpus as well which are the hardware accelerators which which are
+like specifically designed for uh like Matrix operations so in in this demo
+like we are not using it or not even uh uh showing what the difference is but
+like um just for completeness sake I have this device It Takes the Train loader it takes your Optimizer it takes
+your loss function and the epoch that you're running for so this is something
+important that you want to like like in py toch you want to call this you uh dot
+train on your model so this uh like sets up the right Flags inside your model to
+set it up for training and then like these are just some variables which we want to keep
+track of our uh uh like the running loss
+of when we are iterating over when we are doing one Epoch of training and this is just a progress bar
+object that we are making which is like just a wrapper around our on our train
+loader uh so coming to the main part like uh which is this the the body of
+our for Loop so um we are it over our data loader we are getting the data the
+X and and the Y uh from from uh and like
+uh putting it to the right device which is uh um which which we passed as an
+argument and then like one thing that you want to do is like we want to do op call Optimizer do0 gr so this sets like
+all of the gradients of your parameters to zero if you don't set it like as I
+said like as we saw Here There is a accumulate grad operation it will keep on adding to your uh the existing
+gradients that you had for that variable so we'll keep on aggregating the gradients so in most of the times we
+don't want to do that so that's why like it is sort of important to call this Optimizer Zer grad before your UH like
+your iteration begins and so we call zero grad and then
+we get the output we we like do the forward pass which is simply the model
+of data um this gives us output sorry this the output is going to
+be this this Z2 that we we kind the the return of like our forward
+pass and here like now we are Computing the loss which is like uh the Criterion
+like our loss function it takes our output and it takes the target that we got from our data loader and
+this computes the variable uh the scalar variable loss and then we call loss.
+backward so this is what is like main of the core uh ease of pytorch that like it
+lets you compute all the gradients for your parameters just by calling this loss. backward so uh under the hood like
+it is like doing Auto diff which stands for Auto differentiation so it takes your like neural network like it know
+because it has built this graph it knows like what each intermediate values were
+like from which functions and from which variables like each of the intermediate functions came from it applies the chain
+Rule and it can like automatically compute the all of the gradients for these parameters so this is kind of the
+main line where all the magic is happening and it is pretty simple and so
+so much powerful as well so after you have done this like you you like in all
+of the leaf parameters that you have like the boxes in blue their uh dot uh
+their gradient gets uh gets uh computed and stored in like something like W1 do
+grad or b1. grad uh the the the grad you can access the gradients by just
+appending do grad to those variables names and the gradients gets populated
+and then we are doing Optimizer do step so this is what is doing your um your it
+is taking the gradient and it is updating your model parameters by the gradient so remember in case of a
+gradient descent uh this operation looks like like you have W and then you you
+take uh like you you take a like a scaled negative step in the direction of
+your gradient so like it's it's going to look like something like w equal to W
+minus your learning rate times gradient so that's what like this operation will
+do as we'll see later in the class like these optimizers are not always that simple like the the these update rules
+can get complicated so that's why like it's it's kind of everything is like um
+abstracted in this Optimizer do step so for any kind of Optimizer you can just call Optimizer do step and it will like
+do its update rule uh excuse me is that uh step uh
+function also uh take uh learning rate into consideration right because when
+you defined your Optimizer you the learning rate here so it knows the learning
+rate yeah so there were two things that you gave you gave the model do parameters which is a list of these blue
+boxes and you give your learning rate which is the um your your hyper parameter for
+this uh particular object your Optimizer object so it it does take the learning
+rate into account thank you okay so that kind of concludes like
+the main the Crux of your training Loop and uh here like it's it's just some
+logging statements like we are updating the running loss we are then like um
+appending it to our progress bar and also like we are logging it at to the
+our want be object we'll see that like these these variables like Will Come As
+Nice graphs when we like uh actually run this training Loop so that concludes our
+training Loop and then we come to the evaluate and
+uh yeah in the interest of time like I'm not going too much detail on the evaluate Lo but uh like you can go over
+this code and like it's not really not that complicated like it's it's uh it the essential bit is this that it it is
+like getting the data it is doing the forward pass it is Computing the test
+loss by by um running the loss function and then like we are also measuring the
+accuracy which is we we make the prediction as like uh if if my if the
+out the sigmoid of my output was greater than 0.5 then I say it is one and then I
+check whether like this is equal to my target or not and summing it up over my
+batch access also like here when you're are evaluating it's always like an like
+in in machine learning it it is like these things are very fragile so it is always better to have some some grip
+over like what is happening at at different stages of your experiment so if so as I said like earlier as well
+well like in in every step like it is u a very good idea to like have some
+visualizations which which which gives you insights uh into what's happening so here as well like we are kind of saving
+the first batch of sample predictions and then like we are adding that to our
+WB logs um and we will see that like even these images and their predictions
+will come nicely when we open our dashboard so that's our evaluation
+Loop and then comes to uh then we come to the training model here it's a simple
+Loop like we are iterating over like our number of epoch that we defined in
+config we are training the model we are evaluating the model on validation split
+and we are also evaluating the model on the training split to get the training
+accuracy so this way like we can sort of monitor whether like the model is or
+like if the training accuracy is increased ing but the validation accuracy is not increasing that means
+the model is going more into the regime of overfitting the data so that's why
+like it's yeah a good idea to always keep track on the your training
+accuracies or training the difference between your training accuracy and your validation accuracy as well so okay
+let's uh finally run this training Loop and see um what what do we get like in
+right so this model is running I think I'm currently running for 10 epochs
+[Music] and uh here I'm like after every Epoch I'm printing the average uh the on the
+validation set average loss and accuracy and on the training set average loss and
+accuracy as you see the training accuracy is always a bit higher than validation set and when the this
+difference becomes larger and larger when the training um continues
+so the the like now we can see the magic of the the weights and biases Library
+like if I reload this page because I was tracking everything I do see like these
+nice visualizations this is my validation loss over the course of training which is a bit
+Jagged um this is my training loss uh like after every step that's why like
+it's it is like it is so Wiggly but so typically like you you kind of smooth
+out your training losses uh here you can do it by
+like yeah so if you smooth out you can get the
+overall sense of what ex exactly is the trend and then as you can see the
+training accuracy is monotonically increasing like as we will continue doing training but the validation I
+crazy like it is more Wiggly um which would sort of Mak sense
+because like we are training on on like our training data and validation is something like which is just for
+testing um but but if you are like if your model is generalizing then like
+even this should like have the same Trend as your training accuracy now come
+to the other uh important uh things that we logged one was G gradients so here as
+you can see like these W2 W1 B1 B2 parameters like you can see the gradients of your off of uh these um uh
+parameters so like it shows like for after every 100 steps like we are logging it so like it kind of gives you
+a distribution of what these values look like so in our case like uh it kind of
+remains consistent which is sort of a good thing like you you don't want to get like very um High your low gradients
+like you want to get something in uh which which is like maybe centered around zero and like is um sort of maybe
+evenly distributed on the positive and negative side and is not too large and
+that's what we are seeing here which is like a good sign and then we can also
+see our parameters like so like similar to the gradients like we can like it is giving you a distribution over like your
+your parameter values so this is also like sort of uh something which is consistent centered
+around zero which which makes sense um then like there is this panel which
+is Media since we after every um iteration we were we were like when we
+were evaluating we were taking the first batch and we were like uh uh like
+visualizing like how how what is my prediction what is the goal Target so
+here as you can see maybe initially the model wasn't that good uh for this example like it is predicting cat while
+the Gold Label is dog so it is sort of making some mistakes um so I'm not going
+into like uh like into two in-depth analysis but like this is you can see
+that like how this can be valuable like over the course of training like you can see like maybe where you are making
+mistakes and what kind of mistakes you're making so this is uh forms of visualizations are pretty
+helpful which you can which these libraries enable you to do so let's come
+back to our code so here like our training Loop is done at the end like um like at the end
+of like uh your experimental U Loop like
+you want to test your model on your test set and this uh like is s similar to
+like what what we um did earlier in the training Loop that we were calling this evalu our evaluate
+function but this time we'll give the test loader and just name it as test so
+it will will it will give you the test accuracy and you can as you can see like it's 65.5 in our case and like after like
+after once you're finished with your experiment you want to cover like one b. finish so it finishes this run it marks
+as at finished and it gives you this nice summary of your run history so and
+uh sorry these variables will like now if you reload then like you can see this
+test loss appears this test accuracy appears and uh in in the media section
+these test sample predictions also appear so that's mostly completes like
+one run of your ml experiment but like as I said earlier like um in in a
+typical uh life cycle of an ml experiment like you want to keep on iterating over it you want to like find
+the basic uh thing at least you want to do is like you want to see like the
+hyper parameter choices that you made like uh what what are the right things to do
+so these libraries also allow you to do a hyperparameter sweep which is like it
+allows you to automatically explore different configurations uh to optimize your model
+performance and you uh I'll in the interest of time I'll be quickly going over it but of course like you'll have
+access to this notebook and uh uh so you can explore and in your time like how to
+do this but like uh just going quickly over it like it starts with you defining
+a sweep configuration uh this is like the method of your hyper parameter sweep that you
+want to do uh you can like typically like you you can do like a you can set
+it to base like that's like a good default Choice which will like do a
+informed hyper parameter uh space exploration if you are limited on compute but if you want to be exhaustive
+you can do grid which will uh like explore all of the hyper parameter like
+cross hyper parameter choices that you could have made but here like we'll just do base and then then you want to Define
+this like what metric are you looking for like what is your uh what like because like here like I want to
+maximize my valid validation accuracy so like my my metric name is validation
+accuracy and my goal is to maximize it uh then like the parameters of your
+like what hyper parameters you want to um you want to exp do your hyper
+parameter exploration over so here I'm just giving a set of values for learning rate I want to do hyper parameter sweep
+over like U 001101 you can add anything similarly
+for bat size hidden size these are the key things that I want to ablate over
+and I'm keeping the number of EO to be something small because like for hyper parameter sweeps you don't want to do
+full training you want to like just quickly test whether like this how like is this um hyper parameter good or not
+um so so like it it is generally a good idea to keep it small and then you give
+the sweep configuration to wb. sweep you specify which for which project you are
+doing so I'm just repeating that name that we gave earlier this will give you
+a sweep ID which is this everything will get logged here like it gives you the
+URL and then here you define the sweep train function which will take like one
+particular config and the config will be decided based on some instant like some instantiation of
+the all of the choices of your hyperparameters that exist and then you are running your training Loop here and
+then logging all the important metrics that you want to log and it it should
+have this Val accuracy as a as as a as something to be logged because like that is what we are trying to optimize in our
+hyper parameter sweep so this is something very similar to what we did earlier so I just
+uh um Define The Sweep train function and then you run your hyper parameter
+sweep by this command which is um and as you can see like it it is kind
+of uh like sampling one configuration of your hyper parameters like among this
+since we are using uh the base method like it is doing some informed Choice
+over these hyper parameter space and it is like running it for three pox it is
+giving you its run history and then it it does it iteratively and everything
+gets uh logged
+here so so far like three runs have completed um maybe just uh let's wait a
+minute I think it shouldn't take too much time um in the meantime if there
+are any questions so far which I can quickly answer I would be happy to take
+them it should be close to being done on the eighth
+experiment so this one I'm just running for like 10 total experiments like this I specified here okay I didn't
+specify but
+okay let's uh look at the intermediate so like these are all the different runs that we did but this is too confusing to
+see so like it also lets you um kind of visualize this in this neat framework
+that uh like what is the best accuracy that you got and it was this run you could
+you can open this run and then something also uh important is like it also gives
+you this this um visualization like depending on all of the runs it did so
+far like what it thinks like is the important like it computes the correlation factor with with of that um
+that hyper parameter with the final um metric that you were optimizing for and like is it correlated or not based on
+that like it gives you like a important score and here so far it says like hidden size is sort of the more
+important thing and then comes the learning rate um bad size is sort of not important at
+all which is sort of true in most ml cases but and this is also something
+good that it lets you visualize it it gives you like these uh individual runs
+with with different paths they they take they took on the different axes so if
+here as you see like this is the best curve and like this and this was with learning rate 01 with hidden size 256
+with bat size 128 and that give you that gave you the best result maybe I should reload it so that like more runs are
+populated here yeah as you see like right now I think because like I didn't give a count of how many experiments to
+do it is running all of the possible experiments so but I mean this is pretty
+neat like it it lets you visualize like U what what hyper parameters are
+important for you and what is their effect in the final accuracy that you are getting so and like in a typical uh
+lifetime of an ml experiment like you um you you are like doing these iterations
+again and again and this is a nice rapper to do it and now if you see like it says like learning rate is the most
+important factor like once more runs got populated so yeah that's mostly it
+um in in the notebook like I do have like a couple of uh things about like um
+what like some standard practices to do like if you want to debug your neural
+network because often times like as I said like these are very like brittle in nature even like something very small
+like something like initialization can break them so you do want to debug them so like there are like some general rule
+of thumb kind of or like some litmus test that you can do to kind of debug your neural network I'm not going in
+this lecture but uh this notebook will be available so yeah you can take a look
+at your own time okay well thank you Nish that was
+uh I think very helpful for people uh who will be doing homework too
+and also I think further on in the course

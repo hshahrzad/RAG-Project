@@ -1,0 +1,517 @@
+so today we will actually in some sense it'll be the last lecture on uh regression but I will
+actually uh talk a little bit about a seemingly different problem of collaborative filtering recommendation
+or missing value estimation uh and we'll see how regression naturally comes in
+and then we will actually give you a homework today on uh the Netflix problem
+so Netflix I think about nearly probably been about 20 years ago they came up
+with a competition uh where they gave uh tra uh you know uh training data the released
+training data uh or you know subset of ratings that they had uh I think it was
+about 20,000 movies maybe half a million uh users or anonymized
+users and uh they said that you know on the um on a heldout data set they were
+achieving about uh .95 root mean square error and they posed a challenge and
+said that if anybody can uh improve the performance by 10% so about 85 root mean
+square error then they would actually give that team uh a million dollars so
+it was the uh Netflix million doll challenge problem and uh it actually
+spurred on a lot of interesting work in uh machine learning in particular in
+recommended systems and we'll see one aspect of it
+where uh um regression naturally comes and plays a role so I'll talk a little
+bit about that uh talk about the problem uh and then we will assign that as a
+homework and this homework will be available to you uh on canvas and it'll
+be due next week on Friday so before I start any
+questions okay so let me kind of uh review a
+little bit about uh you know what we spoke about last time we talked about
+regression uh and in particular regularization in regression we took an
+particular example about univariate polinomial fitting and we uh
+I showed you some slides uh from the bishop book which we will also upload uh
+where um if you uh use
+to uh higher degree of a polinomial to fit you end up fitting the training data
+exactly but you actually end up doing a poor job on the if a new test Point came
+up right so that's the phenomenon of overfitting and then we saw that one of
+the ways in which it was manifest is that many coefficients were very large and so we tried to uh uh we basically
+added ended up adding um penalty on the size of the
+coefficient coefficient terms and when you add the penalty as uh sum of squares
+which is the norm of w Square then we get rid regression and we looked at R
+regression and we saw it actually solution is actually very similar to a classical Le squares problem except that
+you have Lambda I over here um but then we also analyzed it using the SVD so not
+just a computational tool and we compared it to the Le squares regression
+problem which is essentially an orthogonal projection onto a particular rain space and we saw over here that
+this was in some sense you know like a uh uh a case where the small singular
+values kind of are regarded as noise and they would be set to zero in a smooth
+way using R regression and the large singular values would essentially be uh
+preserved and would be equal to one so that kind of helps you a little bit better in understanding what regularize
+uh R regression does and so you can think of it as a little bit of this phenomenon called shrinkage which is you
+take the large singular values you uh kind of keep them and the small singular
+values you kind of shrink them towards zero okay we gave us geometric
+interpretation also of uh rid regularization that you know if you were
+doing just Le squares regression you would just be you know these points over here which are the global Minima right
+and so that would just be the solution and these are the level sets of the uh
+quadratic uh functional that's in the Le squares problem um and you can think of
+rid regression as saying that I'm going to make sure that my coefficients are uh
+uh have L2 Norm Square less than equal to certain value and that's given by
+this sphere and so the when you minimize F of w subject to uh the constraint that
+your variables lie in this region then you get this solution okay and then we
+didn't do too much we just introduced the lasso which is instead of the
+squared uh uh penalty we have absolute values you know and so that can be
+thought of as you know all my coefficients where the L1 Norm is less
+than a particular value is captured by this surface and you can see that this
+surface has corners and as as a result you know when you minimize F of w subject to your
+coefficients living in this space you kind of end up getting uh sparer
+Solutions note that this you know obviously I'm drawing in 2D but you know your competation is actually taking
+place or your model is uh lives in a d dimensional space okay so we will kind of use a
+little bit of that material and today we will uh look at the problem of a special
+problem in missing value
+estimation okay and in particular this problem comes up in the problem that we
+are going to talk about comes up in recommender
+systems okay and uh again the particular problem that we are going to talk about
+is also known as uh Matrix
+completion and we'll see why it is called that or Matrix
+factorization for recommender systems okay so I told you a little bit
+about the next Netflix challenge okay so suppose you have a bunch of users
+okay so let's assume that there are M users and you know obviously M could be in the hundreds of millions even
+billions now right and you have movies or they actually could be
+you know some items for example let's say on uh
+amazon.com okay and you have M users and suppose you have N
+Movies right and typically users will rate a subset of their movies right so
+suppose there's a particular user and he might say that they did not like this
+movie at all so they gave it rating one but then they liked this movie a lot
+which is they rated as five okay maybe I won't draw
+the circles
+okay so one five but you know a user typically
+doesn't rate you know all the movies right they can't even watch all the movies clearly right
+and they may not also rate all the movies that they watched okay you can maybe get an implicit feel for that but
+there'll be many US movies where we don't know their rating okay so maybe
+another user really liked this movie that this other user hated
+uh they also like this movie and maybe this user is a little bit like the first user where they like
+did not like this movie and like this movie and so on okay so there are many
+ratings okay over here and the question is suppose there
+is a particular user movie pair what is its
+rating so yes it's easy if this user has already rated this particular movie but
+otherwise you have to try to infer if these missing
+vales and the goal of you know a recommender system might be to increase engagement on their platform they they
+want to recommend movies that you know you might actually like so they want to recommend movies where the prediction
+let's say is above four or
+4.5 okay so we have uh ratings
+Matrix sorry
+rate ratings Matrix and let me denote that by
+R okay and so I have this Matrix now which is r
+notice that it's actually going to be very sparse okay if you think about all
+possible user movie pairs it's m time n but a typical user might only rate you
+know tens of movies or hundreds of movies or maybe even thousand if they really like rating right but the number
+of movies might be you know in the millions so this Matrix is going to be
+actually extremely sparse okay with many and when I say spars that means there
+are many many missing
+values okay 99% or more of this m uh Matrix may be missing values so the goal
+over here okay the goal okay and now you can start seeing parallels with the regression problem
+that we've talked about so far okay is that we are given ratings
+okay we want to predict the missing
+values and these would be the actual recommendations so that's the problem
+that we will be looking at okay predict any kind of arbitrary missing
+value in real life situation what you really want is you want to predict the top k right maybe the top 10 or top 20
+movies that a new uh that a particular user might like that they have not seen
+okay so that problem is similar but actually slightly different because you don't care
+whether a user is going to rate a movie 1.5 versus 1.7 right because they don't
+like those movies so you would never really surface them okay but now let's look at it so any
+thoughts about how you you know this this is like a classical recommendation problem many thoughts on how you might
+uh end up solving this problem like how do you guys uh you know try to figure
+out what movies to watch on Netflix I guess Netflix already gives a
+recommendation right so but how would you think about solving this
+problem suppose you are only given this particular Matrix
+oh there's something on the chat let me
+sorry okay soop said find users who are similar to others and then fill in the
+ratings based on the users other users average ratings so great right actually
+you know some of the initial first work on collaborative filtering was based on this KNN kind of approach K being K&N
+being K nearest neighbors right so you find out neighbors right uh who are
+similar to you and then you use their ratings to uh uh infer these ratings so
+that is you know a fine method um and today we will look at you know if you if
+you if we later on look at it we'll see that it has certain similarities but it's actually a little bit more of a
+global method okay so let me just put what rishop kind of suggested right so
+initial methods and these were actually some of the methods that were used in the I want
+to say late 1990s right when Amazon for example was coming up and if you look
+there are certain papers on recommendation systems over you know how
+to recommend um items to users who you know
+may have already bought something okay so the idea is you look at
+neighbors of a user and when I say neighbors I mean
+people who have similar
+ratings I guess today when you buy something from Amazon it shows you a
+list of you know people that buy this also buy those right and actually those have you know
+the kinds of methods that I'm talking about are actually used over
+there does that does that was there a question hormos or you were just Mak no
+I'm just I'm just going with that you know method that yeah mentioned you know
+and you mentioned that Amazon was using it and said and oh yeah still see that
+they're using something similar oh yeah and it's actually a Big Driver of uh uh
+of their products right because it basically comes up to how people discover uh maybe things which are new
+to them they might not have seen before or things which you know have high ratings or people have liked okay so yes
+definitely I did not mean to say that you know they were using them and they don't use them but I just meant to say
+that they were actually you know one of the first companies that needed those recommendations right at a large scale
+okay so what we will study is you know I talked about Matrix completion or Matrix
+factorization and this is the problem by the way you are getting in your uh homework right so we are giving you a
+data set and you will basically uh implement this
+procedure and you'll see that there are some subtleties that will come up when you try to implement
+it okay so here is the
+Matrix R okay suppose it has you
+know I
+throw and this is the J
+column remember this Matrix which is users by
+movies M of users and N Movies okay this is the Matrix R and suppose you know if
+I look at the J movie suppose it has been rated by a few users and suppose I look at the IAT user
+and theyve rated some movies and what I would like to find out is what is this
+value okay and that is R okay and RJ might the I user might not
+have rated the J mod so the model that we use the model
+actually that was quite successful in this competition right the winning team actually used that as one of the components was the following right that
+I'm going to represent it so the idea is kind of similar to the singular value
+decomposition but there'll be differences that I'll talk about that I'm going to say that I'm going to
+factor this as u m
+transpose okay and this Matrix U is M by
+k k by
+n okay and the model is the following right and K is typically going to be
+much smaller than MN so much smaller than Min of
+MN okay and the model is that if I if I I just said that there is a approximate
+sign over here so approximate equality so what you're doing is you're saying that if I look at this overall ratings
+Matrix I can actually Factor it and that there are latent factors that K latent
+factors and I can Factor it as a product of the user Matrix and a movie
+Matrix and in particular a rating r j is actually going to be given by
+the product of the I row of U so let's call it UI
+transpose and the jth column
+which is MJ
+transpose so my model is the following that r j is again let's it's a simple
+model right I'm not saying that this is exactly what different uh uh places use
+currently but uh it's it's but it was actually quite quite
+successful so I don't want to say that it is very very simp simp listic okay so it is UI transpose time
+MJ okay and you should convince yourself that U of M transpose is a rank K
+Matrix okay so that's the model that's that R is approximately equal to U transpose
+okay and let me just kind of I've already written it but uh you know this
+was uh I row J column of M okay
+so row I of U is UI
+transpose okay so you can think of it as it is a low dimensional representation
+of the I us so low
+dimensional and what is it k k dimensional representation
+of user I okay similarly if I look at this is M
+transpose M transpose so I can say that row J of Matrix m
+m is MJ transpose okay and this is the low
+dimensional J column what's that the J R
+of the J column of the mend no no so remember that I so just keep in mind the notation I'm using this is m
+transpose and over here I said row J of M yeah is that clear hermus yes yes thank
+you yeah yeah so I'm just uh yeah but it is exactly this you know this particular
+column of M transpose right so row J of M is the same as column J of M
+transpose okay and in particular like I said if I
+look at columns prob I
+call Columns of U
+Columns of M so if I look at Columns of U right these you can think of as the
+different latent factors
+right and that is uh uh feet you can think of these are some
+features some extracted features okay for
+users okay and these are ladent
+factors features
+movies you know and if I actually remember uh you know there are this you know it's not just for Netflix but I
+believe uh it was also used for uh uh dating websites like uh I think
+e-harmony even used to advertise uh that they had uh like a 30
+dimensional representation that they could build they did not uh say that in exactly these terms in their commercial
+but they would say that you know they basically extract out 30 factors for
+making sure that the people they matched up with were compatible with each other okay so another example where you have
+uh you know in some sense matchmaking you're trying to match users and movies or uh pairs of people
+together okay so now the question of course is that this is the model how do you actually find the uis
+and the
+MJS okay remember that I have that r i j
+i want to be approximately equal to UI transpose MJ so any thoughts on how I would find
+U's and
+M's so I'm given the RS but remember this Matrix is
+spse these matrices are actually going to be dense right and given
+this not all the information I have there may be lots and lots of users there lots and lots of movies from from
+that I want to get this it sounds like a partial
+SVD right so you know this is a low rank Matrix we talked about the KY truncated
+SVD so it sounds actually related to an SVD right and one of the things that the SVD does is it uses you know um the
+squared loss right or the square you know Le squares the loss that comes up in Le squares regression right so we
+could and that's a natural thing to do is that we look at a loss function which is the
+quadratic loss squared loss so when I say that RI J is nearly
+UI transpose MJ then I can say that you know let me look at this and
+somehow you know I can sumish some overall IG J and then I can try to minimize
+this over all the U's now how many U's are there U1
+U2 to u m there are M users and then I
+have movies M1 M2
+M oh so is the solution is it just given by because I can write
+this as in Matrix notation no need for the sum right we learned about Norms right
+so I I can write this as R minus u m
+transpose fromus Norm square is that
+correct yes Al do I just then can I just use the SVD
+then to solve it because remember I want to
+minimize over U and
+M yeah but what do we put for the missing values do we just put zero in
+there aha right so that's the the critical difference or importance
+okay that this objective thank you Hermos yeah that's exactly the point
+that this J is not over all M and N if I knew all r j from IAL to 1 to M
+or Jal to 1 to M which is that all users have red all the movies and so on right
+which is of course unrealistic then this problem would be solved by the SVD but that's not the
+given problem the problem is that you only know certain indices so let me um say
+that K is the set of
+all known
+ratings okay so K is all the pairs i j
+such that r j is known and so I'm trying to fit the
+training data the model to the training data so this is over all pairs that are
+known so this is what is the very the important difference right which makes
+this problem very different than the traditional singular value DEC composition problem so this is our
+objective okay and I can write this in Matrix form
+as follows that I can write this
+as w elementwise
+dot where this is the this Matrix W J this Matrix W has
+entries W J which is one if I
+belongs to K and remember K is the known
+ratings or is
+zero and Dot is the element wise
+product okay and that's also has the name called hardart
+prod okay so is that is it clear so far what I've talked about any
+questions so this is our model um transpose and I'm trying to fit it to
+the training data and the training data is exactly this i j belong to
+okay and then you know we've talked a little bit about uh regularization right so
+typically we do want to see regularization and and you'll see as you
+do the homework that regularization is very important also right so the regularization we'll do is Ridge
+regularization and that is is+ Lambda summation of
+UI squ I is 1 through M plus oh
+sorry plus Lambda summation I = 1 through
+n MJ s okay and I can write that as Lambda
+U forus nor square plus
+Lambda M okay so this is adding sorry do we use
+same Lambda for U and M uh you could you could try different
+lambdas too so that that that uh uh you know you could do experiments with I
+forget in the homework whether we have same lambdas or different lambdas in the homework we've given you the same
+lambdas I think when people tried it it did not make too much difference whether they use the same lambdas or
+not okay you could actually also end up using you know
+um different sets of lambdas right users who had red more movies versus users who
+had uh rated less movies but right now we'll just assume that uh the Lambda is
+the same does that answer your question yes thank you yeah
+okay okay so now remember that that you know if my
+problem right
+if K is the set of all IJ
+okay then the problem would be of the following form summation of I = 1
+through M summation of J = 1 through n r
+i j minus UI transpose MJ
+Square okay and again minimize over
+U's and M and that would be equ equivalent
+to minimize u m r minus u m
+transpose okay and the
+solution would be given by
+the K truncated
+yes we okay but as I have said that and let
+me just write it to reinforce it right but in our
+case we only
+know readings that belong to a subset of all
+possible pairs right so i j that belongs to a given
+K so again to emphasize we do not
+know r r i j for all
+I okay
+I 1 to M and J is 1
+to okay so we cannot use the procedure to compute the SVD now that's another
+also thing that we haven't really studied is how do you actually given a matrix how do you actually compute it
+SVD it's actually not trivial right but we know that you open up python or you open up
+numpy right you will find a procedure to find the SVD but we cannot use that
+so any thoughts on how we might go about solving this
+problem we need to solve this problem over
+here I kind of given you a little bit of a hint I've talked a little bit about regularization I've mentioned regression
+to you so does this look like a regression
+problem it is and should be solvable with some gradient based method thing
+yeah yeah remember what are the variables that we are solving
+for it's U and M
+okay so there's something that we can do we can use a procedure called alternating
+minimization okay and what this procedure does is the
+following right so it first does fix
+so it starts with some U maybe I should just say that okay
+start with Su U as a
+guess okay now given this U
+right fix you and compute and
+okay now think a little bit about this right suppose I'm given a u and I'm trying to do this
+problem right and what you can do is you can
+look at only one column of
+R right then you'll have the the ith column or the let's say the jth column
+of R is equal to you know you have fixed U
+and the jth column of M
+transpose n Square okay and of course there's a
+regularization also but my question is can you solve that problem fix
+youu yeah that's a that's a normal regression problem right so that's Le
+squ regression that's exactly what we've studied so far right so we let me come
+to that but the algorithm is actually going to be this right start with some U fix U and compute M right and
+then fix M and
+compute U okay and repeat
+let's suppose capital K
+times okay so you would start with some U
+not you would get M1 from it then you fix M1 you get U1 from It
+You Fix U1 you get M2 from it you get U2 and so on
+okay and remember what Mi would be Mi would be obtained by a procedure
+where I'm minimizing over m r
+minus U let's see IUS
+one yes time M transpose from minus Norm squar
+okay plus Lambda I have this regularization
+also okay so I'll be solving this problem and
+mi mi would be the minimizer or argument of this
+point okay and similarly UI would be the AR
+men over u r
+minus u m I transpose vus square plus
+Lambda U
+squ okay so let's let's and let's look at detail at what happens okay
+um let's fix
+uh well if I have R is nearly equal to u m
+transpose let me flip this around uh R transpose is nearly equal to Mu U
+transpose because uh let's see um
+so I think I'll just fix M first and then compute U okay I guess I guess I
+could do either one of okay but right now suppose we fix
+M the other case would be very analogous you would just be working with the transposes okay so let me just draw this
+out so this this would be the Matrix R
+transpose okay so R transpose is number of movies by the number of
+users and I want this to be equal to
+M which is n by K this is the Matrix M and
+U transpose okay and this is
+M okay and uh let's look
+at this is I user Factor
+UI okay and what I'm saying is that I want to look at the ayat column
+over
+here I have column let me call that as r
+i so I have r i is nearly equal to M * UI is that
+clear okay r i is the I column of R transpose okay so what I can try to do
+is r i - M *
+UI Square
+okay plus if I add regularization so remember now this is like our coefficients
+W this is like my Matrix X and this is like
+y okay Y is replaced by RI X is replaced by
+m and this is like our coefficient W okay so I have this
+and I want to try to find out the minimum over
+UI so is this the problem we want to solve this looks exactly like a r
+regression problem
+and then I can basically solve it for any ey
+right what is the mistake that I
+made so remember ra is the entire ayat column
+do we know the entire I column no
+we we don't right that's the double you thing in there we only know certain
+elements okay so in particular uh
+[Music] so in particular if the uh you know we
+have what M users and N movies so if this particular user
+has only rated a few movies right
+then you know we don't know that entire column so this is actually kind of
+incorrect okay so what we do need to know is we need to
+concentrate only on these values
+these are the Y values that I know okay so what we will say is that
+we'll look at the index
+set and I'll call it I I not the best notation but uh so I
+subscript I represents indices
+of movies rated
+by user I okay and so now let's look at what uh
+what the correct objective is right so let me denote by r
+i subscript r i as these values
+vales so these values over here this this this
+so suppose II is just these three pairs then this would be a vector of length
+three okay and remember that this is now going to pick out
+exactly uh uh exactly the corresponding rows
+of
+uh uh some particular uh subset of the Matrix
+M so it won't be the entire Matrix M right it'll be a subset of the Matrix
+M okay so let me call that as M of I I
+okay so there will only be three rows of the corresponding
+Matrix okay so for example if I have these threes this will be one this will be two
+and this will be three okay so if I put these over
+here and assemble them into this Matrix this will be m
+right okay so similarly if I assemble it over [Music]
+here okay then this is our I and this will
+be okay will be three rows if I I is of
+size three and so I have Mi times UI
+and I still have that
+regularization okay and you know I can just put a half over
+here and that is my objective okay and let me call this
+objective as ji and I basically need to
+minimize this over
+you any questions excuse me how do we decide the
+dimensionality of the latent space like the K here so that's something that you know
+we can actually just experiment with but you can start off with 1K and you can just try different KS and see
+typically in machine learning what happen is that you will be given like a um um training set and then there is a
+held out test set okay so you can basically try
+different values of R and see how they perform on the test set and typically you also divided into training set
+validation set and test set right and you basically then try to
+find out the K or the rank that you know gives you the best performance so
+clearly too low a rank would be not good enough it won't fit the data it's kind
+of like that uh uh you know the curve that we showed right that if you have
+twoo low then you'll be underfitting you have twoo high you'll be overfitting and
+there'll be a some sweet spot okay and you would you would do the same for other other hyper parameters
+such as Lambda also right
+okay was there another question
+okay and then so this is my objective and now I can you know this is basically uh a r regression
+problem okay and uh this is like a regression problem where uh n capital N
+that we talked about in regression is actually just three okay so it'll actually give you
+some really interesting cases where you know when we talked about regression you know there was the dimensionality
+and there was the number of observations d and n right typically in regression
+problems we assume that the number of measurements which is n is you know greater than D or much greater than D
+and here you'll see that there will be sometimes when especially in the Netflix data that you know some users only rated
+a couple of movies some movies were only rated by a couple of users so you actually get the
+other case also where the number of measurements is much smaller than the dimensionality right dimensionality is
+fixed at K okay so you will actually run across these uh uh issues when you kind
+of try to solve the problem right and so you know I'll just I'm actually just rederiving it right but you can you know
+solve this problem as a regression problem where we take the partial derivative with respect to UI right and
+what you will get is you know um um this RI minus
+Mi UI right you'll basically just get
+um the residual which is r i i i minus m
+i UI right the half will cancel with the two right and then then you'll get a
+minus m i i okay this is basically just the uh analogous to the um normal
+equations okay so when I set
+this to be equal to zero that implies that you have M of I
+transpose M of I
+okay this should have been a transpose I guess okay plus
+Lambda I UI is equal
+to M I transpose
+times r i
+okay and one thing to not is that this will be a k by K Matrix nothing to do
+with M or n okay this will
+be uh K time my I
+Matrix and this will be our
+size okay and suppose now I have
+that the size of I I is equal to
+ni okay so what is the amount of computation
+which was involved okay um so let me actually try
+to do this quickly Mii is I I by K which is NI I
+my K so I have to first form this
+Matrix okay and I'm actually doing this because you'll actually have this problem right you'll
+actually for your homework you'll actually need to do these computations
+so forming this Matrix will require so it's you know basically
+multiplication of two rectangular matrices okay and this will be
+k s * ni
+operations solving the linear system it's a k byk linear
+system K by K linear
+system okay you want you'll probably use some
+uh routine right but it'll take order Cube K Cube operations
+okay and so the total
+complexity okay of
+finding U from
+Mi okay is going to be equal to order k s summation of n i over
+I okay and that is equal
+to uh kind of number of
+ratings so summation of Ni is basically the total number of ratings in The Matrix times x Square K Square maybe I
+should not times K squ plus I have this part
+right M K Cube and that needs to be solved M MK
+times K Cube do okay so this is the method of
+alternating these squares alternating minimization
+but the minimization problem is these squares at at every
+step okay and uh in some sense it is a little
+expensive okay because you have uh computation being cubic in
+K okay and you can have other alternatives to solve this
+and we'll see some of these methods uh later okay so one is going to be a
+method that we will actually talk about quite a bit later on which is stochastic gradient
+descent okay print
+STD then we can also use other methods like coordinate
+descent and so on okay but uh um you'll see that this
+problem actually exposes different aspects of rid regression that uh we
+have talked about okay and you will see that for example you will not be able to
+do it without R regularization you just will get an error when you try to do
+right because the Matrix might be too small
+or a particular matrices that you get might not be invertable so any
+questions so if we could use SVD it we
+just like multiply the W by R and then
+factorize it sorry uh but but you cannot use the
+SVD right because yeah I'm just I'm just saying let's let's suppose that we could
+use SVD then it would be uh like factorizing
+the The hardart Matrix times the the r yeah I mean I guess what you're saying
+is that can I just take W.R right which means that on the
+position that you don't know any ratings you replace them by zeros right yes like
+that no people actually have done that and actually that's a good point people have actually used that to try to initialize this
+iteration come up with the U1 or M1 or something right yeah exactly exactly and
+uh the the issue is that you know SVD is actually a pretty complicated u u uh uh
+computation which is kind of expensive right and many times what ends
+up happening is that uh you know you want to do this over millions or even
+billions of users and millions or 100 million movies and then it just becomes
+uh computationally intractable to do the SVD yeah yeah makes sense
+yeah okay any other questions on this okay so I'm actually going to stop
+a little bit early and uh I've mentioned a couple of times that we will give you
+your uh your first homework is being given out today and it'll be due next
+Friday

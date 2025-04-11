@@ -1,0 +1,615 @@
+okay so let's uh start uh today's lecture so today is the you know second
+uh lecture on classification so today we'll talk about uh some regression
+approaches to classification so [Music]
+classification last time what we did was we did some probabilistic uh modeling where we
+assume that uh each class had a certain distribution for example a multivariate
+normal distribution and then we saw that in some cases we got a linear classified
+or linear decision surface and in some other cases we got a quadratic decision
+surface so today let's kind of think back a little bit back to uh regression
+and see if uh you know what would be regression approaches to
+classification and later on as we'll see uh you know what I'm going to talk about
+today today uh actually ends up uh being used partially in current deep learning
+uh architectures so again our problem is you have XI Yi this is the training data
+you have XI belongs to Rd you have now Yi remember are we are
+doing classification let's consider the K class classification problem so that means in instead of you know last time
+we considered k equal to 2 class one and Class 2 but today let's be a little bit more General in the beginning right
+where we consider a general K class classification problem and of course
+when k equal to two then you will get the two class classification problem so we're going to actually say that R
+Yi is belongs to RK and this is going to be the K
+class classification prop
+okay and then of course you know we have I equal 1 to n capital N being the size
+of the training data so just as we had before remember just writing it out I
+have my training points let's suppose I have X first component second
+component and there are D components okay and similarly we have Y which is
+now K okay so remember that this size is D it's D dimensional and this is K
+dimensional and what we will say is that
+Y is an indicator Vector right which basically means that it has just one
+one okay in the J
+position okay and that basically so suppose this is Yi and this means that
+uh it is a way of encoding that XI belongs to class
+J okay so you can think of it as the J position you can also think of this as
+the jth column or row of the identi
+Matrix so that's how we are kind of encoding the classification problem uh
+and then what we want to do is just as we did before a linear method for
+regression and but let's look at a linear method for classification okay so
+my linear my coefficients are going to be W's so w KN plus
+W1 X1 + W2 X2 and I have D +1 coefficients w d
+XD so this is a linear fit and I can think of I denote this as
+y given X okay y of function of X and generally
+these kinds of in the classification setting these kinds of y's are called
+linear discriminants because what they are trying to do is discriminate between
+one from one class to the other so each uh each class will actually have a
+different linear uh discriminator sorry discriminate discriminates this could
+should be discriminant okay so I'll have WJ this
+is a vector okay transpose X Plus
+WJ okay and this is a linear discriminant for the jth
+class okay so let's let's write it out again suppose I uh take all the uh I'm
+giving a training data set I'll have training examples for class uh
+C1 training data points that belong to class C2 and so on so let's for the
+moment in the training data set list all the X's that belong to class
+one then class two then class three and so on right so so I'm going to arrange
+my training data in this Matrix right just very simp
+uh uh very similar to what we had done for the linear regression problem and
+now I have E1 X11
+X12 x1d so I basically listed the first training data point as the row of this
+Matrix and I'm going to do the corresponding linear discriminant right
+and that is going to be W10 W
+um uh and then this this part over here
+just if I want to keep this notation you know I'll just say that
+this is W1 bar okay this is a size
+d and this is of size d and this is of course
+one okay and there's going to be and and I'm going to arrange all the training data for C1 over here okay so what that
+means is that when I take this and I multiply with the corresponding linear
+discriminant okay I'll have other linear discriminants w20 W2
+bar and so on so I'll have we have K classes so I have K linear
+discriminants k z uh
+WK okay and what I I want to happen is that the first when I take this times
+the first linear discriminant I want to get one but for all the other uh
+discriminants right I will get
+zeros these are K this is
+K this is K so that means that you know uh X this is
+in this language W1 transpose X Plus W1
+KN I want that to give a one but for the
+other discriminants I want this to give a zero so this now becomes the corresponding Yi which is like this one
+over here okay um similarly the second data point
+belongs to one and my first few points belong
+to class C1 so I have this pattern and if this belongs to C2 what I will have
+is 0 1 0 0 0 1 0 0 and so
+on and then when I have uh class class CK over here right so class CK you know
+there'll be some uh last point which is xn1
+xn2 x n d okay and in between there'll be something which is one XY x
+i1 x I2 to xit okay and this will be
+0 0 and one in the K
+place okay so what I want is that this is
+approximately equal to this again we don't want to overfit but we want to do do want to fit to the training data let
+me call this Matrix as X this is the Matrix of training data very similar or
+almost identical to what we did in linear regression this now is the Matrix
+of coefficients and you'll see that basically there is a vector for every
+class which is the linear discriminant okay so this is x * W and
+this Matrix I can call as y okay so what I I want is I want to
+find coefficients W so that it gives me
+x w is nearly equal to y okay now we've seen this before and you
+might say okay I've also said in the beginning that you know I'm doing kind of a regression approach and then you
+might ask oh you know can I what do I mean by xw is nearly equal to I right so
+one can potentially I'm not saying this is actually going to work well but one could potentially do the following right
+is to think about trying to find w do such
+that this is minimized which is the square
+error and if you think about if you remember the solution to this is X
+transpose x times W star I'm skipping all the steps in between about taking
+the gradient and so on is equal to X transpose y so not that the difference
+from linear regression was that in linear regression when we looked at only one target right we only
+had one single column of y's and one single column for W's but
+here what we are saying is we have K classes so we'll actually have K different
+Columns of Y and similarly we'll have one coefficient for each
+class okay and then if W uh X transpose X is
+invertible then I will get this
+solution so that could be like a first regression approach that you might be
+that you might use for classification okay and remember that x w star will be
+the prediction on the training date
+okay so now just think about it I want a new x a new X little
+x times W star would be the prediction what will it give me it'll give me a k
+dimensional Vector right K dimensional vector
+remember that W is d by K okay W belongs to r d by
+K so when I take X transpose which is
+sorry sorry go ahead it D or D+ one
+okay yes good point uh I did include d right so there's one over here so good
+good point thank you this is is D + 1
+by okay and remember that X is
+uh r u so remember I'm doing Rd +1 because
+it's of this form
+okay so D features but the first one corresponds to the bias
+I think that looks like uh one
+so okay and what you would like is you would actually like this x transpose W
+star you know like there are K numbers you want it to be one if it
+belongs to the class so suppose this belongs to you know this is something which is close to something on the the
+trading data and it says that this is98 right maybe you want these to be
+kind of probabilities right maybe this is 01 this is 02 and so
+on that's what you would like right and this would be the jth
+position if XI belongs to CJ okay
+however the
+above right and when I say the above I am talking about this because this is
+given by a Le squares problem in the Le squares problem really right when I do
+xw star there is no guarantee that these values will actually be probabilities or
+so on right in fact they can actually be negative right
+so this the above W
+star can lead to X transpose W star
+being of the form you know some negative number over [Music]
+here leave some positive numbers here nothing related to
+probabilities okay and clearly okay and
+clearly this is not a good
+approximation to an indicator
+Vector okay which is kind of of this form 0 0 0 1 0
+0 okay often this is also called a one hot
+Vector okay so just Le squares just uh Le
+squares for
+classification as obvious drawbacks
+okay it's it is kind of like an obvious method to try but when you look at it you realize that you know the values
+that you get really can't be interpreted as probability so it's really not a
+great method okay but we're just introducing it and later on you will see that
+actually when we come to deep learning then you can actually have different
+nonlinear functions that can take these real numbers and then map them onto let's say a
+probability distribution there's something called softmax which does exactly that it'll basically take a
+vector and it'll map [Music] into uh numbers between zero and one
+that uh can be interpreted as probabilities and the sum of those numbers will add up to one so we'll come
+to that okay but uh classically you know the above that I've done is is you know
+something to look at but then also quickly uh disregard and say okay this
+is not really a very good method but I just wanted to kind of introduce that because you know it's an
+obvious thing to try uh any
+question so we've so far actually introduced two methods right one through
+probabilistic modeling and one over here and actually neither is
+that greater method okay it's not really what was used in practice even before
+the days of deep learning so let me now talk about one very very popular
+method which before the days of deep learning everybody used to do this logistic regression I'll talk about and
+then also I'll talk about support Vector machine so these were the most popular methods of doing
+classification um so logistic
+regression and it's actually very good to understand this even with the current you know deep
+learning methodologies okay so let's do a little
+review okay last time when we did probabilistic modeling right what had we
+done we had modeled
+each class has a
+gaan with covariant
+Sigma okay and if I I'm not uh um going to derive it and so on but the rule that
+we had got was something like this that we were interested in the posterior which is P of CI given X suppose this is
+a k class problem and I was trying to distinguish it from a two class problem from the CI
+and CJ then this log of the posterior
+was the log of the prior probabilities the ratio okay and
+then there was this linear term or um
+uh so so remember this is the I'm assuming the covariance is identical so
+the quadratic term goes away and you get Mi + MJ you can look back at the notes
+from last time and this was what we've got Mi IUS
+MJ plus X transpose Sigma inverse M1 minus M2 so this is the linear term
+right so this part you can think of as you know W
+KN and then this is the linear term and I can think of it
+as W1 trans W transpose
+X so the last parenthesis is also m i minus MJ right thank you thank you thank
+you for keeping me honest and it is m
+IUS MJ
+okay [Music] so you see from here that you know even
+though we did this probabilistic modeling we finally got a decision decision rule of this
+form the problem with like I told you last time is when we try to model each
+class as a ga with coent Sigma is that first you have to actually um
+uh try to estimate Sigma for each class and that actually becomes
+complicated because Sigma has you know number of parameters that is quadratic in the
+dimensionality right so while this approach you know allows you to
+um get to W KN without really doing much competition right I mean you have to do
+Sigma inverse but once you estimate Sigma Sigma inverse basically you get the
+formula but the formula is of this form and if you remember where this came from
+this came from modeling the data within each class using a
+probabilistic p of x given C so the LR says is that hey look let me
+just bypass this modeling because you know that probabilistic modeling and you know figuring out the covariance Matrix
+and the parameters of the distribution is a little harder let me just say that
+I'm going to model the log priors the log uh the
+the the log ratios of the probabilities with the linear function so what
+logistic regression says is suppose I have a k class problem
+then I'm going to look at log of P C1 given X and for all these
+probabilities I will normalize them with or take the ratio with respect to the last
+class and I'll say that this log odds is
+W plus let me just call it W1 Tilla transpose X because I don't want to be
+carrying this around and this is W1 transpose
+X okay where um you know X has you know this is xar and X has you know the bias
+term one in its first coordinate and then I have log of P C2
+given x b c k given
+X is equal to W2 transpose X okay and what we are going to do is
+we'll need to find the W's right that's what we need to find and similarly I can
+go all the way so I have K minus one BC K minus one given x / by CK given
+X is equal to w k minus1 transposes
+okay so this is now my first equation second equation
+and K minus
+first okay and just for Simplicity because you know I don't want to carry
+this around I'm going to do a bunch of uh algebraic manipulations let me write
+this right p c given X
+as Pi okay and if I do that right then I
+get that you know my first equation is log
+P1 divided P2 is equal to W1 transpose
+X which means that P1 given P sorry
+divided by P2 is equal to e to the power W1 transpose X so this is first
+okay and similarly I'll get oh did I do P1 divided by P2 I should have PK yes
+perfect I actually got this before you yeah yeah okay so I just realized when I
+saw it that yes this should be PK okay because we are dealing with a
+general K class problem okay so similarly we'll have P2 given divided PK
+is equal to e to ^ W 2 transpose X and all the way till p k
+minus1 ided PK is e to the power W kus1
+transpose
+X okay and remember what we want to try to find is the the
+W's the W's that you know give us good predictions you know they fit the
+training data plus they are good on a new Point okay so let's do again some U
+manipul uh algebra so what we are going to do is we'll see that it's actually going to be easy to add ask where where
+the W zero l oh so remember that I did this uh
+thing where I oh yeah yeah I basically you know put W KN and W1 till into W1
+right right right so the x is D+ one dimension so each
+W has the has is our okay and similarly X belongs to R D+
+one it's just taking the the the first uh feature or first component component
+of X is one the bias thank you and it accounts for the bias exactly
+okay so if I now add up all these equations 1 + 2 and the reason I'm doing
+it is because if you see on the left hand side right over here I have P1 P2
+PK minus one and remember we are modeling these as probabilities so the sum of all the pis will be
+one so if if I add all these together since they have the same
+denominator I will get P1 + P2 through PK minus 1 and then of course on the
+right hand side I'll get something but then since the sum of the probabilities ends up adds up to be one I will end up
+getting this to be 1 minus PK divided by PK okay so let's let's do
+that okay because that'll help us simplify things so this implies that I'll get
+P1 / pk+ P2 /
+PK plus PK - 1 / PK is equal
+to e the^ W1 transpose X that's from
+here plus e the^ W2 transpose X that's from here okay and then I'll
+get e to the power W K-1 transpose
+X and this will be P1 +
+P2 + pkus 1 /
+PK is equal to summation of I = 1 to Kus 1 e to the
+power W I transpose X
+okay but by the way what I'm actually uh teaching you is like a sometimes a favorite uh uh interview questions uh if
+you interview for you know a machine learning position in uh in Industry many
+times okay so if I look at the
+numerator I have P1 to PK minus one I'm adding
+them right and okay I see there's something in the
+chat oh anus you should have asked this question
+before is there a specific set of Lambda values that we should be training why don't we come to this later n can you
+just remind me because I think this is about the
+homework okay so I get this is 1 minus PK
+ided PK is equal to summation of I = 1 to kus1 e to the^
+Wi transpose X okay so I can take p k to the other
+side I can write it as 1 - PK p k * summation I = 1 K -
+1 e to the power wi transpose x one
+sorry I'm taking maybe more time than I should but it's
+okay just keep me honest make sure that I'm not making any mistakes okay so this
+means that PK is equal to 1 / by 1 plus
+okay and what is
+pi let's see oh here it is right Pi I ided by PK is this right so I have Pi /
+PK is e to the power W I transpose X
+okay so since PK has this form by the way I don't want to confuse you with I
+and I so remember this is a summation sign so I'll just put it as
+J okay this means that Pi is equal to e
+w transpose x divided by 1 + summation
+of J = 1 2 K -1 e^ W J transpose
+X okay and this is for I is equal to 1 2
+through Kus 1 and you can confirm that the sum of
+all the P will then be equal to
+one any question so far
+okay so remember I'm just kind of really done uh a algebra right now to find out the form
+for PK and the form for p i P1 P2 through K
+minus one okay but remember that these are the parameters W1 W2
+W3 w k minus one they are
+all parameters okay and then the question
+that we have is how do we find
+them okay so the parameters are usually going to
+be found by something called maximum likely Ood estimation okay so we are
+going to uh look at now the details okay so the
+parameters in logistic
+regression okay and these are wi and remember how big are
+these the + 1 and how many I = 1
+[Music] through
+K okay and they are going to be and
+usually usually fit fit
+by maximum light
+okay and we'll see so this is kind of very similar to um the uh again
+the uh leaste regression case you know we could have actually shown that this
+was if we had done probabilistic modeling uh we could have shown that the
+least squares problem arises from Maximum likelihood okay so that's what we are going to use over here okay so to
+simplify to derive it let me consider the simple case of a two class
+problem okay so in that case I have um
+uh just y1 and Y2 and I'll actually use a different encoding for y's okay so
+let's consider a d class problem I have need to figure out pc1 given X
+right and remember that's what we were calling um uh P1 but and and I have P2 so I have
+P1 and P2 but P2 is 1 minus P1 so let me just call this as P so I don't have to
+carry around this index and P of C2 given X is 1 minus p
+okay because obviously P of C1 given X Plus P of C2 given X add up to one okay
+and do remember that you know we are modeling it so p is some
+so it's actually a function of
+w okay W are my parameters okay so I have training data XI
+Yi is training
+data okay I assume kind of it is you know as before it's kind of
+IID so here is the following encoding I'm going to use this time okay is that
+let Yi equals 1 when x i belongs to
+C1 y i equal 0 when XI belongs to
+C2 okay instead of uh using kind of indicator vectors that's what I'm doing
+so I'm going to try to figure out one W okay that either gives one or
+zero okay and what I want is that when XI belongs to class C1 I want the
+prediction to be close to one when XI belongs to C2 XI belongs to the training
+data and C2 then I want it to belong to the Yi to be close to zero okay so I can
+look at kind of um uh the data likelihood
+okay and I'm basically going to try to maximize that okay and I can write that as let me just first write
+it is the product from I = 1 to n p to the power
+Yi Time 1 - P to the^ 1 - y i okay so so just to
+sort of understand what's going on remember you have x i Yi
+if x i belongs to CI you want your corresponding Yi equals
+1 okay so what is this evaluate to what is this evaluate to when x i belongs to
+CI right so I have P of
+Yi 1 - P * 1 - Yi so if Yi equal to 1
+I get this equal to P ra to the^ 1 * 1 -
+P ra^ 1 - 1 so it's p * 1 minus p ^ 0 so
+that's equal to P okay and that's what you want
+right and similarly you'll see that when y i equal to0 Z then this will evaluate
+to 1 minus P so the data likelihood is given by
+this is taking the product okay but you know we have
+exponentials so it's better to look at log
+likelihood log likelihood okay because log is a
+monotonic function okay so my log
+likelihood is I'm basically taking log of this expression and remember this
+is a function of w right don't forget that why this prediction is going to be
+or p is going to be a function of w and that is what we need to find out so we
+are going to try to maximize the log likelihood and by doing that we are going to try to we are going to be able
+to find the corresponding W okay so if I take log of this
+quantity right I will get summation the product turns into a
+summation and I have log
+of P Yi * 1 - P 1 -
+y this is equal to log of P of
+Yi plus log of 1 - P 1 - y
+i okay this is yeah this is fine and then
+this is equal to I = 1 to n y i log of
+b + 1 - y I log of 1 -
+B okay so when I was saying that this is a you know like a favorite interview question sometimes might some someone
+might just say hey go to the Whiteboard and can you derive the log likelihood for logistic
+regession okay so this is what you would do and then of course how would you find the parameters right so you want to try
+to maximize the likelihood of the data or the log
+likelihood okay so remember that this is a function of w right because p is a
+function of so my likelihood log likelihood is here
+and I'm going to try to maximize overall W okay so Maxim
+imum over W and it
+is summation of I = 1 through and I'm just copying what's written
+above y I log of p + 1 - y
+I log of 1 - P okay and this is all within the
+summation sign so this is what I want to try to
+maximize and remember I have a w over here and this is because p is a function
+of w okay so why don't we now write it out what the function what we had if you
+go back okay we had
+Pi okay so in this case we have just P1 so p is e to ^ W transpose x divided by
+1 + W transpose X okay because we are only considering a
+two class problem okay and we've encoded in such a way that we just want one
+W because it's a two class problem so P of
+w is e to the^ W transpose X
+I okay 1 + e to the power W transpose
+XY then 1 minus p is 1 - e^ W transpose x i / 1 + e^ w
+transpose x i and that's equal to 1 / 1 + e^ W transpose XY so this
+means that log of P okay if I take the logarithm of this
+quantity I get W transpose XI minus log
+of 1 + e ^ W transpose X
+and then if I take log of 1 minus P that becomes minus log
+of 1 + e^ W transpose X
+any
+questions okay and then again I want to
+maximize okay and this will turn out to be like a concave function right so I can set the
+gradient equal to zero and it's a con concave function so if I try to maximize
+it I need to set the gradient to be equal to
+Zer okay now if you think about the gradient of this gradient of LW remember LW is here
+so it'll basically involve gradient of w log of p and gradient of w log of 1 minus
+P okay so this the gradient
+will
+involve log of p and the gradient of log of 1 1 minus P
+right there's one log of 1 minus P so let's first kind of look at that
+so log of p is given here and if I differentiate this with
+respect to W remember I'll get just XI over here and then this is log so I'll
+get one divided by this quantity and then I have
+XI okay so it'll be of this
+form okay so if I have this okay so just look
+at over here and the gradient
+is x i minus log I differentiate it I get 1 + e
+^ W transpose XI okay
+times Well I have e to the power W transpose
+XR time XR okay if I take the gradient of this
+with respect to W okay and I can write this
+as x i * 1 - e to the^ W transpose x i ided
+by 1 + e
+transpose and then I also need to if I need to take the gradient of the log
+likelihood I need to take the gradient of log of 1 minus P right and so if I
+look at log of 1 minus P it's given over here it's actually a little simpler
+right it doesn't have this term and it has the identical term over here okay so
+it basically just
+becomes the second term over here right this term okay so becomes
+minus e to the power W transpose x i divided by 1 +
+x i
+x okay so now let's put these things together okay so remember this is the
+likelyhood log likelihood okay so if I now look at
+gradient w l of w that is equal to
+well I have the summation I = 1 to n I have
+Yi gradient with respect to W of log of
+p + 1 - Yi
+gradient with respect to W of log of 1us P
+okay and then let me just copy things from above I = 1 to n y
+i I have this is equal to
+this so I copy that write it here
+is x i * 1us e to the
+power W transpose x i ided by
+1+ and then I have the remaining term which is + 1 -
+Yi and then I have gradient of log 1 minus
+P that I get from
+here and so I substitute that over here so I have
+this I have this and I substitute that over here so
+it becomes minus e to the power W transpose XI ided by 1 + e^ W
+transpose
+X okay let's see if we can expand it out y = 1 through
+n okay well uh oh I did miss something right I did miss this
+XI okay remember that there is this XI I noted it down here I forgot it over here
+so it is Xi so let me take the XI common so
+remember XI is a vector okay and the rest of the quantities are scale
+s right so I have Yi let me expand this out Yi * 1 - Yi *
+this one + e ^ W transpose x
+i and then when I do this I get minus of this
+quantity minus of e to the power W transpose x i so
+just keep me honest I very possible that I might make a
+mistake and then I have this minus Yi and minus here so it give me plus
+Yi e to the^ W transpose x i
+/ 1 + e^ W transpose
+x no but look at this term this term is identical to this except it's
+opposite in sign so I can cancel this out so I get
+that radient of the log likelihood is somewhat simplified
+and it is x i time y i
+minus E to the^ W transpose XI 1 + e^ W transpose
+XI oh and look remember what this is have we seen this before e^ W transpose XI / 1 + e^ W
+transpose XI seems like it
+right here right it's this oh it's the probability of C1 given
+X
+okay so you can see right for example if uh I have x
+i if XI belongs to the first
+class class C1 then Yi is going to be
+one and this is p of C1 given X this is
+the prediction if I'm close to one it'll
+match if I'm far away from one right it will not
+match so then I basically will change my w depending upon the gradient right and
+I want this to be actually zero right so to solve
+to find W that
+maximizes L of w and I'm not going to go through the all the details but you can show that law L of w is a concave
+function so if I set this to be equal to zero
+okay that gives the maximum likelihood solution
+so I what I need to do is summation of I = 1 to
+n x i y IUS e^ W transpose x i 1 + e ^ W
+transpose x i =
+z but one things that you should notice is you know remember that XI
+is dimension how much is Rd + one right plus one
+yes and W belongs to Rd
++1 so how many equations are these
+these are d+1 equations right yeah and how many unknowns do I have
+d+1 okay so I have [Music] basically D + one
+parameters and I have D + 1
+equations since x i belongs to Rd
++ in linear regression what happened do you remember we had
+also kind of XI right we had this
+uh if if you if you really looked at the the uh linear regression case also right
+with Le squares regression you would have noticed that there was basically an XI *
+y minus X transpose W there was none of this e to the power
+stuff so it was basically a linear equation in W and it actually had this form that it was XI times like the uh is
+in a littleit this is kind of the residual or the difference from the
+actual value to the predicted value so you're basically essentially getting a
+very very similar thing over here except computationally it is much more
+different right over here you have this exponential or a ratio of
+exponentials so the problem over here is that these are non linear
+equations so in the least squares case where we did not have this
+exponential we could actually just formulate this as a system of linear
+equations by setting the gradient equal to Z here it is a system of nonlinear
+equations system system of linear equations we actually had a close form solution given by the normal equations
+and you could express it in the inverse in terms of the inverse of X transverse
+X okay but here there is no closed form solution
+and this is the most common thing that happens in machine learning right generally there are no close from
+Solutions L Le squares linear regression is just a very special case where you can get a close form
+solution okay so there is no close form solution so how do we go about solving
+it how do we solve for w
+okay so we need to solve
+this okay so we now really need to use some optimization
+methods so one thing I also want to spef uh stress is that yes uh when we do Le
+squares when we do linear uh regression we get a close form solution there exists a closr solution
+and you can use that to solve for linear regression but even there you could actually have used some iterative
+optimization methods to solve it here it is a necessity okay so we need to
+use optimization
+methods to solve
+for these
+parameters okay and what are these optimization methods well you know classically you
+have things that you might have heard about gradient descent we will talk
+about these methods more in class okay or we can have gradient
+Ascent okay gradient descent when we are um
+when we are solving a minimization problem and we have a convex function gradient Ascent for example here we have
+a maximization problem but the function is uh um concave right or you could have
+solved you know the negative of this right and you would have gotten you
+basically would try to be minimizing the negative of this log like and then you
+would look for a minimum okay if you look at like optimization
+books there are more sophisticated methods second order methods for
+example Newton's method
+okay and these are various ways to solve it right and uh um
+for specific cases you can actually develop specific solution so for listic
+regression you have you know some you can actually solve it with using an iterative Le squares
+solver okay you can actually also use Newton's method over here and adapt it
+so that it is fast one thing that happens is that in
+modern machine learning problems n can be very
+large okay so typical methods like gradient descent what they will do is
+they will have some w i or WJ and they will basically go along the
+direction of the negative of the gradient and have an update rule of the form you know
+WJ + 1 is WJ minus some step size times
+the gradient of okay so this is gradient
+okay and Newton's method is you know WJ + 1 is WJ minus a and then they have
+something called the hhan okay of
+this inverse times
+this okay let's forget about all the these but one common problem over here
+is that both of them require the gradient and what is the gradient to
+evaluate the entire gradient is actually quite expensive right if capital N is very
+large so the drawback with gradient descent and methods like that is that
+they at each step requires order and comp
+competition the drawback of these
+methods and why I said these methods I mean gradian
+descent [Music] Newton
+is that each step
+requires essentially the entire training data order and computation and you make
+zero progress until you do this okay so this is not
+feasible when n is very
+large okay so as a result result people use methods
+like stochastic
+gradient
+the okay and sometimes this is called SGD and what SGD
+does is basically it gets uh an estimate of the
+gradient by just looking at a few points or maybe just even one point classical stochastic
+gradi me descent method is just looking at one training data or you can start looking at a subset of the training data
+like what's called a mini batch okay so you dra basically the computation then either just becomes
+order D where D is the dimension or B * D where B is the bad
+size okay and typically these are the methods that are used and these are also the method that now power the uh deep
+neur neural networ okay so um uh we will look in
+more detail at optimization methods especially things like stochastic gradient descent or
+other methods that you might have heard of like adom and so on that in addition
+use some momentum and some orders of a second order method they they do
+basically curve per coordinate scaling that can be thought of as a diagonal
+approximation um to a of a nut method okay now you know classically if you
+solve it using you know either gradient descent or stochastic gradient descent you also as in linear
+regression you may want to add regularization okay so you may
+do two Norm or one now okay so in
+practice this some sort of regularization should be
+used okay so that kind of concludes uh today's lecture where you know we
+um looked at logistic regression and we said we just going to directly find the
+parameters forget about modeling the variance Matrix but by maximizing the data
+likelihood I'm going to try and get the parameters and we saw by doing some
+analysis that that leads to a system of nonlinear equations uh d+1 nonlinear equations and
+d+1 unknowns and then you can basically try to solve it using an
+optimization okay so any questions
+uh I have a question yes we shall go ahead so uh I have two questions so
+firstly um will gradient descent be guaranteed to find uh will it be
+guaranteed to find the global maximum since like you said like the log function was convex right so oh sorry
+it's not I mean the log function is monotonic but in this case you can show that the log likelihood for logistic
+regression is a concave function so you can take the you can
+take the second derivative and you can show that that has that property that the hesan is uh negative
+definite so because it's concave if we use gradient descent like is there is
+will it be like guarantee to find the maximum yes so so sorry just to keep the
+notation uh correct if you have a concave function and you want to find its maximum you use gradiant
+ascent and that'll under certain conditions get you the global maximum
+you could equivalently take the negative of the log likelihood and you can then show that
+that function is convex and you can try to find the minimum of that and gradient
+descent will find you the minimum Global minimum right then one more question uh
+at the beginning we assumed that all of the we assume that the prob like the weights
+represent uh like like certain terms in like a multivariant gajin so when we
+when we plug those weights back into the gajan uh like will will it still then we
+like find the covariant like will those two terms be equal to each other so like if we find like no no so sorry so just
+to make it clear all I was showing over here is that when we had modeled each
+class as a gaussian with coant Sigma then we actually had gotten that the log
+odds of the probabilities were of this form W plus W
+transpose X this is when the covariances of the two classes are equal all what that was saying is that
+that was just motivating us to model the log probabilities as a linear
+function so and then logistic regression tries to find these parameters right
+through maximizing the data likelihood and does not try to estimate
+the covariance of each so so in logistic regression there is no assumption that
+the class has a gaussian distribution right got it okay so when
+you assume that the gaussian has if you do this modeling as a gaussian with
+covariant Sigma you basically first need to estimate Sigma once you estimate
+Sigma the answer is there for w w and W KN but it turns out it's actually not a
+very good method because in practice a lot of uh uh uh problems uh you know you
+don't need to model it as a gum and you're also trying to estimate deep
+Square parameters so it's actually not a good method this one but logistic
+regression is generally one of the best methods
+Prett deep learning ER got it so all this does is like it's just motivation exactly not actually uh
+like assuming that like log of the probabilities divided by like each like each other is a gaj right yeah it's not
+assuming that these are CS right yes so by maximizing the data likelihood we are
+basically doing that's what logistic regression does and these are called log
+ODS I got it thank you okay great

@@ -1,0 +1,637 @@
+okay so we'll continue I think today will be the last lecture that we will
+have on regression so um so last time what we did was
+we continued kind of with the review of linear algebra and really concentrated on you know the SVD so SVD is a very
+important decomposition it pretty much tells you all there is to know about a particular Matrix It exists for any
+Matrix and it is this decomposition U Sigma V transpose and we talked about the full
+SVD and also something called either the thin or the reduced SVD but
+also uh you know you can actually truncate the SVD at any K so you can you
+know if the full SVD is U Sigma V transpose as given over here right uh
+the thin the the thin SVD is sometimes called this U hat which takes where m is
+greater than equal to n and you take the first n singular vectors U hat Sigma hat
+V had transpose but you can actually truncate it at any K so you can just take U1 U2 for example or U1 U2 u3 and
+then take the corresponding singular values they are of course ordered in decreasing order and then also the
+corresponding v's and that is sometimes called the K truncated SVD and one of
+the uh really nice properties of the SVD is that actually that gives uh the best
+rank K approximation um to the given Matrix right so for example here you
+know if you have a given Matrix a and you want to find out the best ranky
+approximation of this Matrix then you can basically just take you know U K
+Sigma K VK transpose where UK is uh n by
+uh M by K uh maybe I should actually write it over here Sigma U UK belongs to
+our M by K Sigma K belongs to r k by
+K and VK belongs to R NYK
+okay and that gives you the the the S the best singular value best truncated
+best rank ranky approximation okay then we went back to Le squares regression
+and we saw that LE squares regression if you analyze it using the SVD it's actually just the orthogonal projector
+onto the rain space of the design Matrix which is X transpose right which is made
+of the training samples so today we will kind of uh talk
+a little bit more about uh regression some of the issues that there are with
+uh just doing regression as we've talked about it uh for example e squares regression and talk about something that
+is really needed to make the regression better which is
+regularization in regression
+and there we'll look at a particular way to regularize which makes the prediction better and we will see that
+uh uh we can actually analyze uh this method called Ridge
+regression quite um uh well by looking at the singular value
+decomposition okay so uh reminder that uh regression is you know
+I have training data and XI Yi XI is D
+dimensional D features the Y's since we are talking
+about regression these are real numbers and linear
+regression is basically taking a linear combination which is W + W1 X1
++ W2 X2 plus
+WB XD all right it's the
+prediction for a new unknown X Val okay now even
+though I've called it linear regression sometimes you can kind of
+do nonlinear regression using this scheme so let's talk about a particular example which I will use to motivate U
+the need for regularization so let's think about polinomial interp
+interpolation or polinomial
+F okay and we'll talk about you know the simplest case which is univariate polinomial F okay what do I
+mean by that okay so in this case what I will say is that you know we actually
+have just one single value of x okay so my D is equal to
+1 okay but what I will do is I will actually derive some nonlinear features
+from X so I will take X and I will map it onto something
+called f of x okay so I'm going from actually uh
+r d okay and in this particular case it is
+um D equal 1 to R let's say d Prime so f of x is of
+Dimension D Prime okay and in particular the way we can think about polinomial
+fitting is to think about f of x
+as the monomials so X x² X
+Cub to x to the power D or or X to the^
+M let me not uh
+reuse okay okay uh I guess I've used D Prime so in this case m is equal to D
+Prime okay so if I want to do linear prediction
+so the
+polinomial fit at X we'll see is equivalent to
+to linear
+regression for p ofx okay so let's think about what
+linear regression of f of x is right and let me call that as Z so if I say that
+this Vector is z okay so remember what is linear regression for a vector Z it is
+W plus W1 Z1 plus
+W2 Z2 plus W um M
+ZM okay and in this case my Z as I've said the components of
+it are the power so the ith value the ith component of this Vector Z is
+actually x to the power I so I have W +
+w1x + w2x 2+ w m
+XM and many of you might have seen this problem before right so what you are trying to do is you're trying to fit a
+polinomial to a a univariate polinomial to a given data so this is a technique
+that is many times you know you're you're using linear regression but uh you're actually doing a nonlinear fit
+because the different powers of X are nonlinear in X of the features of X so
+this is not that uncommon and can you can actually apply it even when X has Dimension greater than one so you
+typically take you know your given Rd and you can map it onto r d Prime
+typically D Prime is much much greater than D so for example here m is much
+much could be much greater than one right and you basically have the way you
+we denote it as you take X and you do a map with a uh a nonlinear map called Fe
+and then we'll do prediction
+using few effects
+okay so let me uh um give you show you
+some examples okay of polinomial fitting and let
+me share my screen
+okay so you guys can see my screen and so this is an example from this textbook
+by Chris Bishop okay hopefully all of you can see
+it okay so you know here's an example that you know you might want to recognize this at the classification
+problem but here is the problem that we are talking about right so here think of
+you know a particular X so X is given over here right and this
+is the value that you want to fit the y- axis right so you have basically X comma
+and then you have you know you have the value at X1 you have a value at another
+point x X2 you have a value at another Point X3 and so on right but for a particular x what you want to do is you
+want to fit a polinomial right so Y in this case is a polinomial and you can
+see that is exactly what we are talking about and it is linear regression on F
+ofx where uh the component the ith component of the vector f of x is X to ^
+I right and over here the in the green line line is shown
+like the kind of fit that you would kind of think is natural for this data set
+right notice that this fit does not exactly pass through all these points
+okay but let's see what happens when you try to vary capital M okay so you of
+course you know we can do Le squares regression this is just the sum of squares uh error
+function and now think about what a zeroth order polinomial is
+well a zero order polinomial says that I'm just fitting things by W
+KN okay and that's it and you might say okay what should the value of w not be
+and you know if you do the math it'll end up being the average of all the Y
+values but it is just a this red line is the fit that you would get if you just
+take m equal to Z and you can right away say that hey you know that's probably not a very good value of M to take right
+if my goal is to fit this set of points so then you can say okay I can increase
+capital M and if I make capital m equal to 1 then I get a straight
+line and this is the straight line you'll get if you fit it to this set of points now how many points are there 1 2
+3 4 five 6 7 8 nine 10 points okay
+so you get that that again seems you know it's better than a uh than a
+constant uh but still you can visually see that it's not very good so let's try to increase M and this time to m equal
+3 and you can see that it's actually now kind of getting better right so m equal
+to 3 is this value right now from the theory of
+polinomial you know that a third degree polinomial can have kind of three roots
+and you can see that you know there is one going to be one root or the value of the polinomial zero here one here and
+then one over here okay so the polinomial will kind of oscillate right because there are these
+roots and then you can say okay I can obviously the fit got better as I went
+from m equal 0 to m = 1 1 to m = 3 let's try to make
+it even better let's try something well much higher ninth order
+polom oh and look at this fit now this red
+line is the fit now anybody wants to kind of say
+whether this is a good fit or not that's terrible
+so remember our goal is prediction okay if it was inter so one
+of the things that you will notice so the reason I think hormos you're saying it is terrible is that you know it
+actually just oscillates very wildly right and but note that at all the
+points that were given in the trading set it actually passes exactly through
+them okay but remember our goal is not polinomial interpolation which means to
+fit the polinomial exactly at that point some of you might have taken like a numerical analysis Course and there you
+might actually have used polinomial interpolation and clearly if there are
+uh uh uh 10 points like for example if there are two points you can fit them
+exactly through by a line if there are three points you can fit them with a polinomial of degree 2 and in general
+there's a theorem that says that if there are uh uh m+ one points you can
+fit it with a polinomial of degree M that means you'll make zero error but
+remember that's not our goal here our goal is to be able to predict at a new Point Let's suppose an X over here it
+does fine over here right okay and even if you do polinomial interpolation by the way this is not
+this is not good good so people do other things like piecewise uh uh
+pols so what is is happening over here okay what is happening here and this is the first time you're seeing this and
+this is a big problem in machine learning where you are trying to overfit
+you're trying to fit too well to the training data but remember our goal is
+what's actually called generalization yes you want to fit to the training data you know and you want
+the training data to be representative of the final task right but the goal is to predict at some new point okay so if
+you look at the so typically what you can do is you can divide your data so or
+you have like a training set and a test set right the training sets what happens
+is in this place as you increase the degree of the polinomial you can see that it
+decreases okay sorry the training set is in is in uh blue and you can see it as
+decreases and like I said a 9th degree polinomial will fit these 10 points exactly so the training error actually
+decreases to zero okay but the test error which is a
+new point when I try to predict on this the training error kind of declines but
+then it shoots up and that's this phenomenon called overfitting that means you've overfit too much to the training
+data your predictions will actually not be good for a new point or the test
+data Okay and like why is it happening over here if you look at the polinomial
+coefficients you'll see what might be happening right so with m equal to Z I had a coefficient of 0. one9 right and I
+I'm guessing that that is the mean of all the Y values over
+here with m equal to 1 you see that you have coefficients of the order of one m
+equal to 3 the coefficients are actually kind of slightly higher right it's 25 and
+17 but look at what's happening with m equal
+to m = 9 the coefficients are actually becoming
+really big and the reason they are becoming really big is what's happening is that
+some values become very large and some values become very small so that's why you'll see that you know you have very
+large positive values very large negative values and they somehow cancel to give you zero error at the uh uh
+training data on the training data okay so One symptom of overfitting is that my
+um coefficients right are actually getting very large you can think of that
+as that your your predictor is actually getting a little
+bit more complex right with you know what and
+that's one in in this case it manifests by these very very large values okay
+so uh what do we do then what should we try to do right well
+remember that so far you know we talked about the error on the training
+data this was the error on the training data and we are looking at Le squares regression so we take the squared error
+and we are trying to decrease it but we've seen that just decreasing it isn't
+the best idea because you can overfit okay the model is becoming too
+complicated and it's trying to overfit simple model is better in this case what
+happens is that this manifest in the coefficients becoming too large so then what you can then do is
+you can say okay I will not my goal is not to just fit the training data right
+I'm actually going to um do something called
+regularization which means that I'm actually going to penalize my coefficient two large values of my
+coefficients so this is called this particular regularization where this is the two Norm square is the Ridge
+regularization and Lambda is a parameter that kind of Trades off between the fit
+to the training data and the complexity of the model Okay so for example if
+Lambda equal to zero we'll be back to our previous case where we are just fitting to the training data and we
+might get to complicated a model we might overfit On The Other Extreme if we take
+Lambda close to let's say very large so in the limit we take it to Infinity
+right our W will be you know in some sense constant or even zero right
+because if I take this to Infinity what I will get is that you know W should be actually all zeros and that's not a good
+predictor so typically you want Lambda to be uh um uh to be good and ideally
+what you want is that you know over here you know we had
+this m if you kind of look at a value of Lambda over here typically that's what
+will happen that when you have too large a model it'll be too large a Lambda
+it'll be a very simple model your training as well as your error will be
+high test error as you then start decreasing Lambda your test error will
+keep on declining but then as you make your Lambda close to zero you'll actually overfit and your test error
+will start
+increasing okay so let me now stop sharing the slides and move back to
+[Music] uh I see so sorry I'm just looking at the at the chat and I think PRI you kind
+of uh uh uh foresaw what I was going to say and yes this is uh struggling from
+overfitting okay so let me go back to my
+okay okay so now what we will do is we will do Ridge regression okay so let
+me I'm going to contrast it with just the linear regression that we did so let me talk a little bit about R regression
+over here so let me write it over here R regression
+okay so the goal in retrogression is to minimize a combination of fit and
+regularizer okay so remember the fit since we are still talking about regularization uh sorry we're still
+talking about regression and the squares regression the fit is measured like this
+and then I have regularization which is Lambda
+W2 Norm square square so it's the sum of the squares of the coefficients and just
+to contrast things draw a line over here right our
+regularly squares
+regression which we have examined so
+far was just minimum of x X transpose wus y to
+S okay and remember that in this case what was our
+solution the solution was you know the normal equations you can take the gradients or you can do the geometric
+analysis which is XX transpose W star is equal to x *
+y right so equal to w star which are the
+coefficients being equal to x x transpose inverse
+time XY okay well what is the solution over
+here okay well I'll leave it as an exercise you can again mimic what I did for Le squ regression and it's not not
+really complicated at all right and what you get is if you take the gradient and you set it equal to
+zero you'll see that the resulting equation that you will get is
+basically very similar except Lambda makes An
+Occurrence and Lambda makes An Occurrence in this way XX transpose plus
+Lambda i w star is equal to X1
+okay so you can see that you know there is seemingly not much
+difference there's XX transpose here there's XX transpose here but here
+there's a Lambda I and as a result my optimal
+coefficients are x x transpose plus Lambda
+I inverse time XY
+and if you think about it right what's happening over here is that earlier
+my this inverse value remember as I was going from M = to 0 1 to
+9 you know these values were actually becoming very big so w star was getting very large and
+what ends up happening is that when you do Lambda right it dampens things and
+you're taking the the inverse of not XX transpose but XX transpose plus Lambda
+I any
+questions by the way if there if there is a question that comes up on the chat because many times I don't pay attention
+to the chat while I'm lecturing uh somebody can just uh you know just say hey there's a question on the
+chat okay there's no question right now so let's let's look at now how these
+compare okay so now the in Le squares regression we saw last
+time that prediction on training
+data okay so remember the prediction on training data is always going to be
+X transpose W star okay and that's just going to be X
+transpose times W star is given over here so it's XX transpose
+inverse X Y similarly over here the
+prediction on training data
+is X transpose
+sorry X transpose W star and now I have X transpose and my w
+star is XX transpose plus Lambda I inverse time
+x so very similar right but now let's see how the singular value decomposition
+can actually help us in analyzing this okay um not talking about computation
+but just to analyze what is going on so remember we did this last time also so
+we did X transpose so let's be you know let's
+look at the SVD of X transpose
+Okay then if you do XX transpose is equal
+to um
+V Sigma U transpose U Sigma V
+transpose and this is equal to V Sigma squ V transpose and if I look at XX
+transpose inverse that's going to
+be V Sigma minus 2 V
+transpose okay and then when I want to look at the prodiction which is X
+transpose W star which is X XX transpose
+inverse X transpose W star that is going to be
+what is that going to be sorry I think I may have let's see
+sometimes I get clipped up between the transposes so it is X
+transpose and X over here okay so it's U Sigma we
+transpose and then from here I have V Sigma minus 2 Vose remember I'm
+actually just repeating things from last time okay and then I
+have V Sigma U transpose right and what happens is that
+this gives me identity this gives me identity so I get U Sigma Sigma minus 2
+Sigma U transpose and that's equal to u u transpose
+okay with uu transpose times uh so again
+I made a typo over here this
+was
+y okay so it's taking your the given data the given training
+data you form a vector and then you project it onto the uh space the range
+space of X trans space okay so this is I can also write this as summation of
+UI UI transpose y okay I = 1 2 and t +
+one where the is the dimensional okay and this is
+[Music] orthogonal projection
+on to range
+space of let's look at what happens in the
+case of R regression okay so let's do something
+similar right so again my X transpose is equal to U Sigma
+V transpose same thing thing as before again I
+have now remember that in this time I have I have XX transpose equal to
+V Sigma squ V
+transpose and what is XX transpose plus Lambda I so earlier I had XX transpose
+inverse okay but now I actually have X transpose x x
+transpose plus Lambda I okay so well I can actually write this
+as V time Sigma s + Lambda i v
+transpose and that's because V is n byn it is square right and that gives me the
+identity so I can write Lambda
+inside okay then I look at X transpose W
+star and I get X transpose x x transpose plus Lambda
+I inverse time XY so very similar right except instead
+of XX transpose in inverse I have XX transpose plus Lambda I inverse and then
+I can just substitute from here right so
+um XX transpose plus Lambda I inverse is equal to
+V Sigma s + Lambda i v transpose inverse
+of this and that's just equal to V Sigma s + Lambda I
+inverse of V transpose okay because V transpose is
+the inverse of okay and then my prediction
+is X transpose W Star right so I have U Sigma V
+transpose V Sigma s + Lambda I inverse V
+transpose 3 Sigma Vose bear with me because finally when we come to the end
+we will actually kind of see a quite a beautiful uh explanation what rid
+regularization is doing but you know we have to kind of go through the through the algebra okay so again this is equal
+to Identity this is equal to Identity and what you get is
+U Sigma Sigma s + Lambda I
+inverse and sigma *
+U okay so and earlier remember that when Lambda was equal to zero then these
+would have all canceled out okay but this time Lambda is not
+equal to zero right so things actually don't cancel out so what is this Matrix
+this Matrix what is this if you think about it it's remember
+it's a diagonal matrix Sigma has you know the little
+Sigma on the diagonal so here is the first element of this matrix it's Sigma
+1 squar that comes from this
+Sigma and the sigma and then since it's the inverse of a d
+Matrix the elements of the diagonal elements of this Matrix are basically just the inverses of the corresponding
+diagonals so it becomes Sigma 1 s / Sigma 1 s +
+Lambda the 22 element is Sigma 1 Sigma 2 s ided Sigma 2 s + Lambda and all the
+way okay and it's Sigma D ² / Sigma D ²
++ it's a diagonal matrix Zer on the off diagonals okay and
+if I want to get a similar representation over here as
+here right if I take this then what I get is that this is
+equal to summation of I = 1 through D +
+1 Sigma i s ided Sigma i² +
+Lambda time UI UI trans and I guess instead of D still go
+D then this goes still D +
+one now what can you say about this this
+coefficient remember when Lambda equal to zero it's equal to one when Lambda equal
+to zero okay but in general it is less than
+equal to one it's equal to one when Lambda equal
+to zero as Lambda becomes bigger the denominator keeps on becoming bigger and
+it actually starts going towards zero so so let's let let's look at that again
+okay so if my Sigma i s which is this I singular value is much much bigger than
+Lambda then what happens to this number Sigma I S ID Sigma i s +
+Lambda okay if Sigma I square is much much bigger than Lambda this will be
+nearly equal to Sigma i s / Sigma i s and so will be equal is nearly equal
+to one in particular if Lambda equal to Z
+right but now let's see what will happen if Sigma i s is much smaller than
+Lambda then I have Sigma i s / Sigma i s + Lambda and this will be approximately
+equal to so remember Sigma I square that will
+stay in the numerator and sigma I sare + Lambda when
+Sigma I square is negligible compared to Lambda is going to be Lambda and that is going to be nearly
+equal to zero okay so what R regression
+does and we are able to only do this analysis by looking carefully at the singular value
+decomposition what R regression does is it
+shrinks the small singular
+values to
+Z okay any questions so far I think you should many people should
+have questions
+right okay so just to repeat the difference what ends up happening over
+here is you have this Matrix X transpose it
+has D+ One Singular values and they can vary in magnitude
+the first singular value can be much larger than the d+1 singular value in
+particular if x transpose is not full rank suppose the features are
+identical right then Sigma d+1 can actually be equal to
+zero but what linear regression does is kind of it actually eliminates Sigma
+Sigma over here Sigma is not over here so it treats
+each singular value to have the same importance and it basically just do a
+projection on the entire space but what can happen is
+that what can end up happening is
+that oh sorry that some of these singular values
+could actually be very small so when you take the inverse or minus
+Sigma minus 2 this could actually be very
+big okay so the coefficients can actually blow up in the prediction and what red regression does
+is that it the large singular values when Sigma
+I sare is greater greater than Lambda then it basically does the same thing as R regression as Le squ
+regression it basically keeps them at one hey indit there's a question on the
+chat by rishab yeah go ahead rishab you can feel free to ask me a question uh I just would wanted to
+clarify on the right side when we're were going over the equations for Ridge regularization what happened to the Y
+term did that get canceled out somewhere oh thank you for bringing that
+to my attention I'll just add that back in
+is that good yeah thank you
+yeah there's another one by me there's another one yes can we say small so me
+Muhammad can we say small Sy values or noise in the data and regularization leads to not over fitting to the noise
+yeah I think uh that's kind of a valid way of looking at
+it does that answer your question
+M yeah and sometimes remember that we are uh you know when you're running on
+the computer you can't represent a real number exactly right so you represent
+numbers as floating Point numbers whenever you do an operation there's some error in it
+so many times when you get these small values you cannot actually trust that and what Ridge regression is doing is in
+some sense kind of eliminating them but in a smooth way so notice that you know
+here's another thing we could have done right what if we had done the following that you know
+for so so this is shrinkage
+um what if you had done some hard shrinkage
+let me clarify what I mean what if I had said that you know I'll take the sigma I
+sare as is for IAL to 1 through let's say
+K and then I will take Sigma i s and replace it by
+zero for i = k + 1 through d plus
+one I could have done that also right what I've done above is like it's
+a smooth uh change but I could have done this and that all that is saying is that
+I'm actually now using the K
+truncated SVD because if you look at it carefully
+then it'll just be the that you're taking the K singular values as is and
+you're truncating the rest of them to zero okay and that actually is also kind
+of a valid thing uh that you can try to do right I mean you can I think Ridge
+regularization is kind of more accepted in the in the language of um uh modern
+deep learning it's sometimes called weight Decay okay but uh you could potentially also set the small singular
+values explicitly to zero whereas here they are kind of being gradually set to
+zero okay and remember and for example over here it could happen that all the singular values are
+large in which case you know it won't make that much of a
+difference okay um so I think this is you know very
+um most people when they look at R regression right they see this
+okay and it's kind of a good motivation and you can say that you know you don't want your model to be too complex you
+don't want your W to be small but then when you kind of look at the solution
+you know this is there's another question by R uh yeah let me finish so
+you basically you know get this
+the solution is this and what it says is to
+obtain to solve for this minimum W that's equivalent to saying that
+you're going to take the small singular values and start ignoring okay what was the question by
+somebody R is there a property oh yes um
+Rees you cannot speak but that's the definition of SVD
+right so if I go back to my previous
+lecture when we talked about the
+SVD we arranged them in this way
+right the sigma 1 is greater than equal to Sigma 2 is greater than equal to Sigma n so they are increased in
+decreasing order so does that answer your question uh
+R I guess you said you can't speak but I'm hoping you can say
+yes just Ming Sing well uh uh okay so I'm not sure
+what you are asking rites but um rid regression does not do does not
+just remove the small singular values and set them to zero R regression does
+exactly what I gave over here it's essentially taking the I sing
+value and replacing it by Sigma squid Sigma square +
+Lambda and that has the property that when Sigma square is very large much bigger than
+the the regularization coefficient Lambda then the sigma Square will be
+essentially you know what you're doing is that coefficient is one and when Sigma square is very
+small then it is Sigma Square ID Lambda which will tend to zero but it's not
+exactly zero an alternate way could be to do this
+shinkage where you set the small singular values to zero okay and you keep the large
+singular values as is that's also a a way to do things but it's not the same as r regularization r
+regularization and if you now think about doing this on the computer right to do hard
+regularization you actually need to know the SVD to do r ization you don't need the
+SVD all I'm doing is I'm showing an analysis so for example if you want to
+solve this problem then you don't need to find the SVD effects you can actually do it using you
+know py de composition Q DEC composition and so on or you can actually use an
+iterative algorithm to do the solution okay and I think you'll see in
+the next in the first uh in the first homework that we'll assign on Monday when you look at this collaborative
+filtering problem you know which is like let's suppose you are given like a whole bunch of movies and ratings by
+users of movies then uh and you then want to predict uh the rating of a movie
+by a given user then you will see that you know the algorithm that you will use in your
+homework will not need you to compute the SVD because the SVD finally is
+quite an expensive competition to do so here what it's doing is it's really un
+helping us to understand what is going on but you typically will not solve this
+problem by Computing the SVD so that's why doing this hard shrinkage is something that is much more
+expensive whereas Ridge regularization is much more you know it can be done
+without the SVD but it can be interpreted as doing some changes to the singular
+okay does that clarify things yeah so so that's actually a pretty important point so the singular value decomposition is
+is a very good tool but it's actually quite expensive and when we talk
+about very large data sets and the analysis of that typically you don't not you don't compute you will not be able
+to compute okay so um
+let's look at another view of R regularization okay
+so Ridge
+regression so so far we've said you know minimize X transpose wus
+y squar + Lambda time 2
+normal squar okay this problem is actually a little
+equivalent to the
+following problem okay so to the
+following okay so take the same objective
+as D squ regression but then you say I don't
+want my coefficients to grow too much so I'm actually going to put a
+constraint that my W2 Square should be less than equal to C or some
+C so over here the ridge the the tradeoff between
+regularization and fit to the data is Lambda and over here it is C okay so the
+the following is a constrainted optimization problem
+okay so this problem which is typically how R
+regularization is posed is equivalent to this constrained
+optimization
+problem and the reason I mention mention in the last part is that we can
+geometrically kind of try to understand what is happening right and it'll actually end help you understand a
+different kind of regularization which is when we don't regularize by the sum of squares but we regularize by some of
+absolute values so instead of L2 Norm Square we can actually regularize by the
+L1 Norm which leads to what is known as the L so which you might have heard
+about okay so
+geometric
+interpretation of this above constraint optimization
+problem
+okay so what you can show is that if I look at this
+function our Le squares function then it actually looks like the
+following okay it's if I look at the contour map or level
+sets and I'll explain what level sets are okay so if I look at um okay so
+level sets are where FW is a
+constant okay so the contour map is actually something
+like looks like this these are ellipses and I'm not showing that over
+here but it can be shown
+and this each of the contour maps corresponds to FW = to C1 for some
+particular C1 okay and this one would correspond to
+FW equal to C2 and C2 is less than
+C1 okay and this value over here is going to be FW equal to Z so
+this is the minimizer this is the d s
+solution and now if I look at my constraint set right so let
+me so this is my constraint set right and if I look at that
+okay if I fix a particular C I guess I should have used uh different notation
+uh let's see maybe I'll change this C
+to okay okay let me just say R for
+radius for some r okay so this is typically going to be
+like R is the radius and what I'm saying is that my X Norm of
+x² is less than equal to R and what I'm saying is my constraint set is
+this I want only sorry I wrote WX but it's
+w my the only W's that I want are actually within this
+so the solution of r regularization or the the constraint version of R regularization is that you basically
+look at the level sets and the first time the level
+set meets the constraint set
+okay that is the r regularization solution
+okay so this is another interpretation of R regularization right you're minimizing F of w it will be minimized
+over here if you just looking at F of w which
+is the Le squares problem that gives you the Le squar solution okay but that's not what you
+want because this W magnitude might actually be very far it might be very far from the
+origin as a result these w values could be very
+large you want these W values to be small so you have this constraint that my w values cannot have some squar to be
+bigger than R they must be is less than equal to R but geometrically the minimum value of this
+constraint in optimization problem is when the level sets first hit
+this R radius R uh
+sphere okay so that is an interpretation of rid
+regularization any questions about that so is there a relationship between
+R and Lambda what's that a relation relationship between R and Lambda Yeah
+so basically for every Lambda there exists in our but there's no straightforward
+relationship thank you I see yeah but basically you know you can either work with RS or you can work with lambdas
+right and solving like a constraint optimization problem is generally numerically a little bit more difficult
+so people whenever they solve it they really look at uh uh this version of the
+problem okay and then they typically you know we'll use either an itative you know depending on the size of the
+problem either they'll use a very um an interative algorithm it's very large or they can use the kesy decomposition or
+even the SV okay but the important point to not
+is that this can be represented as uh a con this is equivalent to a constraint
+optimization and one of the reasons I'm I'm Sor sorry go ahead oh I just said
+Thank you got it sure yeah and the and one of the reasons I'm talking about this is that there's another kind of
+regularization that is actually very popular or maybe used to be
+popular um is called lasso okay and lasso has the
+following objective same objective as the squares regression in terms of the
+data
+fit X transpose W - y to
+n² but now now the regularization is changed to
+be the one Norm
+of so seemingly like a pretty in aquous change right instead of some Square
+um of some of the squares of w we are penalizing the sum of the absolute
+values okay so it's basically one
+Norm of w instead
+of [Music] squ two
+nor people use this and one of the reasons actually people use this is the
+following that lasso many times leads to
+a
+solution with sparse W okay and what do I mean by sparse
+W that is coefficient Vector with many
+zeros and you can think of that as you know it's a basically a more or s onus model
+ponus right so remember that I'm taking a linear combination of the D
+features right d could be very large in Modern Problems D could be as large
+as a million so what that means is that you now have a coefficients of million
+features okay but somebody can ask okay can you give me a solution which has still a good solution
+a good fit can you give me a solution which has lesser coefficients it's a
+more interpretable model so what happens is that the lasso results in a more parsimonious
+mod and why is that okay and now we can see that if I look at
+lasso okay I can think of it as being equivalent actually let
+me say that it's
+equivalent to um the following constraint
+optimization problem the same thing that we did before I'm following that foll
+constraint
+optimization problem which is minimize
+w x transpose W - y² such
+that what is the constraint now that Norm of w but the one Norm of w
+is less than equal to R
+now if I look at the if I draw it geometrically what is the norm of w less
+than equal to R I wonder if I did that before right so for example if I go back to the linear
+algebra review when we talked about different
+Norms oh yeah look I did that here
+right Norm of w is less than equal to one is this
+set right because this has boundaries one0 the corner points as one 0 0 01 and
+so on and in between these are straight lines whereas the two
+Norm the constraint set is a sphere so this actually has
+Corners this boundary has corners and that's why it'll actually give part
+solution okay so this constraint set will
+be sorry my drawing is not the best but it's going to
+be Norm of W1 is less than equal to
+4 okay and given my data my you know suppose it the same problem
+problem I'll basically get something like this my uh F of w right so if I draw the
+level sets of that it's going to be something like this and then the solution will be the
+first time it actually hits and because this has
+Corners you can see that the solution is here this is the L solution
+is usually Sports now remember I'm drawing this in
+uh two Dimensions but you know this is happening in D Dimensions when there are D features so D is a million your like d
+dimensional space so it's not going to be like only one variable is negative or is non negative but there may be many
+variables okay and remember there is the regularization coefficient right so as you
+increase Lambda right that basically means that you
+are decreasing R right and you can you will basically
+um uh get bar
+Solutions okay any questions about that
+sometimes it's also called the contour map you probably seen these kinds of
+maps when you do hiking and so on
+right this is a convex function so you know it's like this and every level set
+is a ellipse okay any questions for me
+okay so let's recap we started the course of talking about
+regression we looked at Le squares regression the sum of the squares I think right in the beginning there was a
+question like why are we looking at some of squares and you've seen that we've developed kind of a you know some really
+nice intuition and one of the big reasons why we use some of squares is because it's in some s good to analyze
+it's easy to analyze right so um then we
+realize that hey you know we need some linear algebra for this I did some linear algebra review then we came back
+and said today what we saw is that hey Le squares regression by itself is not a
+good predictive method because it can overfit and that principle is very true
+of machine learning in general so this is a particular example where you don't want too complex a model model that fits
+your training data exactly because that leads to overfitting in the context of regression
+we saw that we can prevent overfitting by penalizing the coefficients that we have the
+coefficients W Ridge regularization is one way to do it and
+you can think of you know that has the interpretation when we look at the SVD that you know you are kind of
+shrinking the small singular values towards zero and the large singular values towards one but is not doing like
+a hard operation on them and then we saw that there's another regularization
+method called l so okay and I kind of gave you some intuition as to why
+that leads to a more parsimonious or a sparo model where the coefficients have
+many zeros as a result the predictor is only using a few of the D
+features okay so with that we are kind of coming to the end of how much regression we will do in this course I
+will uh um uh on Monday I will give uh a lecture
+on uh um collaborative filtering which is you know recommendations by you know
+like a very important problem these days right which is collaborative filtering
+recommendation algorithm and so on right so we will look at one particular way of
+doing collaborative filtering or recommendation and that you know back when the Netflix price happened was
+actually one of the leading methods I'll talk about that method and see that that naturally basically is a regression
+problem we'll I'll do that lecture on Monday give you your first homework uh
+on Monday that will in involve programming right and then once I finish
+the um collaborative filtering lecture then from next from next week onwards
+Wednesday uh I'll start talking about uh classification okay where the variable
+to be predicted is not real but is categoric predict whether for example an
+email is spamm or not okay so that's what is uh coming up in the
+course um okay so with that we are at the end of the lecture any
+questions on the material that we've seen so far excuse me you mentioned that
+the lasso is not popular anymore is there any reason for that specific
+reason oh when I say lasso is not popular I mean basically everything has been taken over by Deep learning so um I
+see so VK is a more natural way for yeah
+weight Decay is like you know just naturally comes up in uh deep
+learning and then if you try to get Spar Solutions you have to deal with the fact that it's not a differentiable function
+and so on so typically I haven't really seen much use of uh lasso kind of
+regression in deep learning thank you got it but it's still it's still very important it's good to
+understand and maybe there are some cases where we kind of you know may want to look at uh L1 regularization even in
+you know deep learning applications yeah I think interpretability is still a big
+issue well that's a huge issue with I mean if it's a big big issue with uh rid
+regression it's an even bigger issue with deep learning but I think generally generally what we've seen is
+that the quality of the approximation people care more about than interpretability so in particular people
+generally might care more about you know the goodness of a recommendation algorithm than being able to interpret
+it yeah makes sense thank you that that is just that's just true okay I see some
+comments got it thank you thank you okay good so that uh ends this lecture and I
+will see you on Monday bye

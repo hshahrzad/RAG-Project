@@ -1,0 +1,617 @@
+okay so let's uh start uh today's lecture okay so we have uh concluded
+talking about uh regression and we are going to move on to
+classification um in regression we realized at least in Le squares regression we realized that you know we
+needed to do like a review of linear algebra which I did and hopefully that was helpful to most of you
+uh in uh as we go through more and more of machine learning supervised machine
+learning we'll see that we need other Concepts too especially from probability Theory so before actually starting to
+talk um about classification I'm actually going to give a lecture on uh
+probability Theory background that we will need for oops uh that we will need
+for um this class
+okay so I'll talk about probability
+ability Theory
+background so we'll spend today talking about it and next time when we start the
+first lecture on classification we'll kind of realize that we kind of need it almost right
+away probabilistic uh modeling is a very important uh Concept in machine learning
+and uh we could also have used it in regression um but we will see very
+quickly that we will need it in um uh discussing various classification of
+projects so let's assume that we have just two random variables for now we
+have random variables X and Y and right now I'll
+just assume that these random variables are discrete so they take values X1 X2
+through XM and Y takes values y1 Y2 through y l
+so when I have these two discrete random variables I can actually look at their joint distribution and think of it as uh
+a table so I have join distribution P of XY right and I can
+represent it I can look at the table over
+here the columns are indexed by uh the X values or the X random variable the Y
+the rows are indexed by y so the different values that y can take is
+y1 Y 2 y j
+a y l and X is X1
+X2 x i m x m okay and so for example if I am
+looking for the jth row over here YJ and the ith column right this
+is I will if I want to be very particular I will say that this is p
+probability of x = to x i and y = to y j
+okay and many times we don't want to have so much such a cumbersome rotation and we'll just say that this is
+probability of x i comma
+YJ okay and now suppose you know I have dealing with these uh run variables that
+can take these discrete values you know I can kind of have n
+trials okay and in the N trials I can record
+NJ as the number of
+times in these trials we observe that X = to x i and y = to y j
+okay and as I start doing more and more trials that as n tends to Infinity you
+know what this is that pxi y j will be equal to so this estimate will converge
+to the actual probability values okay so when we are talking about uh random
+variables there are two important Concepts that uh uh are important one is
+called the marginal distribution so even though I have a joint distribution I might be interested in what is PX = to
+XY so I'm marginalizing overall the Y outcomes that's why this is also called
+as the marginal
+distribution okay and that is going to be just the
+summation okay so remember the y takes the values y1 through y l so I look at P
+of x = x i y = y j right and I actually sum over sorry
+this should be J = to one 12 okay so I'm marginalizing over Y and
+I get the marginal distribution P of x = to XY and now if I look at kind of the
+details about what it is right this is going to be summation of J = 1 to l if I
+have n trials right this is each of these values remember is n i j ided by
+n okay now n is kind of a constant so I can keep get it outside and then
+summation of Ni J I can call as CI okay so for example over here in my
+table over here if I record the number n j in each cell right then I can actually
+list the kind of cumulative sums as C1
+C2 CI CM okay and clearly c
+i is equal to the Sum along this entire column right so summation of um N
+J with my J is going from one through L okay
+and that's what's coming out over here so this turns out kind of gives you one
+important rule okay which is kind of the sum
+Rule and then the other than marginal probabilities and an important concept
+is conditional probability okay so conditional
+probability so suppose I'm looking at the conditional probability of y equal
+to YJ given that I've already observed that x
+equal to x i okay and that will be denoted by P
+of Y = to YJ given that xal to XY right
+and if you think about the table over here right so this is kind of saying
+that you're now only really concentrating on this part of the joint
+distribution you're looking at that X is already given to be XI and then what is
+the probability then that I get this so instead of being n j ided by n that is
+the probability of x i comma y j given n it'll be an i j given by the divided by
+the marginal distribution right so it's actually going to be equal to n j
+sry n i j ided by C
+okay and just like we you know uh had this uh more concise form for the joint
+distribution we'll also write this as P of YJ given
+XR so which what we see is that P of YJ given XI is n j divided by CI
+right as of course the number of Trials becomes larger and larger and so let me
+just write that again P of YJ given x i okay or sorry
+the remember the joint distribution P of y j comma x i is equal to n i
+ided okay n j and I can say that this is equal to n
+j divided by CI time c i / so it's still n j ided by c i c by n
+but now I've written it in terms of well the conditional distribution and the
+marginal distribution so if you like again let me kind of just write this out
+P of Y = to y j x = to x i right this is equal to over
+here this part right which is the same as this
+part over here okay so this is equal to P of y = y
+j conditioned on x = x i and this is the
+marginal distribution remember we saw this Above This is p of x = to x i okay
+so this is p of x = to
+X okay so this is often known as the product rule
+if you for example take a look at the book by Chris Bishop then he will also
+have a section devoted to this this is the
+product okay so just to summarize right um I have two rules this is the sum
+rule I'm just writing it now in terms of the random
+variables right you get the marginal distribution by marginalizing or summing
+over all the Y outcomes okay so this is the sum
+Rule and then we get the product
+rule P of X comma Y is equal to P of Y
+given x times P of um X
+this is the sum Rule and this is
+theule okay now we could have conditioned either on X or we could have
+conditioned on y right so if I look at P of X comma
+y right what I've written above is that I have this equal to P of Y given X
+P of X but I could easily have conditioned over the other variable first right so I
+could have written this as P of I can write this as PX given y *
+py okay and that gives us the famous base Ru so this is used a lot in machine
+learning especially when you do probabilistic machine learning right so Bas rule is that if I want to compute py
+given X okay I will basically write this so remember py given X is our
+here because this is something that I want to compute then I can write this as the x
+given y * py /
+PX P of x given y time
+B1 divided by
+okay so many times this is known as
+prior so for example we'll see that you know suppose we want to look at like classification of an email into spam or
+not spam in that case Y is a discrete variable that takes values either in
+spam or not spam and then there might be a prior distribution that you know hey
+maybe most emails are actually normal and not spam and so py equal to spam
+might be much lower than py not equal to spam so that's something that we can uh
+either guess from the data or we may have some reason to uh give a kind of
+different prior and this is known as the
+posterior so in the email example the X might be you know some kind of uh uh uh
+uh uh data right so XI Yi Pairs and what
+you want to do know is the posterior which is given the data what is the
+probability that it is uh uh that the email for example is Spam or not spam
+but what really helps us in making the decision is p of X comma x given y right
+so that is known as either the evidence or the data like
+okay so for example which which will model right given the spam emails what
+do the spam email distribution looks like given normal emails what our normal
+emails uh uh look like okay and uh if you notice over here in the denominator
+we have have P of X right that's the marginal distribution and I can actually
+substitute PX over here right so I get that this is equal to PX so this the
+numerator as above BX y PX given y * py
+and then the summation over Y which is p of X comma
+y okay and I can now write the uh denominator
+as again this and I can apply the um
+product rule over here and I can say that this is e of x given y d y okay so
+you can see that the numerator is one particular x equal to X and the denominator is uh summing over
+all the particular y okay so that is uh base rule that
+comes up quite a lot so I've given you like a very quick introduction so let's
+actually look at a particular example okay so um but before we do that you
+know just one kind of notion which is comes up again quite a lot is the notion
+of uh Independence okay so two random variables are independent of each other
+if pxi comma YJ can just be factored as pxi
+time PJ P of YJ so just in terms of the marginals and
+you don't need any uh uh it actually is the joint distribution is like the
+product distribution of the marginals so for example and in particular this implies that P of
+YJ given XI is just equal to P of Y so it doesn't really the conditional
+distribution is uh uh you know does not depend actually upon XI okay so this is
+kind of the notion of Independence let's take an example that illustrates many of the
+above things right and how we can infer some probabilities given uh this
+information about uh The Joint distribution or the marginal
+distribution okay so let's take an example where we have two two boxes okay
+so um so we have two
+boxes this will be blue and
+red and we have two types of fruit this will
+be apples and
+oranges okay so let me draw like uh red uh
+box I have a red
+box okay and then I have a blue box
+okay and suppose somebody says hey you know we are given that uh you know the probability of choosing the red is going
+to be is0 4 which is 2 / 5 and the probability of
+choosing the blue box is6 the probabilties should sum up to
+one so this is three okay and now suppose I have uh in
+the red box okay suppose I have you know two
+apples and six oranges and suppose in the red box I
+have three apples plus six oranges
+okay so the orange color is here so
+oranges and I guess I can have uh why should be well let's go with
+green let's say Suppose there are Granny Smith apples green apples okay so just to draw
+it we have two apples over here
+and then we
+have how many oranges six oranges and then the other
+one actually in my notes I don't want to get change things too much on my notes I
+think we have one orange
+we have one orange and we
+have okay so what is
+the
+probability what is the probability of an apple given in Red
+Box okay come on somebody help me
+out uh one over4 is 1 over four right so that's 2
+divided by eight there are eight pieces of fruit in the red box uh somebody uh be be ready in the
+red box we have oranges somebody
+else oh you want to communicate by chat okay RAB says three4 Okay that was uh
+wrong I was thinking about the last problem I I saw the red arrow um I confused the
+numbers okay but is this not correct probability of uh orange given a red box
+is that 34s oh that that is yes that is it is 34s right yeah
+so this is 34s okay somebody else probability
+of Apple given uh blue box somebody I haven't heard from so far
+in class sorry could you just repeat
+that 34 34 right probability of Apple green apple
+given a blue box okay so there are three apples out of four and then probability
+of orange given a blue box is one out of four one out of four thank you okay so
+now I can start writing this now in a two-dimensional table right just like we had for X and Y so let's suppose my box
+is is the one random variable FRS is another random variable there's a red
+box there's a blue box there's an apple there's an
+orange okay now do we know the joint
+distribution what is so let's Suppose there are four things right P of a comma
+r p of joint distribution of orange and red joint distribution of apple and blue
+join distribution of orange and blue
+so somebody wants to tell me give me the formula for p a comma
+R let's suppose we apply base rule is a PA a Time PA given
+r b * a did you say p a given R times p r
+perfect I can also have written it as P of a p of R given a let's come to that
+later but but we know this right P of a given R is what 1/4 from
+above and P of R is 2
+fths so that is one10 what is p o comma R The Joint
+distribution similarly P of O given R time P
+of R okay P of R is 2 FS as
+before and P of O given R is 34s so that
+becomes two equal to
+3 now what about this part is this formula wrong or
+right it is correct right but do we know what P of a
+is actually we don't right it's not kind of straightforward because the process
+involves picking the Box first and then picking a fruit from the box okay but we
+can try to we will try to infer that right we'll try to see that the sum Rule and the product rule will allow us to
+figure out what P of a is and what P of our given is okay but meanwhile we have
+P of Apple given the boxes blue again
+apply P of a given B P of
+B okay P of B is 3 fths and P of a given p
+is over here 34
+right okay so that becomes 9 by
+20 and P of orange given blue box P of box P of
+blue box is 3 fths and this is
+so this is speid so I can start filling actually
+this join distribution table right so p a comma R is
+1/10 the O comma R is
+310 this is 99 20ths and this is 3
+20 and you should verify that we were given that p of R is 25s right so if I add these two
+up right if I add P of r a comma R plus
+P of O comma R what does it add up to 4/10 which is 2
+FS right and that P of R and you can see that that's exactly what was given over
+so far I haven't made a mistake okay and this is p
+is 12 / 20 which is equal
+to 3 ided this is p
+of and you have verify that this is same okay what about probability of picking
+an apple now okay
+somebody remember that that was not that's not right in front of us right so we actually have
+to do a marginalization right so we add up the P R and P A B yes so it is PA
+a comma R plus PA a comma B and that is 1110 + 920
+and that's equal to 112 okay so that's this
+sum and what about uh P of
+O well P of O is p of O comma R plus P of O B is equal to 310 + 320th
+and that is equal to 920 we could actually have also
+gotten it from here right it's basically 1 minus 11 by 20 is = to 9 by 20
+okay what about uh let's say this thing that we were talking
+about P of that the suppose you are have picked your observe that you've picked
+an orange suppose you observed you picked
+an orange what is the probability that you pick the uh you will pick a red
+box given Orange right so again we can apply base rule so that is p of O comma
+given r p of R / P of
+O what is p of O given are
+310 34 right over here oh sorry yeah sorry I
+meant 34 yeah yeah yeah P of O given R is 34 remember if you have a red box
+then there are six oranges out of eight so that's why it is
+34s times oh I could also have written this oh it's okay what is p of r
+uh uh P of R is 2
+fths divided by P of O which is 912 I could actually have just you know
+said that this is equal to uh um P of O
+comma R and I'd already done this so I kind of repeated it but it's okay right
+so this is equal to it's the same as this quantity
+right this is the same as this okay so that is equal to
+310 over 9 20ths right so that's equal
+to uh 310 * 20 by 9 and that's equal to
+2 okay so you've seen like that you know it's all very consistent now right if uh
+the you have the sum Rule and then you have the product rule and they give us
+the very important
+base any questions so
+far okay we've talked a little bit about discrete random variables right
+now so let's talk a little bit about probabilities with continuous variables
+and then we'll talk about the ubiquitous gaussian distribution that comes up a lot okay so and we'll talk about the
+multiv cin distribution which some of you might have seen some of you might not have Okay so
+probabilities with respect to continuous variables
+okay so we'll have X belongs to R so right now just let's take um well we can
+take either X belongs to r or later on we'll see that we'll actually look at
+where the continuous variable is D dimensional okay so we have uh you know
+we have something called the PDF which is the
+probability probab prob
+sorry um [Music]
+probility density
+function and we denote it by capital of PX sorry little PX typically right and
+it's a function it's a continuous function V of X is greater than equal to Z right and it adds up to one so what
+does it mean for a continuous variable it basically is that the integral
+suppose the domain is minus infinity to plus infinity then the integral is one so
+that's the analog of the sum of the random of a discrete random variable okay so similar to uh the sum
+Rule and the product rule that we had for continuous Rand for discrete random
+variables we have the sum rule which is that the marginal distribution is when
+we integrate out the other variables so suppose we have a two-dimensional uh Jo
+a joint distribution between X and Y right we marginalize over
+y that's kind of saying that we Sim an analogous to summing over all the
+different possible values of Y and my product rule is that my joint
+distribution is the conditional distribution times the marginal so this
+is uh uh contain conditional distribution given X and or you can do BX given y *
+B okay so you know I didn't talk about it
+really in terms of in the discrete uh case but you know you have the mean of a
+random variable right so [Music]
+expectation or mean okay that is so suppose I have a
+function of a random variable F ofx then I have in the discrete case it
+would be uh um sorry maybe I won't write it here the discrete
+case this is going to be integral of e of X time F ofx
+DX okay and in the discrete case it would have been summation of X DX
+FX okay in particular I have that the expectation of the random variable is
+equal to
+XX okay in addition to expectation or the mean there's another important
+concept called variance okay um by the way note that
+expectation has this property that expectation of x + y is linear is
+expectation of X plus the expectation of Y and you can
+see that easily from the integral because the integral will become the one
+integral will become the sum of two integrals okay so now suppose I again I
+have a function of x f ofx okay my variance is going to be the
+expected Su squar deviation from the mean okay so so I said a lot so
+expectation that's the first part Square deviation is f
+ofx from the mean mean is expectation of f
+ofx okay
+squar okay now if I take the quantity within the brackets if I open it up I
+get F of expectation of f of x²
+plus well you know it's basically a minus B squ right so I have a squ plus I
+have this mean of f ofx just be careful where you put the
+squares and where you put the brackets right minus I have two of this part
+which is f ofx times this part F ofx times expectation of f of
+x okay and remember since expectation is linear I have expectation of f
+ofx Square okay plus I have expectation
+of expectation of f ofx I'm just expanding out things okay I could
+probably go quicker but I just want to show all the steps right so two of I
+have expectation of f ofx find expectation of f
+ofx okay this first part Remains the Same F
+ofx okay the next part is basically expectation of expectation which is a constant so I get rid of the outer
+expectation or inner expectation what okay and then over here I have two times
+this is kind of a constant so I have expectation of f ofx appearing times the
+expectation of f ofx right so two times expectation of f
+ofx appearing twice right so these two give me expectation of f of
+[Music] x² minus I take the expectation of F
+ofx and then I Square it okay so very important to notice where the squares are right so the square inside is inside
+the expectation and here you are taking Square Off the expectation okay so in particular you probably have seen this
+formula in you know a course in statistics that if you have a variance of X then I have it is expectation if I
+if I go back to this original formula right I've just f ofx is the f is the
+identity function so it's expectation of x minus uh um so it's the deviation of
+each observation X from its mean okay so it's x minus E
+ofx squ and like what we did above you can
+go through all the steps in particular for this but you know we've already done this above this is expectation of
+x² minus you take the expectation and then you square
+it okay in addition to uh uh variance when
+we have two or more random variables and in particular we for example if I have a
+two dimensional random variable or a d conventional random variable another thing that comes up is
+the
+co-variance okay and many times we'll use c as the denote the covariance so
+the co-variance of XY is
+basically how this they kind of behave from the deviation from the mean so X x
+minus expectation of X
+sorry a little careful time Yus expectation of
+Y okay and then if you again kind of go through the similar exercise as before
+what you will find is that this is expectation of XY minus expectation of
+X expectation of right so co-variance of X with itself
+is just going to be the variance and that's what you'll get you'll get expectation of x squ minus expectation
+of X whole square and that is if x equal to
+Y now we' noticed you know we talked about a little bit about independent
+random variables right so what if X and Y are
+independent okay we have if that's the case then I have P of
+X comma Y is equal to PX * py so if I have covariance of X comma y
+remember the covariance of X comma Y is X expectation of XY minus expectation of X expectation of
+Y and if you think about what this is right this is basically P of X Comm y
+time XY integral Dy
+DX right and if this breaks up into PX
+py I can write this as
+xpx time xpy okay and that's expectation of x
+find the expectation of okay and if I do this then what do I get
+that Co variance of XY is equal to expectation of X time expectation of Y minus expectation of x
+times expectation of Y so it's equal to zero okay
+if X and Y are independent
+okay so the co-variance is zero if my two variables are independent right the
+co-variance of XY equal zero If X and Y
+are independ
+okay now let's talk a little bit about uh gim distribution and what my goal is to uh
+um tell you what a multivariate ga and distribution is right I don't know how many of you have seen that almost all of
+you have seen I'm sure all of you have seen what univariate G in distribution
+is okay so let's start with that but we will what towards by the end of class we
+will talk about the multi gum distribution okay so I have a gaussian
+distribution okay and that's also called the normal
+dist okay so we'll assume in the univariate case that X belongs to
+R okay and the Gin distribution X okay so there are two parameters in a
+gin distribution mean and variance okay so given particular X and
+sigma square and many times we'll just you know not write the given part we'll
+just say p of X or the PDF is given by this particular Formula 1 / < TK 2 piun
+time Sigma e ^ -2 x - mu 2 / Sig
+sare remember that mu is the well not remember but mu is the
+mean or
+expectation okay and sigma square is the variance so for example if you take this
+PDF and you actually calculate the integral of x * PX you will get mu and
+if you compute the integral of you know um uh um that corresponds to the variance
+then you will get Sigma squar okay so in
+particular XTX DX minus infinity to Infinity is equal
+to Mu which is the expectation X and then if you compute expectation of
+xus mu s remember this is the same as expectation
+of x² minus mu^ s okay
+that's expectation of X squ this is equal to Sigma
+squ so that I'm pretty sure that all of you have seen But now let's move to the
+um to the multivariate case so now suppose I have X which is a d dimensional
+Vector okay so X has multiple components X1
+X2 XD so I think you should be able to
+clearly see that if I do expectation of X that's going to be expectation of mu1
+uh X1 which is mu1 let's denote that by mu1 expectation of X2 which we denote by
+mu2 and expectation of XT which we denote by mu and this we'll call as Mu
+so remember mu is a vector mu belongs to
+Rd okay and let's just look at the
+um univariate variances right so if I look at x
+i minus mui squar let's say these are Sigma i
+s okay so there are D of
+these variances for each component of the V but what we are interested in is a
+joint modeling so remember X is an RD so really X is a vector Vector so the joint
+distribution of X is so if I think about the kind of notation we
+had before that's it we are looking for the joint distribution of each of the
+components of the vector X so what is the multiv gaum
+distribution well instead of going straight to the gausin distribution let's let's take a simple example first
+and then we will extend it to the uh multivaried
+distribution so let me uh First Take let's assume that the XIs are all
+independent of each other suppose XI
+is independent of XT for all I not equal to
+okay so they are all independent of each other and we know that the joint distribution in that case is just the
+product okay so maybe I'll just write it in case you're not familiar with this notation
+but it is p of X1 P of X2 P of XD that's the product of this
+and that is denoted by the symbol which is the product for I = 1 to D of P of
+XI okay and now let's write it out right what is p of XI well XI
+is a you know it's a gaussian distribution and we saw that this was
+the formula for p of XI so P of
+XI is going to be 1 / < TK 2 piun Sigma
+1 time e ^ x - mu 1 / Sigma 1 s right so for for so
+this will be 1 / squ < TK 2
+pi time Sigma 1 but let's just look at that this thing
+which is before the exponential right how many times will it appear there are d d times right there
+are D terms over here so this will appear D * and then this will be Sigma 1
+Sigma 2 to Sigma
+D okay and then the thing within the exponential it will be a product of e to
+the power so same as here same as here I'm just rewriting it
+down over here e^ minus 12 of X
+IUS mu i² / Sigma I
+square and the product is from I = 1 through
+D okay so I rewrite this as 1 / 2^ IUN d by
+2 I haven't really done anything I just take the square root right written it as
+power half and written it like this and then I have Sigma 1 Sigma 2 to
+Sigma okay and now you need to notice one thing this is the product of
+exponentials right so if I have e ^ a * e ^
+B that's equal to e ^ A + B so what happens is that I can
+basically turn this product into a sum if I take it into the exponent so this
+becomes e^ minus 12 summation of X IUS
+mu I squ / Sigma
+i² any questions so far
+and remember the summation is I =
+to so what I can do is I can actually take uh Matrix
+Sigma um by the way sorry because uh I don't think I can avoid it but you
+know this is a matrix Sigma okay whereas this is the not
+notation for a summation okay but I'm actually collecting things in a matrix Sigma
+which is Sigma 1 squ Sigma 2 squ Sigma d s so it's a diagonal
+matrix with the variances on the diagonal and everything in the off
+diagonal is zero what is the determinant of this
+Matrix uh like the products of the diagonals determinant of this Matrix is
+the product of the diagonals so it's Sigma 1 squ Sigma 2 squ Sigma d
+s so it's Sigma 1 Sigma 2 time Sig D
+squ so this means that I can write this
+as 1 / 2 pi D /
+2 times the square root of the
+determinant remember the determinant is a number
+is that clear okay and
+now what about uh this term over here this term
+here x i- mu i s / Sigma
+Square um maybe you can turn like XI and mui into vectors and you can multiply
+them uh by you can take like the dotproduct of that of the vector minus
+the X Vector minus the mean Vector squared you can take that vector and you can multiply it by the inverse of the
+sigma Matrix yeah yeah so let's let's go through it slowly so suppose I have x -
+mu transpose * x - mu okay remember now x - mu is a vector huh x - mu is equal
+to X IUS mu I sorry X xus mu is a
+vector and that is X1 - mu1 X2 -
+mu2 to XD minus mu so if I write x - mu transpose * x -
+mu that is well you can see it's going to be the sum of the squares right
+summation of i x IUS mu i² so it's starting to look a little
+like this except I don't have Sigma I squ
+okay so then if my Sigma is diagonal x - mu transpose time Sigma
+inverse x - mu is summation of i x
+IUS mu i² / by Sigma
+Square okay and remember that Sigma is
+diagonal let me just write it again right Sigma 1 S 2
+2 Sig d 2
+this Matrix Sigma okay I apologize because you have
+to realize that there are two sigmas out here right so just by context this is the Matrix of the variances and this is
+the summation sign it's I = 1 to d i = 1
+to okay so this says that my joint distribution in the case
+when I have Independence between XIs is I can write it as 1 / 2
+pi D / 2 determinant of Sigma to the^
+Half Time e^ - 12 x - mu transpose Sigma inverse xus
+okay so I just wanted to kind of just show you that in the case of Independence I can write it like this
+okay now let's look at the general
+case General case okay in the general case I'm not assuming that the XIs are
+independent so I have X belongs to
+Rd okay and let me so I have a
+multivariate calcium
+distribution okay and the PDF what's it given by well guess
+what it's going to be identical to this except Sigma will not be D The Matrix
+Sigma will not be dag 1 / 2 pi b by
+2 determinant of Sigma to the power
+half e to the power minus 12 x - mu transpose Sigma inverse
+x - okay and where where
+as before mu is the
+means that is Mu is equal to expectation of
+X okay and that's just the same as before mu1
+mu2 to Mu D mu I isal to expectation of
+XI okay but my Matrix Sigma
+is the remember earlier it was the diagonal diagonal matrix with variances on it but
+in general it'll be the co variance
+Matrix that is it's defined to be expectation of xus
+mu xus mu trans and in particular Sigma i j is the
+covariance between XI
+and X2 okay so the Coan Matrix has the
+following property remember it is going to be a d by D Matrix right that's
+pretty easy to see it is going to be
+symmetric symmetric okay and is also positive
+definite remember what positive definite means that it is uh uh all the quadratic
+form is greater than equal to all quadratic forms are greater than equal to zero which means that the igen values
+of this Matrix are all they're not only real because it's a
+symmetric Matrix but they're also greater than zero so that means if I
+have Sigma is V Lambda V transpose right which is the ion value
+[Music] decomposition the only set of matrices
+for Which ion value decomposition and the singular value decomposition are identical are the
+positive definite matrices positive semide definite it's either you can call it the SVD or uh I value decomposition
+you know so Lambda is
+diagonal okay Lambda I I is greater than
+zero
+and the matrices V are are um orthogonal orthogonal matrices right
+so they are the orthogonal matrices orthogonal matri matrices where the
+columns correspond to the igen vectors of Sigma and then what happens so so we have Sigma inverse
+here in this
+formula okay so Sigma inverse can be written as V Lambda
+inverse which transpose
+okay and so the quadratic form half of xus mu
+transpose thing that appears in the exponent of the GS IND distribution over
+here okay that I can write as half x - mu
+transpose V Lambda inverse V transpose
+xus okay so what I can do is I can actually form another variable Z which is equal to
+this well maybe maybe I won't do
+that okay let me just kind of use a different color and let me say that I'll make this
+equal to Z okay so I have Z is equal to V
+transpose xus mu which means that half of x - mu
+transpose just from copying from above is equal to 12
+of Z oh my two is starting to look Z
+sorry okay it's equal to 12 of I made
+any better but it is z let me try Qui it
+Z transpose Lambda inverse times
+Z okay and if you know noce like if I just
+ask you like what are the Contours of um equal probability density then this will
+be P of xal to C which is that so it implies that you know I have half
+of Z transpose Lambda inverse Z is equal to
+some C Prim okay and if you think about it hard enough or you can just expand it you'll
+see that this is the equ Al to summation of Z i² / Sigma i² where Lambda
+is um well um well let me call Lambda
+isal to Lambda 1 through Lambda D okay and in this case it
+is Lambda d right but remember that L sorry Lambda I remember that Lambda I
+are all greater than equal to zero so this this is this and if you know if
+you um this is just the equation of an
+ellipse okay so what that means is that in Z right my and this is ellipse centered
+at zero okay so this particular case is you know P of x equal to some
+C Okay the reason I'm drawing it is but that many times when you see a gaussian
+distribution you will see the following picture which is that and when you look
+at things like uh principal components analysis that you might have heard about
+right you'll actually see a picture like this not not the same as what I've drawn over here because this is centered at
+the origin right uh sorry for the bad picture by the way this is supposed to
+be these are all supposed to be symmetric ellipses okay so let me see if I can draw it a little bit better but
+but or similar figure not centered at zero and not axis parallel right so
+whenever you see things like PCA or so you'll see maybe I'll draw it below
+you'll see something like you know there's a center over here
+I don't know if it's my drawing is any better but you know this is
+V1 this is V2 and remember I'm drawing it in two dimensionals but there are d
+orthogonal uh uh vectors over here right so this is p of xal to C and why is this
+kind of you know so this is going to be mu
+okay so if you notice that my transformation was this
+right so that kind of said that I made the origin equal to zero and then I did
+the orthogonal transformation so when I undo that I get this so this is how
+sometimes how the PDF or you know Contour
+plot of PDF of G okay and these sigmas are supposed to
+represent so these ellipse this ellipse in some sense represents the
+covariance Matrix right it would be a it would these would all be circles if all
+the singular Val or igen values were identical right so the special case is
+that if all
+if for example it was like this right then this
+is kind of saying that my uh uh Sigma is
+diagonal right and uh
+um and that all my igon values are equal so for example when you draw from a gaussian which is you know unit variance
+in each Dimension all the variables are independent then the cience Matrix would be equal to
+the identity okay so this is the Contour
+plot of PDF of multi
+CL okay um any questions about this so you know I so just to recap you know I
+started off by you know somewhat slowly um talking about discrete uh
+uh join distributions discrete random variables and we saw that there is a sum
+rule then the product rule and then we can extend it to uh probabilities uh
+probability density functions where we have continuous variables similar concepts mean
+variance um uh sum rule product rule and then we saw particular case of uh
+distribution which of course is ubiquitous uh the cin distribution
+now many books will give you this particular formula
+directly and they'll say that hey you know this is the mean and this is the covariance Matrix but I wanted to build
+intuition right so we showed that the in the case where all the because many of
+you have seen the univariate cian distribution right that if the variables
+are identical then you can write the PDF F of this in the same way as you write
+the PDF of a general multivar Gan of course Sigma is special over here it's
+diagonals right and remember that earlier we also showed that when X and Y
+are independent where did I show it here when X and Y are when x i and XJ are
+independent then the co varience of x i and XJ are is equal to zero okay and so
+you can kind of make sense of why Sigma is diagonal over here in General it is
+uh it is uh the expectation of the covariance in
+general it is a d byd dense Matrix and uh
+um uh you can represent the PDF like this and when we come to we'll probably
+briefly mention the principal components analysis that's going to be kind of finding the principal components which
+are V1 and V2 which are we some books will say it's the direction of Maximum
+variance of the data okay so with that kind of we
+conclude this uh again background lecture on uh probability Theory and so
+from next time we'll start talking about uh classification and we'll see how the modeling that we did for example today
+will straight away come in uh in the next lecture uh any questions
+okay is there no more question is there are no questions uh then uh we conclude
+and uh we will meet on Monday so remember there's a homework hope you
+have a good weekend and then uh from Monday onward we'll start talking about
+classification uh see you on Monday thanks bye

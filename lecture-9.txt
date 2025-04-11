@@ -1,0 +1,648 @@
+so today it'll be the TA NES who will be teaching this uh lecture so NES uh you
+can go ahead thanks init
+so yeah today's lecture is on introduction to deep learning here we'll
+talk a little bit about um deep learning what it is why do we want to do it and
+what are its applications why is it so exciting and then we'll look into what
+are the key ingredients that make this deep learning
+framework so yeah let's begin so what is deep learning uh deep
+learning is a sub field of machine learning that uh leverages deep neural networks to model data so if if if we
+draw um a rough vein diagram so like if AI is the
+bigger uh circle like which which constitutes of like the the goal of
+trying to mimic human behavior like trying to mimic human intelligence so machine learning is a sub field of AI
+which uses uh statistical uh techniques to sort of do
+AI uh
+um deep learning is a smaller circle inside machine learning which
+specifically leverages neural networks
+to achieve the goal of AI which is trying to mimic intelligence
+artificially so why do we want to do it like why why not
+uh traditional machine learning that we have seen so far because it is a very
+powerful technique which allows us to automatically learn representations from data eliminating the need for manual
+feature engineering that is like um with classical machine learning there are
+often times like you need uh specific practitioners in the field to design uh
+the features for the task that you are solving for to get an effective method what deep learning
+promises not like sort of promises to do is it it eliminates that need and it can
+learn from large amount of data uh by itself without any need to design um uh
+features or like special representations to enable machine
+learning so deep learning uh neural networks as a concept have existed
+before like they were they were first introduced in some something like
+1950s but uh they they were not successful at that time in this current
+like since last decade they have gained a lot of traction and this has happened
+because of these three components first is the hardware that is gpus and tpus
+happen which are uh a very powerful Hardware to accelerate these Matrix uh
+operations and then uh like internet also happened which gave us a lot of
+data to train on so these unsupervised methods which which don't need um uh
+any uh any annotation to to train on they they became possible because like
+the data was so much available that like you uh you were able to train on such am
+vast amount of data and the model was able to learn properly and then the
+third is the third pillar is the Frameworks these uh uh it is uh uh sub
+Frameworks like pytorch tensorflow Jacks they enabled or they provided a very
+seamless apis to uh work on and to to share uh code on that open source
+Community could build upon and a lot of uh the the the details of the deep
+learning could be hidden inside these Frameworks and people can work on abstractions simpler
+abstractions so these three pill pillars kind of enabled deep learning in modern
+era so let's come to some of its applications so essentially any
+intelligent task can be uh deep learning can be applied to it could be object recognition that is given an image or a
+video like you want to identify an object it could be self driving it could
+be playing games something like chess alphao uh go and any kind of games like
+recently uh a AI agent has also soled Among Us which is great to see and
+conversation agent that we see as chat Bots like they are ubiquitous these days
+and then we have media generation something like imagine Del and much more
+that followed which which can like given text prompt they can generate image or a
+f length video the even these days and at the end like maybe like it the any
+like the artificial general intelligence then that probably like at least that's the goal that we want to solve using
+deep learning so all all of these applications are exciting and they they
+they are worth working for so let's look
+at like some of the key components of deep learning so there are three kind of
+broad components of a deep learning framework the first is the model which
+is typically a neural network that Maps your input data to Output
+prediction then second you have a loss it's it's a it's so loss is a scalar
+quantity that defines how well a model fits our data so it is typically defined
+using a loss function which consumes your model and your data and it gives
+out this scalar quantity which we call loss so uh the third is the optimization it's
+a process typically some variant of gradient descent that adjusts the model
+parameters to minimize the loss so it's essentially the learning process that
+you have defined your task and you have defined your mechanism to solve the task
+now how do you learn uh the learning process itself is what we call
+optimization so these three are the key components and in the rest of the class like we will dive um deeper into all of
+these three components one by one so before we go ahead any questions so
+far
+okay so let's come to the model which is
+essentially neural networks in the case of deep learning so a brief history like I said earlier the early work on
+perceptrons in 1950s late the foundation for neural networks but back then
+because of limited compute limited data these methods were not that successful
+and eventually like the excitement around these methods like dead di die down but in 1990s like they saw
+Resurgence and with with more data available and specifically in 2012 with
+imag net and uh gpus getting available
+like they they saw a big rise in popularity and that's the main uh
+it's it's been the main like Workhorse behind all kind of AI since then so
+roughly it's model after the human brain's neurons that is like in the brain like we see these interconnected
+neurons where a neuron is a basic computational unit it takes some inputs
+and produces some activation based on what kind of inputs is seeing so essentially like it's neural networks
+themselves are also somewhat inspired uh but it's it's uh they they
+do work quite differently than actual neurons so like it's it's like it's only fair to say that they are inspired but
+they are not exactly trying to replicate what brain neurons are doing
+so so let's uh look at what a neuron looks like in a in a neural deep neural
+network that uh deep learning uses so it's it's as I said like it's the
+building block for our neural network um uh it's a basic computational unit so
+there are four components to it one is like it the inputs it receives multiple
+scalar inputs and then there are weights for each of the input it receives the
+weight essentially measures how much that input is important for activating
+this neuron and the summation so like the summation part is just it's it's a
+it's doing all the sum adds up all the weighted inputs that it is seeing and
+then there is a nonlinearity which is a filter or activation function that given
+given the weighted sum like it it decides whether to like shoot up or like
+stay uh below zero so it's it's acts kind of like a filter function if you
+want to Loosely draw analogy so let's quickly look at like a like a
+basic neuron um here like I'm looking at a linear
+neuron this doesn't have a nonlinearity so it it just is doing a
+weighted sum of its inputs so here as like uh like we have our input
+sorry our input consist of
+uh this is our input which is a two- dimensional input first is X1 which is
+your x coordinate let's say and your X2 which is let's say your y coordinate
+and here like all throughout the figures the kind of notation is like blue
+represents a positive quantity and orange represents a negative quantity so
+keep that and like if if I if you're uh like sometimes like when when I'm like
+denoting data points like or like class classification so they represent like
+two different classes so so like here like as we can see
+um we have this neuron which which essentially like is this module it's
+it's taking two inputs X1 X2 it's uh multiplying X1 with W1 X2 with W2
+summing them up and giving this output sorry
+which is z uh that we denote it's uh W1 * X1 + W2 *
+X2 so that's uh that's how neuron looks like and on the right like I have shown
+the decision boundary that this neuron creates so essentially um depending on what your W1
+and W2 this decision boundary will look something different but right now
+for like for some W1 and W2 the decision boundary looks like this and it it is
+always going to be a linear kind of a decision boundary uh because like it's it's a
+linear function the like what a neuron is modeling and uh yeah here you can see
+see that like for this particular data this decision boundary like perfectly uh
+fits um the data that we have so that's
+what a linear neuron looks like now let's add a nonlinearity in this neuron
+so essentially like we still have the same this is our input but our neuron now has this
+additional component which is our
+nonlinearity in this case uh in the diagram I'm showing you a rectified
+linear unit which is in short called value uh it's a simple function which
+we'll see later but like it's essentially like for all the negative input like it stays at zero and for the
+all the positive input
+like it uh linearly uh gives you the identity
+function so this is our x-axis this is R
+of x
+so it's a very simple nonlinearity that is like it it just kind of partitions
+your the input that it is seeing so if it's negative it remains zero if it's
+positive or like non- negative it uh just gives you the input itself so it's
+a very simple nonlinearity but like this itself is very powerful like if you
+we'll see later that if you if you start stacking up uh neurons with such
+nonlinearities like you can just draw arbitrary you can fit any arbitrary
+function so I hope so far the
+the the things that I presented are clear I'll take some time to see like if
+there any questions or anything confusing with the notations
+okay so so there are uh let's let's take a
+brief look at some of the non nonlinearities that are popular in deep learning and kind of constitute the
+basic nonlinearities so first is relu as I said like it's
+it's a function G of X which gives zero if x is less than zero and it is x if x
+is greater thanal zero so it's a simple function it's kind
+of looks like this um and yeah but but it's still quite
+powerful and like some variations of it is still used in everything that
+you like all the uh top deep learning products that you see including chart
+GPT and stuff so this is a Rel
+nonlinearity and then sigmoid as we saw in the last lecture it's it's it's
+uh it it's the function that it represents
+is this 1+ E power minus X so essentially like it's it's uh its graph
+looks something like this like for maybe I should use
+color for all the negative values like it remains at zero uh not all the negative values but
+like uh if if you're X is very negative like it kind of stays uh close to zero
+and then at xal to 0 it gets to like 0.5 and then at slowly it start
+increasing and then at one uh it it it gets capped at the value
+of one like as you keep increasing your X so it kinds of like acts as a gated
+gating function that um if if if your X is very negative like it is zero if your
+X is very positive or like even moderately positive it it gets to one
+and in between like it it gradually Rises to Z uh 0 to one so that's how the
+curve looks like um this we have already seen in our previous
+lecture tan uh tan H is also like it's it's the inverse tan
+function and it's essentially like the same as sigmoid just that like it's a scaled and shifted version of sigmoid
+that it's instead of like being capped between 0 and 1 it is between minus one
+and one so it's uh almost identical
+to sigmoid just that
+it's one minus one so it's it's kind of
+like two times wider than sigmoid and like but and the other thing is like Zer
+it is at zero so so very similar to
+S then we have soft Max So Soft Max is something different than these three
+nonlinearities so in the sense that like these nonlinearities are act on a
+scalar that is uh this x that so far I've been giving it's it's it's a real
+number but soft Max acts on a vector so here let
+me note the vector with different
+notation so here my X is a scaler a vector of real numbers so
+what it does is like it it so it it takes a vector and gives you a vector so
+it it it G is my soft Max is R to the N
+to R to the n and the ith element of this Vector is going
+to be E power x i divided by sum of
+e all the xjs where J is from 1 to
+n so it's
+um um so it's it's typically used to
+convert a raw uh Vector that that that is
+unbounded that is like it's it can all the values inside the vector can be
+anything between minus infinity to infinity and then like it takes that vector and converts it into a
+probability distribution that is like if you see that like one good property that this has is like summation of all
+the gxi from i1 to n is one that it it
+satisfies the probability constraint that and more on top of that g of XI is
+greater than actually is greater than zero
+so and these are the two things that we need for
+a um Vector of scalers to represent a probability
+distribution so we'll see this often at the output layer of a neural network
+we'll talk about like what output layer of a neural network is but whenever we want to convert uh some raw Vector
+quantities to a probability distribution Vector of uh um probabilities then like
+we use this softmax function and uh yeah this is also
+something very popular um that we'll see
+later okay so that concludes
+the um brief discussion on the nonlinearities let's see how these
+neurons can be interconnected to form a deep neural network so so a deep neural network like essentially is a layered
+arrangement of neurons that uh that forms a neural network so for example in
+this like uh each of uh like we have
+two hidden layers this and this and then we have
+the the input layer as before and then like here is our output layer like which
+uh so entally like there's a neuron setting here as well which which gives out like just one single
+scaler so here we we
+have um so all of remember like all of these neurons are some like represent
+just this quantity just that like they are arranged in a stacked up manner now
+so let's um look at like how how do we how like how does a how does this whole
+neural network acts as a function like how does it take a input and gives you the output that you
+want so let me try to
+write the some notations first
+so
+so remember that like each of the edges represents a weight so
+the um as I said like the notation that here I'm using is a blue uh color
+represents a negative quantity orange blue color represents a positive quantity orange represents a negative
+quantity and the thickness represents the weight of that quantity so here like if you see like uh these are the weights
+of your neural network so this let me denote as sorry
+yeah so this is
+the weight for the first neuron and the first input so I'll represent
+w11 and this is the weight for first
+neuron and second input sorry so I'll represent as 2 comma 1 and
+similarly like we can have like a weight uh for each of the edges that we see
+here so here like the notation that we'll be
+using is like like because this is for our second hidden
+layer so
+so this takes the first input and it's for the first hidden new neuron of the
+layer two so p 2
+so if you look at this neuron which I'm going to call N1 one because like this represents
+like which layer it belongs to layer one this represents like what is
+the index of this neuron in that
+layer so this n11 has two parameters which
+is W1 1 1 and
+BL 2
+similarly like if if we take this hidden neuron this I'll call
+n one 2 presents layer two
+presents index of this [Music]
+neuron so this has three parameters so such
+as W 2 1
+1 2 2 2 comma 1 W 3
+so as you can see like like all of these neurons comes with their own parameters
+so like if if you go on to write the whole equations like it will give become quite messy so how how we typically
+represent uh a neural network is in terms of matrices so each
+layer uh gets uh can be represent as a matrix of uh size in this case 2 cross 3
+because it acts it has like two it takes two inputs and it produces like three
+outputs so uh so like uh we can represent hidden layer one
+H1 as W1 which which
+is a matrix of size 2 cross 3 and then we can represent hidden layer
+2 as W2 which is Matrix of
+size three cross
+sorry Case two and then we have the output layer as I said like imagine a neuron setting here
+this in this
+case so its shape is going to be 2 cross one because it's taking two inputs producing
+one output so and one thing that I missed is
+there is also like like the inputs can also be considered as a layer so in this
+case the input is just one data point but typically in deep learning like we
+deal with multiple uh multiple inputs at once so
+like we create a batch of inputs so uh in this case let's say the batch are
+like in the batch like we have only have one data point so like our input is
+uh input is of shape
+2 cross one where this one represents like the bat size in this
+particular case but it could be anything so this is our X and now if we
+go on writing our uh like what what
+function this this whole neural network represents so so we can write that so
+the and write z one which is just the weighted sum
+after hidden layer one it's that's going to be um so let's see the
+shapes um it's so we want to have like three outputs
+and we have uh two inputs so it's going
+to be uh if someone wants to help me like
+in what what's it's going to be like w time X but like does anyone is is this
+right like just writing W1 matrix multiplication with the
+X no right like the shapes don't match sorry someone was saying
+something yeah said should it be X transpose times the
+W uh X transpose time W also works uh it depends on like what kind of notation
+you want to use but like it does work it will like if if you we I
+do X transpose time W this will give me
+something of the shape 1 cross three where like I have shifted the batch axis
+on the first one right and here like this is my output Axis or
+I could have written instead of this I could have done the other way like without
+Shifting the batch AIS which is W 1 transpose X which will give
+me 3 cross 1 where the batch access remains
+consistent so for the sake of of this lecture I'll use this notation which is like I'll use W transpose X to denote
+the uh linear combination uh but yeah you could have done X transpose W it just depends on
+what notation you want to use so this is my so but remember like this is not the
+final output of my hidden layer one this is just the weighted sums I now need to
+apply the activation so let's assume that like in this neural network we are using sigmoid activation which we
+represent by Sigma so
+our maybe let me use a different color
+so after applying the activation we'll get sigmoid of
+Z1 and this is an element wise operation so it doesn't really change the shape of
+your output so it still gives you a three cross one
+entity so and now this A1 is what this this whole output that will be seeing
+from the collective three neurons in the hidden layer one
+so okay so now that we have seen like first layer in action we can now see
+second layer so the weighted Sim of the second layer is going to be something
+like w two transpose and now remember like this
+hidden Layer Two is acting such as like the output of hidden layer one is input
+for hidden Layer Two so now we'll multiply this with a of
+one and what's the shape that I'll get I'll get the shape since it's W2
+transpose I'll get 2 cross 1
+so remember this one is still my batch axis and this two is the output that I'm
+seeing from hidden Layer Two and finally like I can uh like
+similar to Hidden layer one I can do A2 as sigmoid of
+Z2 and then let's assume that there is another neuron which which is of uh size
+2 cross 1 so my Z3 is going to be W3
+transpose E2 and assuming this is Al this also has
+the sigmoid activation this is going to be Sig of
+c 3 and what's the shape of this it's Z 1
+cross one
+batch so that's the final output that my neural network is giving me like for a
+batch of data points which have two Dimensions as the features uh and in this case there there
+are only like the batch size is one so that's why I'm getting a 1 cross one but if I had n data points in my batch I
+would have got a R1 cross n uh quantity at the end and A3 is my final output and
+uh that's how typically a neutal network works so I hope this is clear and spe uh
+specifically the notations are clear uh I did like uh it's not written
+that cleanly as I I imagined but uh yeah if there are any questions here like please let me know because we'll be
+using this notation and then this way of thinking about neural networks later in the class
+and actually like later throughout the whole course as well
+okay so let's come to the question that like why do we even need this nonlinearity like um essentially like
+what we said initially was that a neuron like uh takes some inputs and then it's
+uh it uh it needs to accumulate those inputs into one signal so why is the
+summation not enough so um I'm sure like some of you already
+know the answer but still like if you if others who don't like they want to make a guess
+or the people who know like they want to say like uh what's the intuition behind
+having a nonlinearity inside a
+neuron so we can like uh like model more functions
+uh but why not like if I just had like in this neural network if I just had linear neurons like why is that not
+enough CU we might as well just use like linear regression like we didn't like there's no point in using a neur network
+if it's just going to be linear right yeah so so that's that's true that like if
+you have a bunch of linear neurons and you connect it in any way that you want
+you will still end up getting a linear function and and um I mean this all of
+these diagrams that I've been using are from this playground. tensive flow so let's quickly take a look at
+uh uh like what for this dummy example that we had like if we had like bunch of
+linear neurons connected like in a fairly complex setup in a neural network
+and if we did training over it like anything that we do like we'll
+still get a linear separator of data and particularly for this kind of data which is a concentric circles like we won't be
+able to separate it so uh you can try to write the math and
+like you'll see that like you will at the end the neural network will be a like it's it will just represent a w * X
+operation so so let's see like uh
+what go back let's see like if if we had a Ru activation here and and then we did
+like training of our model like you can see like it it can give you like some
+like the hidden neurons here can give you a part like a kind of a partition of
+your whole space and then they can be combined in a way by the later neurons
+to give you a much more complex boundary for example like it's like this is creating like a parabolic shape from the
+right side this is a parabolic shape from the left side and then the these things can be combined to give you
+concentric circles so so so if you see like even with a
+simp very simple nonlinearity such as reu like you you were able to approximate it even if you have a
+sigmoid activation uh like that would still give you a similar result just
+that like it will okay in this case it's long
+okay with enough learning like it does give you so as you can see that even with activations like they can be
+finicky at sometimes so like depending on the type of problem you solving like
+you'll have to choose the right kind of activations but like having a nonlinearity really helps in modeling
+complex uh data so coming back to our lecture so
+nonlinearity gives us a superow that like combination of nonlinear neurons is
+much more expressive and it is uh it is actually like so powerful
+that like it can be shown that a neural network with at least one hidden layer and which has a sufficiently large
+number of neurons and an appropriate activation function it can approximate any continuous function um that to a any
+desired degree of accuracy so um I'll give a slight intuition about
+like this this theorem so essentially like let's say that like we have this function this blue curve that we want to
+approximate so how we can approximate it like we can construct a neural network which has like one hidden layer and it
+has enough number of neurons in it uh and it can like approximate this function to an arbitrary degree to an
+arbitrary accuracy and how we can construct such a function the key idea is that like two neurons can be
+constructed to give a pulse function that is like if you have for example like relu
+activation then you can uh like have one neuron which gives you the one side of
+your step function the other neuron which gives you the other side of your step function and you can combine with
+the weight one and minus one to give you this step function and this width you
+can control depending on uh like the what values that you choose for T1 so
+like typically like there's a bias also like in your neurons which for brevity I didn't show earlier but depending on the
+biases that you choose like you can shift these uh uh activations like left
+or right and uh you can give get a very arbitrary
+smaller with T1 um Step pulse function as well and and then like all of these
+pairs of neurons can be just summed up at the output layer to give you a like a
+bunch of rectangles like which approximate it so if you keep like reducing the width of your pulse
+functions then like you can like just get to an arbitrary degree of approximation for this continuous
+function so yeah feel free to read more about it but like it's it's u a pretty neat
+construction and pretty powerful way to see that like with just like simp nonlinearity is like we are able to get
+something this complex so yeah I realized like I'm
+running a bit short on time so I'll speed up a little bit so now um but
+still like any questions so
+far okay
+so coming to loss functions so the like remember like how we started was deep learning has three
+key components one is the model then is the loss function and then is your optimization process so we have seen the
+model so far which is a deep neural network and how we do computation with it now let's come to the loss function
+so loss is essentially a measure of how good our model is for an input so
+usually it's Quantified in a negative way that like we measure like the cost of an incorrect prediction so like if if
+if your loss is zero then your model if your loss is less then your model is better so it's it's uh simply a notation
+or like a convention kind of a thing you could have defined it the other way as well but like it makes things like
+mathematically like easier to justify sometimes
+so it's it's uh so again like it's a scalar measure of how good are model is
+for an input so typically in deep learning we measure the empirical loss which is that we measure the total loss
+averaged over an entire data sets so let's say like we have like n data
+points then like our typically our loss is going to be 1 by n summation / I to n
+and the loss function which takes your model parameters which I'll
+represent by Theta and your ath data point which I'll
+represent by XI and then you sum over your all of
+your entire data set and then you take the average so this is what we call
+empirical loss or empirical
+risk so we have seen loss functions like in in so far in the lecture
+the first one that we started was a regression loss function which was mean squar error so here like U we we are
+given like our Yi is a scalar that we want to approximate we make a scalar
+prediction which is our Yi hat for the I data point and we take its the squar
+difference uh as our loss function so our like small L is going to be um just
+the predicted scalar minus the actual true scalar
+squared so this is this has we have seen this already in regression then in the last lecture we
+saw binary crossentropy for doing logistic
+regression and this is essentially like we had a two vehicle problem classification problem that is like we
+want to identify whether this class is present or not so our Yi
+is 0 or 1 and then like y i hat is the
+probability of class being present which is given by your
+module and then like our loss is U this quantity actually the negative of this
+quantity which I've taken here outside so the negative of this quantity is our
+loss for that data point and this we call the binary crossentropy and
+remember like this works for a kind of a two-way classification problem that is you want to identify whether something
+is present or not uh so like a generalization of this binary cross
+entropy is the cross entropy function which if if you uh like really look deep
+like carefully like it if if you have um it it looks very similar to the binary cross entropy it's just a general
+version of it so this is for like if we have two uh like instead of two-way classification we have cway
+classification problem that is we have like C classes to classify
+into then we can write our loss uh like in this way and if if you if see equal
+to two you can see that like it will actually be will be the same equation as
+the binary crossentropy so the this loss is typically like um
+remember like here like our Yi hat is
+a vector of size C and this yig J hat
+needs to be a probability distribution
+so like typically in deep learning as I said like whenever like you encounter a probability distribution you model it
+using soft Max so this why I had
+is often or like almost all the times like a result of a softmax operation so
+it's it's cross entropy is like very much like if you in deep learning you'll see like it is paired with your soft Max
+operation but this is the loss function like if you have a cway classification problem uh let's let's uh take some take
+a look at some examples and see so for the first example we have this input of
+an image of a cat or like it it may not be a cat and that's our task that uh is
+there a cat in the image so what kind of loss function will use in this case
+I know it's simple but still feel free to speak up would you use binary cross entropy
+yeah so because it's a two-way classification problem that we want to identify if a cat is present or not like
+the right or the appropriate loss function for this task is going to be BCE which is binary cross entropy
+so let's take another example like let's say like we want to determine the age of the cat what loss function like should
+we use
+now squ error yeah because we want to like our
+output is now just a scalar quanti um which which
+so we we can use something like mean squ error like to do regression over it
+um also like it can potentially be solved using cross entropy as well like
+we can just model every age category or every age that exist as a separate class
+and do it but uh uh in this particular case I don't think it's the right
+formulation uh um yeah but I just wanted to say that that kind of that can also
+be used but means squ error is the uh more appropriate option in this case and
+then like it could be uh uh that like we we it's not just a
+oneway classific a two-way classification that is there is a cat or not let's say we want to determine a cat
+versus a dog versus a bird so this becomes like now a three-way classification so for this like cross
+entropy specifically cross entropy paired with soft Max uh is a
+appropriate uh loss function for this task so okay any questions so far like
+because now we'll be moving to the next component
+so coming to the next component which is optimization so remember this uh here
+we'll be talking about optimization on a very broad level we'll have like a specific lectures dedicated to
+optimization and the better versions of optimization we can do but here I just wanted to introduce optimization in the
+context of deep learning and how does it like look like on a broad
+level so the overview of optimization is the goal is that we want to minimize the
+loss by adjusting the model parameters so let's say like our loss surface looks
+something like this in this particular case we only have two parameters uh W1 and W2 and for each
+choice of W1 and W2 like uh we can we can like have a loss for W1 comma W2 and
+let's say we have some data D so this this loss will be a scalar quantity
+sorry and this is what is represented on this axis for a particular choice of loss of
+W1 and W2 we can get some um loss here so if you draw the
+whole loss surface it will look something like this and uh uh the goal
+of deep learning or goal of uh the whole ml process is to get uh your some model
+parameters which minimize this loss which which which gives you the global minimum of this loss so like one very
+Brute Force thing that you can think of is like you can just try bunch of random W1 and W2 or maybe a grid of W1 and W2
+and then evaluate your loss on each of those choices and then you can uh choose
+the one which gives you the least loss but of course like even in this case
+like which where we only have two parameters like uh the search space is pretty big because like it's continuous
+so uh even then like this Brute Force approach might not like is going to be
+infeasible and will not give you the right results that you're looking for um
+but typically like in deep learning like we easily have billions of parameters these days or like even touching
+trillion of parameters so in that case like it just becomes like invasible to even think of something like brot force
+so we we use like the most popular optimization process that is being used
+in deep learning is gradient descent which is like we iteratively update
+parameters in the opposite direction of the gradient so we we start from a random initialization of our W1 and W2
+let's say this point is here and then we compute the loss compute it the gradient
+with respect to W1 and W2 and take the a step like a scaled step in the opposite
+direction of the gradient so the scaled opposite direction will look something like this here it's denoted in the
+picture but maybe it's not very clear to see so and we keep taking these steps
+again and again and this will eventually like for some lost surfaces it is guaranteed to arrive at the
+Global minimum but even though like it's like quite surprising and it's it's one
+of the um probably unknown parts of deep
+learning is that like even like like currently in deep learning LW surfaces
+don't look this smooth or this neat like they are very Jagged lot of filled with
+a lot of uh valleys and um plane areas but still like this
+gradient descent works like or like some version of gradient descent Works which is just the simple process of
+iteratively updating parameters in the opposite direction of the gradient so that's um that's the kind of
+uh the overview of gradient descent if we try to look at in terms of an algorithm the pseudo Cod would look
+something like this that you initialize your parameters your W weights um
+randomly or like from from a like some distribution and U actually like how you
+initialize your parameters also play a role in modern deep learning so this
+will like in one of the homeworks will take a look like it will uh you you'll
+experience that like with different initializations you'll get different results but uh in this lecture I'm not
+going to cover it but you initialize your parameters for now let's just assume like you're initializing randomly
+from a normal distribution and then for E for like until convergence for each iteration
+like you want to compute the loss L you want to compute the gradients of the loss with respect to each of your
+parameters that you have this will give you your gradient vector and you update
+your parameters by a scaled negative of your gradient so this ITA this EA is our
+scale which is typically the learning rate and uh this negative DL by DW is
+our gradient uh the negative gradient so
+that's the pseudo code for gradient descent but uh okay so I mean like the
+algorithm looks simple and all of these steps like initializing parameters like
+we know like we can do call np. Rand Computing the loss we saw that like we
+can do like how to do a forward pass with neural network and then like you just need to plug your loss calculation
+equation there we this also like looks simpler like once we have DL by D W
+quantity then like this is just like one equation which can be just written in one line but this uh the Computing the
+gradients of the loss with respect to W this is the one of the hard parts of this algorithm and that we achieve um
+like in case of neural networks or in case of like any kind of functions like uh continuous functions we can uh do it
+like we need a efficient way to compute the gradients for all parameters and we do it using by via back propagation and
+it is back propagation is essentially like the chain rule to like propagate
+errors starting from the output to the input so um like uh just a refresher on the
+Chain rule so like chain rule like for a parameter Theta that affects the loss l
+through an intermediate variable Z we can write d l by D Theta as d l by d z *
+d z by D Theta so uh that's your chain Rule and like
+back propagation typically involves like a forward pass and a backward pass forward pass is the like the the what we
+already saw that like in neural networks like how to compute the final output of your function so and so forward pass
+just means like you in um along with Computing the just the final output you
+also compute all the intermediate activations as well because that will be needing in the backward pass so you
+compute all intermediate activation ZL and Al that we saw earlier and then like
+in the backward pass starting at the output layer you compute the gradient and propagate it
+backwards so I mean it's it's uh uh I know like here I'm just saying it but
+let's let's take a look at a sample task and how how to do back propagation on
+that task so let's let's take this sample task
+that we saw earlier that like it's it's a concentric uh um uh classification
+problem like you have like your orange data points on your outer ring and then you have like the blue data points in
+the in in the inside and you want to CL classify Orange from Blue so maybe like something we want to get like a boundary
+like this so here like uh let's say like we because like it's a two-way
+classification problem we'll be using the binary cross entropy um uh loss function sorry there
+should be a negative here so and the model that we'll be
+using for this uh sample task is going to be a like a neural network with one hidden
+layer it's there's only one hidden layer H1 and then this is my output layer and
+this is my input layer and we will be using sigmoid activation and there are like three
+hidden neurons in my um activation uh
+and in my hidden layer H layer one so the optimization process as I showed
+earlier like it will be the gradient descent method that will compute the loss compute gradients update parameters
+but as we saw like this is the hard part so that's what we'll be diving a bit deeper into so so the forward pass let
+me write again like we have already seen this but for
+X we can Define as a matrix which is of 2 cross 1 has two features and one data
+point in this case and then our H1 1 which is parameterized by
+W1 is going to be a 3 CR 2
+Matrix and then my output layer is going to be
+um W2 which is 1 cross
+3 and my forward pass is going to look like my Z1 is w 1
+transpose X my A1 is going to be sigmoid of
+W1 transpose X or let me just write
+z my Z2 is going to be W2
+transpose A1 and my
+A2 which is also my final prediction from my neural network so I'll call it
+my y hat as well is going to be sigmoid of
+Z2 my loss function is going to be um here because there's only one data
+point so I'm just writing it for that it's going to be y * log
+of Y hat + 1 - y * log of 1 - y
+hat negative of this any question so
+far so this we have kind of already seen like we have seen a more complicated
+version of it right now there's only one hidden layer so it's simpler to write so
+that's what my forward pass is going to look like and remember that like I'm uh along the way I'm I'm storing my
+Z1 my A1 my Z2 my A2 because that I'll be needing in my backward
+pass so okay so let's see like how the backward pass looks like and for this
+particular demonstration I'll we want to compute our d l by
+D W 1 1 comma 2 that is for this particular
+weight w Comm two we want to compute the gradient with
+respect of the D L by d uh this
+weight so as I said like let's let's try to draw our chain like we have our
+X that using W1 we
+s using W1 we got to Z1 using sigmoid we got to
+A1 then using W2
+but to Z2 then
+using sigo we got to our y hat which is
+also A2 then like applying our loss function
+here like we the BC fun loss function we ended up being at L so we want to get D
+L and by d uh like a like W1 comma 2 is part of this
+Matrix so like we want to like go backward in this chain
+so so the does anyone to help me get like
+uh or like just want to say what what this chain rule is going to look
+like Nish I think the slide is stuck on the optimization forward pass
+oh okay so somehow yeah okay oh I didn't realize this
+sorry okay you can see the slide now right like and does anyone to help me
+write the chain rule here maybe like uh
+DL Dy hat or duy hat
+okay uh multiplied by um Dy hat over
+dz2 and uh basically yeah you just keep following like the like the chain uh
+like the diagram that uh you drew out except backwards so the next one would be like dz2 over da
+A1 right we can keep going backwards
+should have written it more
+neatly yeah so that's what your chain rule is going to look like and specifically
+because uh because we are kind of just like in
+this particular example we are just looking at the W1 comma 2 so we can uh
+kind of further simplify this into like not all the parameters in our Z1 is
+going to get affected like as we can see like there's like just a single chain so like we can simplify this into d l by d
+y hat
+uh [Music] times C2 are you writing Nish yeah oh
+you can't see yeah somehow okay I don't I don't know why there's a
+lag I see uh sorry about [Music]
+that C2 we can see that only this the the
+second component of A2 is affecting it so like we can just write here like
+tell A1
+so two
+little bit messy so I remove this part
+so I've just like simplified it for this specific weight value that we we are
+seeking so like here I just like written the specific uh coordinates which are
+going to affect this quantity so uh I don't have too much time so like
+I'll just like quickly go over it but let me so this this quantity if if you
+simplify for the binary cross entropy loss this will turn out to be a very simple quantity which is going to be
+your y hat minus y this this whole quantity and then D Z2
+by d a12 uh as we saw like it's it's uh like
+how they are related like a uh A1 two is kind of
+um it's uh it's it's uh like we we multiplied A1 with W2 to get Z2 so
+that's why like it's it's only going to be uh uh like if
+yeah so my
+Z2 was to to transpose
+A1 so that's the relation between Z2 and A1 so this quantity if you compute this
+will turn out to be um this will turn out to be just
+uh W2 and the second coordinate of
+W2 2 and this quantity like uh because like
+the relation between this is the sigmoid Activation so this will turn out to be uh the derivative of sigmoid or sigmoid
+derivative is sigmoid sigmoid value * 1 minus sigmoid so I'm just using this
+property to quickly write the uh equation here it's going to
+be a 1 2
+* two and this again is uh
+just this Z1 was W1 transpose X so this will turn
+out to be just the second coordinate of my X element so do X2 so that's what
+your gradient will look
+like for this particular weight weight value and here like I have shown in uh
+just just like for this particular W but in practice like as in forward pass as we were dealing with matrices and we had
+this compact representation we also like even in backward pass we we like compute
+the the gradients like in in in a matrix way so like for the whole weight vectors
+we compute simultaneously using Matrix operations so um similar to the forward
+pass like it's going to be uh like it like all the scalar values will get
+replaced by your matrices or the intermediate vectors that you got but
+that you will have to do like in your homework so like you can get an idea how to do that but for brav like here I have
+just like explored like how to compute gradient for with respect to one weight
+value so that kinds of kind of ends like our the full Al algorithm deep learning
+algorithm on a high level uh that that we set out to describe in this lecture
+which is like the step one is your forward pass you compute activations step two is your loss computation you
+use your uh the output of your neural network to compute the loss then you do the backward pass using back propagation
+and then you do the parameter update according to the gradient descent update Rule and you repeat this process for
+multiple steps until convergence so uh in practice I just want to like
+take one minute to quickly just say that like there are other things that you want to like you need to incorporate
+into a successful deep learning algorithm that is one thing is like efficiency like right now like gradient
+descent operates or on a like the full data set but uh that is going to be
+inefficient and in last lecture as well like we briefly touched upon it that
+like you want to do a mini batch version of grade and descent to uh gain efficiency and better convergence this
+will explore later in the class and then also like you the learning rate we did didn't really talk about the learning
+rate in the gradient descent method so and that is also something you don't want to keep constant so like there are
+like adaptive versions of your gradient descent which depending on the kind of
+lost surfaces that they are seeing they adapt their learning rate or their scaling of your gradients uh based on
+like what kind of uh loss surface they operating in uh this also will uh
+Explore More in the optimization Le coming ahead and then there is regularization that we saw in our
+previous classes but here in case of deep learning regularization um will look something
+different and uh this also will explore later and then uh rest of the homeworks

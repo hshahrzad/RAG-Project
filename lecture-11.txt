@@ -1,0 +1,638 @@
+so I'm going to repeat some material from uh last time just to remind you right so we were talking about so
+today's lecture is you know we'll basically talk about svms
+and Duality so we'll see that you know we
+looked at the Primal svm problem last time and today we will derive the Dual
+spvm problem and to actually solve for the coefficients then uh in many cases
+people actually have solved the Dual SPM problem rather than the Primal okay so what do I mean by all this right so let
+me recap uh something that uh we talked about in the last 10 or 15 minutes of
+class uh last time so let's consider a
+general constraint optimization
+problem okay so the general problem we'll have is you want to minimize a function
+FNX okay and then we have some inequality constraints on F right so
+fi X is less than equal to z i = 1 to to
+M okay and then certain number of equality
+constraints okay and we just always can of assume that it is fi is less than F
+IX is less than equal to zero right if you had something which was greater than equal to zero then you can just kind of
+you know take negative of that and get a less than equal to inequality okay so
+this we'll denote I think I might use it later problem number one and last time
+we saw that we named it as a the Primal
+problem okay because we started seeing dual last time so again you know
+here x belongs to RN okay which means that my fi is a
+function from RN to R including
+F0 right and so is hi R N to
+R we said that we can actually form something called the
+lrin which is a function L that will basically take the Primal variable so it
+will go from RN but actually add some other variables which will be dual variables or they
+will basically correspond to lran multipliers that will essentially be the Dual variables so we will have dual
+variables for or lran multipliers for every inequality constraint and also for
+every equality constraint so there are M inequality constraints so
+RM P equality constraints so RP and so this function
+takes uh Maps r n cross RM cross RP to
+the reals in particular we
+have these lrange multipliers Lambda and new and my lrange in this function is FX
+plus uh uh summation of I = 1 to M
+Lambda i f i x plus summation I = 1 through P new
+I hi i x okay
+and Lambda I is lrange
+multipliers for I
+inequality constraint okay
+and mui is lran multiplier
+for the aat equality constraint
+so that means that Lambda I corresponds to hi
+and new I corresponds to sorry Lambda I
+corresponds to fi and new I corresponds to hi right and
+like I said last time the Lambda and new are also
+called dual variables
+and then again I'm repeating stuff from last time we looked at this
+lrange dual function which is basically just a
+function of the Dual variables right so it's a function only
+of Lambda and new okay and the way we do it is we take
+take the lrin and we take
+the infimum over X okay so remember the
+Lan like I wrote above is this function so I'm just
+copying it below FX The summation of I = 1 through M
+Lambda i f IX Plus y = 1 through
+P hix and I'm taking the infimum over all
+X and we will say that Lambda and new
+are dual feasible okay so just to kind of uh uh
+uh the language that we are using is something called feasibility right so
+what would be a primal feasible solution a primal feasible solution is
+basically feasibility means that it satisfies the constraints right so Primal feasibility
+will just mean so X will be Primal feasible if f iix is less than equal to
+zero for IAL 1 through M and HX is equal to zero from IAL 1 to P but that X is
+not necessarily the the minimizer of this problem okay so that's the language
+we are using so X is Primal feasible if these two sets of uh well M inequalities and P
+equalities are uh uh obeyed right and dual feasibility is
+if Lambda is greater than equal to zero and and it's just saying that you know
+this uh has a finite solution so it's not
+that this infimum goes to minus infinity okay and how many inequality constraints
+are these remember this is the vector and there are m m which is
+corresponds to fi so you're right that basically there are M inequality
+constraints okay and then last time we said well there are two facts that we
+should know about which is that g of Lambda
+mu is less than equal to P star for
+any dual
+feasible Lambda mu which means that if you have any dual feasible Lambda mu and
+I plug it in to this then it'll be a
+lowerbound for the Primal solution so P star okay so P
+star is Primal
+optimal okay that is optimal
+value of one okay so in particular P star is
+equal to F not xar where
+xar is the solution to this problem so xar will be Primal feasible
+it'll obey all these constraints and in addition it'll give the minimum value
+okay so that kind of already gives us a hint that if you want to find P star one
+alternate way could be to just look at the dual function lr's dual function and
+actually try to maximize it right because it'll approach P star
+okay and Fact Two says okay basically that there are
+certain kinds of problems where if you maximize it you will actually get the optimal solution of the Primal and the
+D so if there exists a dual
+feasible Lambda Star new star okay and
+remember this just means that Lambda star is greater than equal to
+zero okay and a primal feasible xar
+such that g Lambda Star new star equals P
+star is equal to F xar so actually this is only saying that
+you know what are the conditions in which strong Duality holds right
+um uh sorry it's actually just saying what strong Duality is okay so it's just
+saying that if I uh have my variables Primal variable
+xar dual variable Lambda Star new star such that all of them are feasible xar
+being Primal feasible Lambda Star new star being dual feasible right then
+strong do and that this value G Lambda Star new store
+is not only at this Lambda and new not only an inequality but actually an
+equality okay then strong
+Duality is set to hold okay so so far I've just reviewed
+material from last time I did exactly the same thing last time so now let's
+start with uh the new material Okay so we will now look at the Dual
+problem okay which is I take my function the dual
+function okay and I'm going to maximize this over Lambda and
+new and the feasible region is where Lambda is greater than equal to zero
+okay remember I could have written it as you know Lambda I is greater than equal to zero I 1 2 through M okay and this is
+just kind of encapsulating it that I'm just saying that the vector of Lambda is is greater than equal to Z
+okay so now let's look at uh what the consequence of strong Duality is okay
+and remember I don't want you to lose the picture we are finally going back to svms and what we are going to do is
+going to allow us to interpret what the svm solution actually looks like and
+give a faster way potentially of solving the support Vector machine okay so
+suppose strong
+Duality holds for Lambda Star new star and
+xtar okay so let's see what the consequence of that is okay okay
+then let me write F not xar okay strong Duality means that f xar
+is G of Lambda Star new
+star right that's exactly what strong Duality is so we are assuming that it
+holds okay and from before our definition of g of Lambda new star is
+that this is in overx of l
+x Lambda Star new star okay so now we can
+substitute what L is it is f x the summation of
+I equals 1 to M but remember I'm doing it at Lambda star it's Lambda I
+star fi
+X+ new I star hi
+F okay since this is the infimum right then it must hold that
+this is less than equal to the value at X some any other value at X in
+particular xar correct this is the infimum over
+X so this value the infimum will be less than equal to something
+else right and I can at any other X and I can substitute xar over here so now I
+have I'm substituting xar in the above
+okay so now we can kind of look at some quantities right this is dual feasible
+right so this means that this is greater than equal to
+zero f ixar is less Les than equal to
+Z so this means that this quantity is less than
+zero similarly I have well I don't have any constraint on new I and you're
+actually seeing the reasons why right because hix remember xar is Primal
+feasible so this is equal to zero and as a result this whole quantity is equal to
+zero so what I have over here is I have FN
+xar and then something which lowers the value something which is
+negative so what that means is that this whole quantity is less than equal
+to F not
+X but what have I done I have basically shown that F not
+xar is through a sequence of inequalities is less than equal to
+FX so what does that mean that means that this is not just an inequal
+less than equal to but it's actually an equal to this is an equality and so must
+this be an equality okay
+so the above
+two
+inequalities must hold with
+equality okay so what does that
+imply the first inequality says that
+xar must be actually a minimizer of
+this so remember that is a little bit subtle right so it's not remember
+xar was the solution to this constraint
+problem okay from that we D you know we went through this step of looking at the
+lran and lrange dual function right and it's basically saying that the
+lren if I am at dual feasible
+feasible then this must be the minimizer okay
+so xtar must
+be the minimizer
+of LX Lambda star and new
+star and then the second part is that I must have an inqu an equality over here
+but if you look at this this is equal to zero so that's fine this it says and this is now
+actually really interesting this is saying that this should actually hold with
+equality not just an inequality cannot be an inequality strict
+inequality right so this means and this will actually have very interesting implications for U the svm part so this
+says that summation of I equal 1 through M Lambda I star fi xar equal to
+zero right and in particular each of the Quant because they all have the same sign less than equal to zero this means
+that Lambda I star time F ofx star must be equal to zero for
+all I = 1 through M so for each of the inequalities this must be
+true each of the inequalities fi remember that fi xar must be less than
+equal to zero okay so what does this imply and remember that primal phib ility is that
+this is greater than equal to Z so this implies so remember that Lambda star
+Lambda I star is greater than equal to zero what if it is strictly greater than zero so this says that if Lambda I star
+is strictly greater than zero then what
+happens and all the FY has to be zero then the corresponding fi right what do
+you mean by all uh you know fi for the for the X
+star yes fi for the xar so that's just remember that's just the I linear
+inequality right right so if the if the corresponding dual variable
+is non zero
+then this inequality must be met with
+equality similarly there are two terms over here right so we've looked at the first one suppose
+this one is strictly less than
+zero then what must happen the corresponding Lambda must be
+equal to
+zero okay so it basically says that you know if this inequality has some
+slack right that means I end up having xar
+some uh uh such that fi xar is strictly
+less than zero there's some slack in this inequality the corresponding lran multiplier is actually exactly equal to
+zero okay again right now we are looking at things in general but it'll actually
+have implications when we start talking about uh um going back to the svms and
+looking at the Dual svm drop okay so when you're talking about the corresponding it means that like it
+could be that some of the Lambda I are zero and some of some the other fi of
+stars are zero right yeah yeah exactly that's exactly what is going to happen right it'll
+be not always true that all the things are going to be met with
+equality right and we'll see that you see that when we look at the SPM picture
+Okay okay so I'm actually kind of going to conclude and you know just tell you a little bit about more about optimization
+or constraint optimization so there is this uh very famous kkt conditions okay this is
+called Kush Kun tuer or short for
+kkt conditions okay and they
+provide a certificate of
+optimality when problem one is
+convex okay so what do I mean by problem one is convex well you know I won't get
+too much into details but it's um uh you know f is convex and these are
+all convex sets Okay which is true for the problem
+that we are interested in which is the SPM okay so the kkd
+conditions are as follows for X
+star and the Primal variable and the Dual
+variables okay so one is okay what should happen so if somebody presents xstar
+Lambda Star new star okay and somebody says well you
+know these are candidates for Optimal Solutions xar Primal optimal
+Lambda Star new star to be dual optim well the first thing is that they should satisfy
+feasibility right so they should be xar should be Primal
+feasible okay and Lambda star should be dual
+Fe and Primal feasibility remember is fi of xar is less than equal to
+zero I = 1 2 through m h i xar is equal to
+zero I = 1 2 p and then dual feasibility is
+that Lambda I star is greater than equal to0 I = 1 2 through X
+okay and then this thing that we saw
+above this quantity this condition is called complimentary
+slightness
+which is that Lambda i startimes f of I
+xar equal z i = 1
+2 okay so this is the kkt condition for
+xar Lambda Star new star so if you give me xar Lambda Star new star like this
+then this is a certificate that xar is Primal optimal
+Lambda star M Star R dual optimal and we've seen that this condition has two
+consequences that we saw
+above okay so I'm trying to so xar is a minimizer of L so I'll just write this
+as xar equals AR
+men l x Lambda Star new
+star okay and what that kind of implies
+is right the problem is convex that the gradient of L should be
+zero f not xar plus and we'll be using using
+this okay so these are the kkt conditions kkt condition
+s xar Lambda star and let's see if I can draw a
+box okay so you know this is very general and you know we don't need
+to understand it in its full generality so let's come back to the spvm
+problem okay so let's come back to the svm
+problem it's actually quite neat the
+the by looking at these conditions how it'll lead us to understand what is
+actually happening in the svm problem okay so the svm problem remember
+is minimize over W and W
+KN half of w² such
+that Yi so that means you know all the points are classified correctly and with
+a margin okay W transpose x i +
+W is greater than equal to one for each of the points in the painting
+dat okay so I can take this and write it in the form of f ofi right so I can take
+you know this is greater than equal to one I want to make it let let me put it in standard form right and the standard
+form was that I have fi * of w to be
+less than equal to zero so I'm going to write it as one - y i * W transpose x i
++ W is less than equal to
+Z okay and then this becomes
+my f of w f of I of
+w okay so any questions about putting this in standard
+form okay so when I say I'm putting this in standard form I'm just writing
+it like this our variable that we are optimizing
+is W right so I have half of w² as
+F and I have fi and currently actually we don't have any equality constraints
+okay so let's now churn the Machinery that we've learned right so let's form the
+lrin the lren is a function of the Primal
+variables and then we have inequality constraints and let me call the corresponding lrange multipliers or dual
+variables as Alpha so that's very much the standard way that people have uh Lo looked at it
+okay so that is anybody wants to help me
+or feel free to tell me what to
+write Plus for each of the inequality constraints there are n of them I have
+Alpha I time fi W right which is 1
+minus y i w transpose x i +
+W correct this is my lent
+right and remember from
+above I can basically take the gradient with respect to the Primal
+variable and set it to zero Okay so so let's do
+that so let me take the gradient with respect to W of
+L gradiant with respect to W or made the same mistake
+twice l w w Alpha and remember that we
+have two variable to W and W
+KN okay so what is the gradient of
+this with respect to W well it is just W that's the gradient of half of uh two
+Norm of w² plus if I now look at
+this I have have W over here so I'll have plus summation
+of I = 1 to n I have Alpha
+i y y i w transpose well remember W is what I'm
+taking the gradient with respect yeah y i and x i it's x i and there's a minus
+sign right uh yes this minus sign
+okay and that I will set to zero so look at the amazing thing that
+comes out right it's saying that W is actually at the
+optimal it's actually going to be a linear combination of the x
+i and if you remember we are using the encoding of Yi is +
+one for class one y i = minus one of Class 2 and my dual variables remember
+are going to be greater than equal to zero right so it's basically saying that you
+basically have some positive combination of
+XIs minus a positive combination of XIs
+so positive combination of XIs from class one minus a positive combination of XIs from class 2 okay that's what a
+optimal W will look at will look like and then if I now take
+the gradient with respect to W KN well look W KN is not here W KN is only
+here so it's basically going to be summation Alpha I Yi
+W and the gradient will be summation of
+what's it going to be I = 1 through
+n minus Alpha i y i w sorry um that's it
+yeah yeah that's it equal to zero so that means that you actually have a little balancing
+constraint which means that the alpha I is the summation of the
+alpha I is from one class one are actually equal to the summation of alpha I from the other class because Yi is +
+one okay 4 class
+one and minus one for class
+two okay so let's look at the Dual now let's try to derive the Dual right so
+the dual function
+remember we only have one set of dual variables now right because we don't have any any equality constraints so I
+have the G of alpha is my dual function and that is the minimizer
+ww l w w Alpha okay and we saw that the minimizer
+will actually have this property okay so I'll
+have G of alpha
+okay is going to be equal to
+um half
+of so remember this is my
+L I found that the minimizer is this so I'm going to substitute this W over
+here and this W over here and we'll also see that we'll need this we we we'll be
+able to use this um condition okay so this means that my w is of the form I =
+1 through n Alpha i y i x
+i okay so this is half w² correct
+and now I have this let me write this as well I can I
+have a term which is just Alpha I from here Alpha I *
+1 and then I have minus summation
+of alha i y i
+XI transpose time W right and W
+is Alpha i y i x
+i any questions I just wrote w transpose XI as XI transpose W it's the same thing
+right and then I just substituted this over here
+okay and I think there's one more term left which is Alpha
+I time W
+right Alpha i y i okay plus summation of Al
+I Alpha i y i and w
+maybe we can look at this term right what is this value zero zero because W KN is
+some one particular value doesn't depend upon I okay so this term
+is zero okay and that follows from
+here okay now look at the rest part so let's uh let me write G of
+alpha let me first take this term summation of I = 1 to n Alpha
+I and now if you look at this this is half of this
+square and if you closely look at this uh I made a little I should have I
+don't want to use the same I over here and the same I over here so like I
+should have used J over here
+okay so basically I have all the possible pairs Alpha I Alpha j y i YJ X
+I transpose XJ and if you expand this out that's exactly how what you would
+get but they don't exactly cancel because there's a half a half over here and one over
+here so as a result these two terms combined to give you Min -
+12 summation of I = 1 to n summation of J = 1 through n Alpha I Alpha J Alpha
+j y i y j x I transpose XJ
+okay as a result here is the SPM dual so we've eliminated W and W
+KN and we now have an optimization problem only in the alphas and we want
+to try and maximize the Dual so I maximize over Alpha summation of alpha I I = 1 to
+n minus half I'm just copying what I have above I = 1 through
+n j = 1 through n Alpha I Alpha j y i y j x I transpose
+XJ such
+that remember I have dual feasibility Alpha I is greater than
+equal z i = 1 to to n and actually it
+turns out that in this case I do have one equality constraint which comes from
+here okay which comes from here which is that summation of alpha i
+y i = z so this is my dual problem
+M this might be a good time to stop to ask for questions so remember what we've shown is maybe I'll
+try to fit this on the same slide for a minute or
+so okay so this was my Primal
+problem and what I've shown using the theory of Duality is that this is
+equivalent to solving this but note that here the Primal variables are W and
+W and here there are these more abstract things which are
+alphas okay but I can optimize solve for this and it turns out
+that this problem is actually a little bit simpler to solve it has these inequality constraints which are kind of
+non- negative constraints just one equality constraint whereas these inequality constraints can be a little
+hairy so most solvers forvm problems actually use
+this questions sorry uh what happened in the
+first term in the original um G of alpha
+uh which term sorry uh one half yeah that one yeah sorry so so what I showed
+is so so if you expand this out right so let me just
+actually okay I'm just going to use kind of little scratch work right so Alpha
+I sorry what do I have yeah I have this right alha I
+okay so remember that this is the torm right so I have this is Alpha i y i x i
+transpose time summation of J = 1 n Al
+alpha y x is that
+clear that's just saying that Norm of y s Norm of
+z s is equal to Z transpose Z that's all I've
+done is that clear yeah that makes sense yeah if that's clear then the next step
+should not be too difficult it's basically just I equal 1 through n Alpha I Alpha j y i y j x I transpose
+XJ correct if I expand this out yeah so half of this will will be
+half of this which is half of this and what has happened
+is that there's a half over here there's a minus one over
+here so that combines to give minus half I see okay yeah Mak yeah okay great
+thanks for the
+question do you want me to leave this on my Note or oh yeah I'll just leave this I won't
+erase it I'll just say note
+that
+okay any more questions on this uh uh I don't understand how we
+arrive at Alpha how we arrive at
+Alpha okay so just think about Alphas as lrange multiplier for each of these
+right so there are end inequality constraints the alphas are basically
+like the lambdas before they correspond to the inequality
+constraints so I'm basically doing Alpha I
+fi W and this is the FI so I form the these are the Lan
+multipliers I get a dual and then I do
+this oh so we just take like the like the like we just take like the derivative in uh sare Alpha right so
+remember right right so I basically you know I did go over right that in general
+we have this okay and in the end what I showed
+is that when you have this must be
+true okay which means that when I take my uh
+uh lran then I can basically set this equal to zero with respect to the Primal
+variable the gradient with respect to X
+so that's what I did over here that I took the gradient with respect to
+W and I set it to zero and then I get W in this
+form so this way I'm eliminating the W and W KN from the Dual from
+the uh dual function which is what I need to do and that's how I get a function just in terms of the alphas all
+right that makes sense thank you okay I mean it's kind of amazing right I
+mean if you just look at these problems you know and if you ask you
+know a random person on the street you say well is this problem the
+same as this problem
+right yes Say No Yes actually you know what I was wondering is that what was
+the initial motivation like you know someone get into this and then uh
+somehow get out the other side of the equation and then you know realize this or you know yeah I mean you have to
+realize that you know if you think about deep learning and so on right it's been really the the wave in the last uh I
+want to say 10 years right there was a a time when svms they started finding that
+they actually gave very high quality Solutions right so there was a period of about 15
+years in which people did a lot of work on svms and I would say that there were
+thousands of papers published in this area and one of the first things that they realized is that you know you
+wanted to solve this problem right for not this problem but
+but but uh this problem for very large data sets where n
+is very large and they realize that solving this was a little bit hard much harder
+whereas solving this was actually much easier okay and you have to realize that
+you know there's a whole branch of Applied Mathematics on optimization Theory it's very welldeveloped
+and uh so this was kind of classical optimization Theory applied to
+this machine learning problem but there was a time that people was actually trying to solve this and
+then it developed that oh you know yeah the bran and that the D all problem and
+this is problem solve right yeah look I mean if you showed this problem to
+somebody who's an expert in optimization they would do this right away right so it's not like it was pulled out of a hat
+or something right but if if one knows optimization Theory then one would go from here to what I just
+should so it's not that surprising that people were able to find this all I'm
+saying is that you know if you just look on the surface and look at the problem and I just said random person on the
+street right not an expert in optimization right they would basically say that these problems you know they
+don't really look anything like it okay thank you how do you how do you
+derive the weights of w from alpha cuz all we know is that g of alpha equals F
+of w Star right remember this part in the middle
+right so w given the alphas you can find out W I see I see okay right and it's
+Alpha star Alpha you know the solution of the optimal suppose that is so suppose the
+solution of here is Alpha star then it'll be Alpha I star y i XI and that's
+a beauty right it actually gives you an interpretation that the solution is you
+know basically a linear combination of the XIs and it'll turn out that these XIs are actually special we look at
+complimentary slackness in a little bit and see what Alpha I are actually greater than
+equal so by solving the Dual problem you will get the separating uh hyperplane
+explicit
+so is it always the case that like when solving when like that when solving
+for when setting the the grent equal to zero you'll get a close form expression
+of the Primal variable in terms of the duel uh no I mean we are looking at a
+very very specific quadratic problem in some sense it's actually kind of an easy
+optimization problem yeah
+okay okay um but but actually I just also want to want people to know is that
+you know even though the optimization people obviously for them it's easy to
+know but the actual methods that came up to
+solve these problems were very much it wasn't obvious how to solve this problem
+to them very fast for very very large data sets and it's the machine learning
+people who kind of did that and in a way uh the it actually led to these fast
+methods like SGD and coordinate descent and so on which then later paved the way
+for de right so kind of there's a kind of a
+chain of things that that has happened and you know it's it's the work in this
+area ended up being very valuable for you know the current
+work and who knows what will happen in the future and that's why we kind of teach the basics uh in this
+class okay so let's move on so let's we saw something called complimentary
+slackness
+right okay so complimentary slackness what did it say it said that at
+optimality the alpha I so I'm not going to put the Y the Stars over here Alpha i
+w w KN must
+satisfy this lrange multiplier times F of fi W
+Star right which is 1 minus
+Yi W transpose x i plus W =
+zero for all R okay that's exactly the complimentary
+slackness condition over here where was it this one
+the lrange multiplier times the inequality constraint must be equal to zero and just I'm not I'm not I'm not
+writing the W star that's all the stars over here but but these are Optimal
+Solutions okay what does this
+mean okay so remember it means that if Alpha I is greater than zero
+then y i w transpose x i plus
+W must be equal to 1 which means that this quantity must be
+equal to zero and
+if Yi I don't think I need this initial
+brackets if y i * W transpose x i +
+W is greater than 1 then Alpha I should be equal to
+zero okay so this is just algebra right but now let's come back to our two class
+problem right we have two
+classes okay the pluses
+and the second class the minuses right and remember we said
+that this is our hyper plane this is
+w and this is the
+margin and we are trying to maximize the margin
+okay maybe instead of minuses I'll just because it gets confused with the dotted
+lines there are some pluses over
+here okay so now let's look at this
+condition right if y i w transpose XI plus so this means
+that this XI is actually right on the margin it's right these right
+here okay so let me write this in
+red y i w transpose x
+i + W = 1 and this XI is basically these
+XIs because it's met with equality so that means that these actually lie on
+the margin right so that means if the alpha
+I is greater than zero that means these points are on the mar on the started
+line right and similarly the o yeah sorry is that what you were saying
+from yes because then Yi is yeah and then and
+remember what is my w is equal to summation of alpha I
+actually let me just write it
+below actually I already wrot sorry so w
+is equal to summation of alpha i y
+i and this condition what it is saying is this condition okay I don't need to maybe
+write the whole thing in green but x
+i this mean that they don't lie on the margin
+and if they don't lie on the margin it means what Alpha I for them is equal zero
+Alpha I equal zero oh
+sorry yes Alpha equal Z right and here it was that
+sorry the picture is getting mled but Alpha I iser
+than okay but you can say that you know from here W is linear
+combination this is at optimality right of support vectors
+okay and the support vectors are the ones that are kind of like supporting the hyper plane right that's why they
+are called support vectors so these are alpha I is greater than
+Z so you kind of get this really beautiful
+interpretation now the separating hyper plane the optimal separating hyper plane is actually just a linear combination
+of the support vectors where the alphas are actually greater than
+zero so one of the reasons why you know svms were so important
+is because you know you don't really necessarily in classification you don't really care about what this looks like
+you just want to separate the you know one class from the other and that's what
+the support Vector machines are doing they don't you you're not trying to model this as a you know multivaried
+gausin you don't really care what this is what distribution this comes from all you're trying to do is separate the two
+right and support Vector machines were you know one of the best performing uh
+methods uh for doing classification um till deep learning came along and the
+reason why deep learning is much much better is actually different right it basically allows you to have lots and lots of
+parameters and optimize over them
+okay any
+questions and see we could only arrive at this by understanding The Duality right
+otherwise you would not be able to get
+this there's a very uh uh important important issue so far that we haven't
+talked about which is that we've kind of assume that the
+problem is linearly separable right but in practice you know
+you can have outliers you can have noise or the problem might not be linearly separable so for it to be a viable
+method right you need this to be applicable to nonlinearly separable data
+okay so I'm very quickly going to give you the idea behind uh nonlinearly
+separable data right so
+recall the original separable so right now I'm
+going to say that you know this problem then remember this was also a drawback of the
+percepton right in the percepton it was not clear how to modify the problem but
+it turns out that for the svm we actually have a very good modification which in practice works really well so
+the initial thing that we did when we started talking about uh maximizing the
+margin right we said we want to try to maximize C which was the margin such
+that each point the margin of each point would
+be greater than equal to C Norm of
+w right and what we are going to do is that instead of so this basically says
+that the points are separated by a margin right so this basically says that the points have to be linearly separable
+okay in order to extend this to nonlinearly separable data so in order
+to allow nonseparable
+data sets we what we will do is we will
+relax the above
+inequality to have a slack what do I mean we will change the
+inequality such that I have same thing on the left hand side
+right because that's just talking about you know whether the problem is
+correctly classified or not but I will actually have C and then we will introduce
+SATA time nor of and this is going to be greater than
+equal to
+Z okay and you can see that s s i sorry s i is greater than equal to Z right so
+suppose that it is zero then you get back the
+problem now suppose you start increasing it suppose you make it one that just means that it is correctly
+classified and then as you make it bigger than one then we actually assume that some
+points could be incorrectly classified by the hyper
+plane okay so here is the you know if I now you know make this
+change then same as before same as
+earlier okay we can fix C * Norm of w to be equal to 1 and
+then I get now I'm going to not go into like lot of details but
+nonlinearly separable SPM will have the form which
+is you take the Primal you
+take w w not s you take half Norm W
+Square so this Remains the Same half the objective but now you have three variables three
+sets w w s and you
+have Yi * W transpose x i +
+W is greater than equal to instead of 1
+you get 1 minus i y = 1 2 to n and then you basically
+you know remember that SII is greater than equal to zero and what you can do is you can say that you know I want to
+control how much you know remember the larger the SII is that means the you
+know more uh uncertain in some sense you know
+it starts lying on the wrong side of the hyper plane right when s is greater than equal to one so you want to limit the
+size of the SII so one way to do it is you say that the summation of sis is
+less than equal to a constant and what then one can do typically is you can take this and you
+can put it over here okay so so that's kind of like trying to derive it right
+but if I had to give the final svm Prime
+Primal it would be minimize half
+Norm of w² plus the gamma
+parameter summation of s
+i okay and then the constraints I have again I'll write it as a linear inequality constraint 1 - i i -
+Yi W transpose x i+ w is less than equal to Z
+for I = 1 to n and we have introduced these extra
+variables so s i is greater than equal to zero okay and if you want to treat
+the corresponding inequality constraints you would basically have that minus I I is less than equal to zero okay so this
+is the non
+linearly separable which is how it should be okay because in in the beginning you won't know whether the
+problem is linearly separable or not so the SPM problem is basically this
+one I did not want to introduce the full generality of the problem right in the
+beginning okay it's exactly
+this okay and uh the correspond oning
+dual again for non
+linearly separable the corresponding dual is you
+basically chug through the same Machinery that I did before right and what you end up getting
+is you get maximum of maximize over Alpha very similar summation of alpha I
+I = 1 to n - 12 summation of I = 1 to n summation of
+J = 1 through n Alpha I Alpha J X I
+transpose XJ no change so far in the optim in the uh
+FN or uh Alpha I is greater than equal to zero
+summation of alpha i y i equal Z so
+far this is the same as this linearly separable svm but it turns out kind of really
+interesting that if I apply the Machinery over here and look at you know
+uh the Dual problem then all I get is that this is less than equal to gun
+okay so as
+exercise you can do the following which is derive
+the above FM do so I would encourage you to to do it
+okay which is you know from here apply the different steps that we
+had right form the lrin form the gradient with respect to W
+and with side this time so that's uh uh going to be the new thing so I I think I
+miss I made a mistake over here and this is the
+S do that okay and then substitute it in the dual
+function and this is what you will get
+okay so that concludes uh this lecture is probably the most mathematical uh of
+all the lectures that uh I will give um but uh I just thought that it would be
+interesting for you to see how uh you can use optimization Theory to
+actually get pretty good insights in the machine learning aspects right the fact that these
+vectors these vectors only are linear combination of the
+support vectors that lie on the margin is quite interesting right otherwise you would not have caught and then in many
+courses in machine learning you'll hear people talk about support Vector machines they'll just talk you know this
+BL of points BL points and the hyper plane and that's what people end up getting but I think it's really valuable
+for you at least once in your life to see that uh this can actually be
+derived from optimization Viewpoint and we've actually only spent two lectures on it right it's not like we' spent lots
+and lots of lectures on this okay um I'm a couple of minutes over but uh any
+questions thank you that was very interesting yeah it is yeah I mean
+that's why I like to teach it because I just find this uh super interesting and uh you know just one
+thing I would like to also like remind you right that you know you might say oh
+in the era of deep learning you know who needs all this right but you don't know where the era
+of deep learning is going right it could be that many of the insights that you gain from here can actually be used to
+make your deep learning methods either better or you know you can understand them better or who knows what will
+happen in the future also okay
