@@ -1,0 +1,548 @@
+So okay, let's start welcome back after the spring break. I hope you are kind of
+got some rest and are ready to go through this final
+just a little bit over a month.
+So I think one thing that has happened, you know, I think. Just before spring break it was a busy time in the class. You had homework, and you also had the midterm.
+And we were doing a lot of like deep
+mathematical investigations into different supervised and unsupervised learning techniques in machine learning.
+So after the
+spring break, the course will actually slightly change in nature. We are going to start moving towards projects, and I'll talk. Talk about quite a bit
+in this class today
+about what I expect of projects. And I'll also give you some project proposals, and we'll discuss that
+But generally the course will, you know, change from
+that. I was giving you this instruction to you sort of now, starting to take over a lot of the project work and so on. So before we start any questions for me.
+Okay. So you know, one thing that I do want to encourage is a little bit more back and forth in this class.
+In the beginning of the class, I think I had asked you, each of you, to kind of come online and tell me
+your major. And one of the reasons why you kind of wanted to take this class.
+So this is the 1st class after spring break. So I'm actually now going to again ask each of you to come forward.
+Tell me 3 things.
+One is, you know, according to the expectations of you had in the beginning about why you wanted to take this course. How is it going?
+And then answer 2 questions.
+One thing that you like about the course.
+And then one thing that could be made better.
+Okay. So we're gonna do that. And I might start asking people
+in alphabetical order, the one that I see on the right
+in my zoom window to start
+talking about. Okay, so sounds good.
+Hopefully. Everybody can hear me.
+I'll be wrong. Oh, okay, Abiram. Yes.
+Yeah.
+Would you like to go first? st Yes.
+Yeah, yeah, I mean, just going back to the 1st class. Yeah, I guess my goal was to like, kind of get a more mathematical perspective
+of the class. And that's definitely something that
+I've gotten. And yeah, that's what I've liked about the course, so far
+as far as what can be improved.
+I guess. Yeah, I guess one thing that could be improved and that's more from my side is like.
+I think I need to be better at like asking questions when I'm confused, instead of like
+telling myself to figure it out later. But yeah, I I wouldn't, as far as the course, I wouldn't say like.
+I have an issue.
+Shortcomings. Yeah.
+Sure, yeah. And you know,
+we're gonna try to like an interesting project in this class where we might try to use Llms to
+help us organize the course material a little bit. So
+you know, maybe if that had been available to you before, we could have actually used that also.
+So we'll see that. Huh?
+Okay, thank you. Next up is Ananya.
+if you don't, and if you don't mind, you know, like, if you are able to please feel free to keep your turn your video on like you know. I I see you. If you're uncomfortable, don't do it, but feel free to do that
+because got it
+So I really like what I'm learning in the course. I think initially, my hope, like my objective, was to like, get a more mathematical understanding of the algorithms that we study for Ml, and that has been happening. I think one thing that kind of helped me, or could help me more throughout the course would be to just get a like an intuitive understanding of the mathematical, like the math that we study studying so that would be more helpful
+Okay, okay. Sounds good.
+Oh, who's next? I guess, Abiram, you just went right
+the sorry the names keep on getting switched on us.
+Hello!
+Oh, yeah.
+Yeah, I think in terms of how the class is going. You know, I took this class. I'm a mechanical engineering student. So I took it just to get like an introduction to some of the machine learning techniques that
+I might be using for research. And I think so far it's been pretty good. That's a good.
+quick crash course of a lot of different techniques.
+And
+I think I've liked it. We've gone over a lot of stuff, and also that for the homeworks we're able to use like
+actual data sets and kind of more concrete concepts in terms of improvements.
+I think, yeah, sometimes, like some of the math in class can go a little fast. So I think, you know, if we had some additional resources or just something to like.
+so that we can kind of go over some more math concepts.
+especially, I think, with some of like the when we got into the deep learning stuff. It's in our networks
+Okay, okay? And I guess you know, we have tried to. You know, we kind of upload
+lectures as well as the videos. And you are kind of saying if there was something even beyond that, right
+Yeah, yeah, I think, just maybe more of like,
+you know, maybe it's just like a textbook that we can look at or something just to understand, some of the more like math, heavy, linear algebra concepts behind it
+Okay, okay. Sounds good. Fair enough ancho.
+Yeah, I think this course, I was hoping to. Yeah, just get a broader machine learning knowledge. And I think.
+comparing it to taking like. Ml, when I'm getting to actually learn some new stuff. From the undergrad level. That's what I was hoping for.
+I don't know if there's anything in as far as I can't think of too many things other than that. What's been discussed in terms of improvements. I've been okay with how the class is going
+Okay, okay, this is your one chance to voice.
+because I will take your, you know, whatever time is left, you know I'll try to take your feedback into account. Huh?
+Okay, okay, thank you. That was unsure. And next is a 3rd
+Yeah. Can you hear me?
+Yes.
+Okay, perfect. So I'm in the car right now. I'm about to get out. But that's like internal video. But no, honestly, I mean, I feel like this is one of my favorite courses I've taken so far. I'm still an undergrad, and I'm taking my grad courses because I'm about to do like an integrated masters in Cse. M. And yeah, this is, I mean, I think my main goal was to get that foundation, but also have that practical application. And I think, like
+this course has been really good at like bridging the gap between the 2 like, it's not just like complete theory. And like, I don't actually get to apply it. And it's not just like I'm coding things up without knowing where they're coming from. So that's what I really wanted to learn. And I think I'm getting that. And I guess, like what I want to
+suggestions for, like the course, I can't really think of much. I mean, the only thing I can think of is like during the midterm. I did feel a little rushed, but that's because I also like tend to take a lot of time on problems instead of kind of moving on, and then maybe coming back. But maybe if the midterm like felt kind of rushed to me. I don't know if other people feel the same way. But yeah.
+Mostly
+Rush during it, but that's about it.
+There we go!
+Yeah.
+Okay, okay, thank you. And then, in terms of the midterm.
+you know, I did feel like it was important for you to all have the midterm again. It's really meant for as a tool to reinforce your learning. I view it that way.
+You know we are still in the process of grading it. We'll give back to graded Midterm in 2, 3 days, and then, you know, I'll probably give you. If people haven't done well, then, I'll probably give some opportunity in terms of like making it up, not in terms of another exam or so, but in terms of the remaining work
+that is left. So we haven't quite decided. But you know, I need to see the we need to look at the actual outcome of the midterm before we do that. Okay.
+That's perfect. Thank you.
+Okay, thanks. A 3rd
+Next up, I think, is pargo
+Yeah. So I mean, I guess my expectation going into the class were that I really want to learn more about like mathematics behind all these.
+I guess, like fundamental things about machine learning. So yeah, I mean, my expectations were definitely met. So that's something I really liked.
+terms of like what could be better? I mean, I wouldn't really say it's like an improvement or anything but
+And I'm assuming like this is going to be like what's going to happen for the rest of the semester. But I'm getting to learn some like the more I guess, like modern developments that's been happening machine learning. So that's I won't say that's an improvement. But that's something I'd be looking forward to learning now
+Yeah. So like, I kind of said, right, this is like a little bit of inflection point in the course, right? We've had a lot of the times when you know I basically teach on the well, whiteboard or ipad
+right? And teach about the math behind some of the classical machine learning methods. And we've already have talked about deep learning. It's not that we haven't talked about it, but now we will definitely grab, you know. Move on to that, and your course projects. The one that we will propose will be kind of you know, in terms of kind of trying to do
+researchy stuff with Llms, which are also of interest to us, so that we can actually also guide you properly.
+Okay, yeah. And I think there was a question from Minkyu and Hannah
+answered it. We are going in alphabetical order, talking about what we like about the course, how it has met or not met our expectations, and what could be made better? Perfect. Hannah, thank you for summarizing that.
+Okay. So next I believe we have Chloe
+Hello.
+yeah. So my expectation coming to this class was just learning a bit more about the foundations of machine learning. And I think it was really cool to like see a more mathematical approach than I have seen before, so like that part was definitely met. Honestly, can't really think of anything that would like improve the course off the top of my head. But yeah.
+Yeah, and and feel free to send suggestions. If you think of anything later on. That's fine.
+Okay, thank you.
+Next up is Julian.
+Sorry I might be mispronouncing it
+Oh, no, it's fine. Yeah. My room is a bit messy. So like, yeah, after spring break.
+So that's why turning on the video is a little bit
+No worries, sir.
+Yeah. So yeah. As everybody said, I think I think I really like the course. So far, there were a lot of broad introductions to topics that I didn't really think about like constrained optimization. That was like one thing that was very interesting. And what I and I've not really thought about it before, and like giving these concepts
+were like introducing to me something new.
+In terms of something that could be improved. I'm I'm thinking of maybe
+introducing some fundamental properties about neural networks when it's introduced. Maybe like how, when it gets deeper, like, it can learn representations better.
+or like the or when the dimensions get longer, it can learn more, higher, dimensional representations. Maybe things like that like, I think so far everything was good. But
+maybe some properties that are
+a bit fundamental to neural networks like introducing them along with things like back propagation. And things would be a little more helpful. Yeah.
+Okay, okay, that's that's fair enough. We'll try, you know, in the
+last part of the class we will deal a lot with neural networks.
+different architectures coming to the transformer and then talking about Llm. So you know we we'll try to do some of that. Of course you know. The thing with deep learning is that everything is so much in flux. Sometimes
+And so
+Sometimes our current understanding is not actually the correct correct understanding. So, yes, yeah.
+Definitely
+Okay. I think next up is Darren
+Hi, so about my expectation, I think initially, I don't have too much background knowledge in machine learning. So I really wanted to like, learn how machine learning works and what it is.
+So that is something I like about the course in terms of improvements. I think sometimes the topics may go to like mathematical. So it would be helpful to like add more like real world examples to a topic like how the model works. In some cases, so it would be helpful for us to learn about the topics
+Okay. And you do you think that the homeworks have gone a little way too
+Yeah, I think, yeah, I think so. Homework is helpful, helpful.
+Yeah, that's what we tried to do. But we also didn't want to
+like, you know. I guess I could have given you more homework, but I tried not not to do too much of that. But okay, but my, I guess maybe just some pointers to examples, and so on so that you can try them on your own or so right
+Okay, thank you.
+That was Darren. Thanks, Darren. I think next up is Dwayne
+Duane. Are you there?
+Okay, if we
+we'll try to come back to Duane if somebody can remind me at the end. Meanwhile, let's move on to Dinesh.
+Yeah. Hi, can you hear me? Sorry. I'm also traveling
+Okay.
+Yeah. So I'd say, yeah, like a lot of other people. I initially came into the course. Trying to get a more mathematical understanding. I think it's the big thing and I I'd say, at least with like Svms. And
+the regression those like where we focused a lot of the math in that was like, really good
+And so yeah, that's met my expectations. And I'd say.
+I specifically liked the Svm. Because
+the constrained optimization is like it seemed like a real example is pretty cool.
+And then I'd say, for one thing that could be changed or maybe improved is like getting maybe like a like a textbook kind of thing like with corresponding chapters, because, like for the test, for example, a lot of it was just like going through the
+like the course lecture notes, but having maybe a more formal written explanation would also be nice to compare to
+Okay.
+okay, yeah, we did. Maybe I can actually reinforce that. There are some textbooks that we have a link to from the course, web page.
+But we are not really following this one textbook. So you know, I didn't want to
+make it to
+But maybe one of the things I could do is
+that when I teach a lecture I could potentially give you a reference of a textbook which might be the best suited for it.
+That's something that I could completely do. Yeah.
+Yeah, that that sounds good.
+Okay, okay, thank you.
+Thanks. Dinesh. I think up next is Hannah
+Yes, I mean, I came into this course because I wanted to, you know, properly, I think, like learn machine learning. It was something that was touched on
+in previous classes. But I've never taken a formal machine learning class until now, and I will say that I think it is
+mostly what I expected. There has been a balance between the mathematical components of like the lecture, and then.
+the homeworks being a lot more coding heavy, I will, I think maybe one thing
+to be made better is that
+if the homeworks had a little bit more math conceptual concepts, so that.
+like studying for the midterm would have been easier, I think. At least I would have appreciated that, but otherwise I feel like the balance of everything has been really good. Beyond that
+Okay, okay. So you know, from we did try to add some problems in the homework. But I think one of the issues was, there were only really 2 homeworks
+before the midterm. And so
+I I think it's a good idea to maybe actually have either more problems
+similar to the ones that you end up getting on the midterm on the oh.
+on the homework. So maybe you know, I could potentially try giving the like a practice midterm
+or so
+Yeah.
+Yeah. Yeah. Makes sense. Okay, thank you.
+Thank you. Hannah. How long
+Lane is back. By the way, online.
+Like Duane. Would you like to go next
+Yeah, yeah, sure. So this is, just make sure this is asking, like
+the course so far, if it met our expectations and what improvements we think could be made just to make sure
+Exactly. It's actually Hannah actually really articulated it well, on the chat
+Okay, okay, perfect. Okay. So I think
+the course. So far, I was expecting it to be a little more grounded. And like, maybe examples, or just like applications like, I think so far the only example I remember, at least, maybe I could be wrong, but I think the only example in the lectures like applied example, was maybe like the baskets with, like the apples and the oranges. And that was really cute.
+and it's simple, sure. But it kind of help me like, visualize. Okay, like, this is how this works like in practice. Right? Like all like, I think the notations durations like, of course it takes time to perfect that and learn, so I can't expect to get it like right away. But I think if I had maybe some more examples to go along with it. It might make it stick a bit better.
+And I think that, especially with how the lectures are really all about the derivations and the notations. But the homeworks were more applied, or like
+strictly, almost programming, it kind of made like a chasm between the 2.
+And that's why, like I was kind of like doing good like homework. One. I thought I was ready. I was set to go, but the homework 2 was more of the derivations, and more of like the theory I was like. Oh, so I think that's why like, that's what made me kind of struggle. So I think it's still good to have that
+theoretical understanding of machine learning. So I'm not too like discontent with the course, like even I do like simple stuff like oh, straightforward! That's why I really wanted to get, but like the theoretical understanding, I'm glad to get that, too. But I think if there were maybe more cohesion between the homeworks and the lectures, or even maybe like a practice exam. So I could actually know, okay, this is what they're expecting on the exam, or this is what the exam will really be like.
+I think that might have helped me like synthesize everything together a bit more
+Okay, okay, yeah. So maybe you know, next time, one thing I could potentially do is, you know, have a practice exam.
+you know we did try to make the like, for example, when we gave homework one. And we had this question about
+you know, like recommendation stuff. You know, I I kind of did motivate a whole lecture based on that. And there was a direct connection, for example, between the programming you did, or homework one and the lecture. So we did try to do that. Maybe we can make it a bit more explicit
+Oh, yeah, I think that's that's fair. That's that's good, like, I see that that makes sense. I also think that someone said in the chat. But yes, textbook references would be helpful like I look
+No.
+Slightly.
+but like before this exam, but I couldn't really like find like, okay, what's the most relevant chapter to this? Or like the textbooks have like extra stuff that we only go over in class. But I think
+So.
+This will also help like making sure that it's like streamlined a bit. That will help too
+Sure. I mean 1. 1 issue, of course, with the current with machine learning is that you know, we haven't really found like one textbook that is perfect
+for everything.
+And so, you know, I
+don't think I'm at that stage where we'll say, Hey, look! Because, like, for example, Bishop's book is good, but it also does a lot of Bayesian stuff that I didn't necessarily want to do in this class.
+And so it's always a challenge. But I think one thing I can do is whenever I teach some material. In addition to having the lecture notes and having the video, I could actually say, Hey, you know, if you want more detail or so, you can maybe look at this particular section in this particular book.
+I could definitely do that. Okay, thanks. Dwayne.
+Okay. Now, let me see, did we? I think next is Howra
+Oh yes!
+Yeah. Hi, Howard.
+Hi, so I think the course is really well structured, and it met my expectation, because, like, I register for this course to learn things related to my research, and also keep me having a fixed schedule to learn every week.
+So overall, the course is really good, and I like the thing that we have the
+course recordings. And also course note course notes available on canvas. And it's really save a lot of time for reviewing before the exam.
+And I also appreciate that you and Nilesh have zoom office hours. Because for me, I feel like it's fits my schedule. Well, like for the zoom office hours. And yeah, I think I currently doesn't have things that I think need improvements.
+Yeah.
+Okay, okay, thank you. Haral, yeah. So we, you know, I think one of the really good things about
+doing this online is that I could actually make available my zoom lectures easily as well as the written stuff. So
+hopefully, that's helped.
+Most of you. Next is hormones
+Hi! There! Can you hear me?
+Oh yes!
+Okay? Yeah. So like everyone else, you know, I wanted to get
+like into the bare metal of some of these, you know, machine learning techniques which I think you know
+did pretty well in the course
+for the future, as Ken you mentioned, I hope to get to some like more
+you know, up to date things like transformers, attention, mechanism and stuff like that which you hopefully get to. And then for the
+like improvement feedback. I can say I guess I've already mentioned to you in one of the office hours that if you also include some
+review of the matrix calculus, which is actually not a part of the undergraduate or graduate linear algebra course that would go a long way with what we
+trying to achieve? And then, yeah, that test exam also is a very.
+very good idea. Because, like, you know, most of the answers that we've got about the exam was like, it's gonna be more or less like homework 2. But then, given that like, we had like 10 days to finish homework to and was open work and everything. And
+and even you mentioned that, you know, start early, you know, it's gonna be a little bit different and stuff like that. And then we've got the answers the day before the exam. So it wasn't quite, you know.
+time to like rearrange yourself, because you know. At least
+I find some of my answers a bit off for the homework, too. So you know, I need to study again, and you know, find out. You know what was
+like my shortcomings on on those, and try to accommodate and then, I guess.
+because of that reason, I think you know, it might be something just me, but you know I'm going to share it. So maybe other people can also.
+you know, talk about it. But I think in general, like the the timing of the exam wasn't quite enough.
+you know, to go through all those materials, and that's something that definitely can.
+you know, improve like, you know, if you have like too many questions and sub questions, you know, maybe give a little bit more time for people to think. Or maybe, you know, figure out things on the fly stuff like that.
+And
+yeah, the last very specific things that I think is worth mentioning is that like on the exam, something that you know very little things can help like, you know, if if you have a question and you know, half of the question is on the bottom of a page, and the rest is in the you know, top of the next page. You know, you want to get like those data. And you know, when you're composing the answer, you know, going back and forth.
+things are also kind of like.
+can be time consuming or distracting. So
+yeah, even like the the the page setting of the the exam sheet can also have like a positive impact on on the result. But all in all, you know, I'm pretty happy. Of course I I get some very nice intuition that
+I didn't have before, and I'm
+glad and grateful for that. Thank you.
+Okay, well, thank you. Almost thanks for the detailed feedback. So yeah, I think matrix calculus, I think, is something that maybe we should add as background material or as something to do in the class. I would just say, one thing like Don't index over index too much on the on the midterm right. The midterm is just
+like it's an opportunity for all of you to
+study the material. Try to understand it, and in some sense be able to recall and answer questions right? So what the whole purpose of the midterm is? It's not necessarily like an evaluation tool, but it is something that
+you know you are able to study and then understand the material little little bit better, because, you know from my side
+I've actually taken courses where I will, you know, even as a professor, I'll go and sit in on some course, and I realize that you know, without that, structured like learning and midterm, I sometimes will actually not get full benefit of taking a course. So again, don't in over index on the on the midterm. And like, I said. You know we'll return the graded midterm.
+I think, in a couple of days time, and then, you know, for the people, you know, I'll we'll provide some mechanism again, like, not through another test or so, but through other ways to, you know, if you have not done well in the midterm, then you should be able to recoup some of that. Okay, so so again, like, I said.
+Even for self. Evaluation is kind of nice, you know, if you go through something, and then you realize your actual shortcomings rather than you know you think oh, you know you panicked that. Oh, this is not enough time, or something about like this that would also help that, you know you, you can. You can think, okay. So these are the stuff that I need to, you know. Attend more, or, you know, do
+more exercise on and stuff like that. So
+Sure. Okay, sounds good. Thank you. Hormos. Joseph Stanley next
+So yeah, I took this course to get a better mathematical understanding of machine learning, because I've taken other machine learning courses. But they've been kind of higher level, and I'd say I'm pretty happy with the content that's been covered. And
+the the derivations that we do for a bunch of machine learning methods.
+things to improve. I don't think there's much.
+I think, maybe more mathematical stuff in the homework.
+And maybe one extra homework before the midterm. To help prepare would have been good. So just kind of echoing what other people are saying
+Okay, okay, yeah. We did kind of got get started on the homeworks a little late. But I'm guessing.
+I'm thinking that maybe you know, like one extra homework that might just might not involve any programming might actually be required. Minimal programming might be good
+Okay, I'll tell the next generation. Next, people who came came in class that the extra homework is because of you guys
+I'm just kidding.
+Okay. Kayan or Kyrie Zack
+Yeah. Yeah. Obviously, I wouldn't be able to join like the 1st class, so I wouldn't be able to talk about my expectations at that time, but I think like oh, this course, like the the teaching style and the content. I think it's pretty good. And but I like to say that. I think more. Maybe hands on part, like home, like part or like materials, will be helpful.
+because I think, like for all those like machine learning algorithms like the neural networks. I think, like, like, it helps like, if, like, we are provided
+like we we know, like how to use them. How to like, actually build like a like an application, or something to
+like to to to like, do something new. So for the mass part. I'm I'm not saying that the mass part is like, but I think, like the mass part is like a kind of like hard for me like kind of difficult for me, and like sometimes, like I just lose track of like oh, like, here is the mass part, but I just don't know like how to use this. So I think, like
+Did the did, the having the lecture video lectures, and having the written lectures
+Yeah, yeah, like, yeah, I mean, like.
+after. Only after, like the lecture. And I, maybe I just reviewed all the materials like, after that I think I can like, like, understand, like, what? What, what are those items is. But if I just look at it like some like other materials, or just look at like some like math, like mass, like, maybe it's kind of like
+not that easy to understand, but like my point is like the hands on part. Maybe we can have more
+like hands on some questions as a homework.
+And also I look at the schedule like, I think we are going to talk about like the
+A like large limit model, or something like this. Diffusion models, maybe later this month. So I think that would be good to like to know all these like kind of state of the art.
+you know, like things
+So that definitely
+Yeah.
+Yeah, yeah, so definitely, the course is going to change.
+you know, in in the the stuff that I teach. And we are actually gonna teach more deep learning, more
+Neural network architectures, more things about Llm. And many of the projects that we will suggest
+are very much kind of state of the art. So so, yeah, yeah, so I think we are kind of moving towards that. That's good.
+Yeah, I think that would be great. Yes, thank you.
+Okay. Thank you. Km, okay. The next, I think, is Leticia.
+Yeah, Hello, yeah. So I'm Leticia. Just introduce myself. I wasn't here. I wasn't registered for the class yet on the 1st class day, so I wasn't in the 1st lecture. But I'm like a integrated master student. I really like the class. So far, it was really my 1st official Ml. Class that I took. I had like a little bit of exposure before. But this is the 1st time that I really got to learn some of the math behind the algorithms. And that's been really fun.
+I also really liked the the projects I like learned a lot from those. And there was like a I thought, like a good balance of like
+like more math questions, and like programming questions in terms of improvement. I think it's like already, already, a very well-structured class.
+If anything. One thing is sometimes with the programming assignments when training the models. I wasn't sure what kind of accuracy we were expected to get with the the algorithms we were doing. So it's a little bit hard to tell, like, if it was working, or if maybe there was like some kind of issue, because I wasn't sure like, I guess what the expectation was with some of those accuracies. But I guess that kind of comes with the territory with like Ml, that simulates a little bit of what the research is like. Obviously, where you don't know.
+So but yeah, I mean other than that very good class. And yeah, thank you.
+Okay, okay, well, thanks. So, yeah, maybe
+maybe we could kind of have some expectation setting right in terms of like where we expect the homework, the, you know, accuracies in the homework, and so on to land, at least for a couple of questions.
+Okay, thank you. Leticia. Thank you.
+Hello! Can you hear me?
+Yes!
+Perfect. Yeah. Yeah, I think I am enjoying the class a lot, Professor. As expected earlier. You've covered a lot of like foundational knowledge in machine learning. And you're writing all the mathematic
+on board. What I really like about your teaching style is like when when people kind of teach. Ml, and hey, this is metrics for factorization. And this is projection. That's it. They don't really describe geometry. Like like this. Describe it geometrically, like you did in the in the past. It really helped me to understand. All right, this is a production line. Okay, this is like how
+you know, to mattress our projection, and then, like unifactor kind of thing, it's really helped me to understand this kind of concept when you visualize it geometrically. So that's something that I really like about in the course and in terms of the deep learning kind of thing. I have a little different thought, and
+I really don't think, you know, like deep learning is something that we have to fundamentally learn in the class, because I have a lot of industry experience my background so as something that we can quickly learn like while in the industry, or while you are doing research, and I think deep learning architecture itself is very systematic. There's yeah, there's a fundamental thing. But it's really hard to learn
+that fundamental knowledge from the deep neural network itself.
+So that's why I really like your teaching, so go to. I know renewal regression. Svm. Is very simple, as you mentioned, but still it's not going to change it, like I think people in 20 years later still need to learn linear regression, how it works because they are fundamental. And if you think about the diffusion model, it's not about the neural network. It's about the like how we can learn the distribution.
+In order to understand that concept, we have to know stochastic probability and optimization in depth. So these kind of like fundamental thing is really important and something that we have to learn from you and from the school so
+different perspective. And I think in terms of the exam, everyone covers really. Well, it's about the expectation, professor. So yeah, we kind of like, hear that you heard that it's gonna be simple. Everything will be covered in the midterm. And and yeah, when when I saw the exam, I mean, I knew that there might be some question about, like
+drive all the equation mathematics by hands. But it was like kind of like choice. So we have another midterm to prepare. So I was like, All right, since Professor said, it's going to be simple. I don't need to really need to like, write down, study all the details. So that's why we skip. I skip my, I personally skip a lot of things because I thought, it's going to be high level conceptual question like the homework. But when I saw the exam, it's a lot of like
+driving the mathematics. So it's yeah. It's about the expectation. If you give us like more clear expectation before they term
+Oh!
+More prepared. But yeah, it's just yeah.
+We're not supposed
+Yeah, everything's good.
+I think in the more I hear, the more I think that you know, having a practice, midterm would actually be good. I think I should never have said if I said that. It's something that you know like for the person who sets the exam. Of course it's always simple. So maybe I should not actually have said that it'll be simple. But, like I said, don't over index too much on the midterm. I really want you to learn the material. So and like, I said.
+you know, we look at the grades, and we'll offer you some chance to
+to recoup some of the those marks.
+Okay, okay, thank you so much. Thank you. And the next is Mir. Mir Mohammed
+Hello, yeah. I liked the lectures and the fact that it was mathematically oriented, which was my only goal when was taking this course to have a course that is more mathematically oriented.
+One of the great things was that I feel like I understand the books much better. I was familiar with B. Shops before this course, but now I think I can read it faster. Kind of it helped me
+in that way. The only thing I can't, I guess, is missing in the contents of the course is maybe a lecture on boosting or bagging some ensemble learning stuff
+Hmm.
+Which I don't think is covered in any other course other than probably a machine learning course.
+and with regards to other suggestions. Honestly, I I don't, and
+nothing comes to my mind that much except for the fact that
+I don't know how to put it into words, but some becoming familiar more with some platforms that are used in industry.
+or some tools like, for example, what is Kaggle or such competitions? Or, yeah, if I put myself into the shoes of a person that is working in industry, what they do have a kind of higher level picture of what is happening there. I know there's a lecture upcoming as distribute distributed
+types of deep learning models. Things like that. I guess that would be helpful. Yeah, that's it. Thank you.
+Okay, good. Good. Good. Thanks for the feedback.
+Yeah. So you know, remember that I'm kind of taking this poll, because you know. I want you all to be heard kind of in the middle of the class, or slightly more than the middle of the class. So some of the material about the latest platforms, and so on, is something that we will you will face in the last part of the class, right in terms of the projects, and in terms of the homework
+Hopefully. That will address some of that
+Yeah. Thanks.
+Make sure.
+Next up, I believe, is prachi praji
+Hi, yeah, I think I've just very much enjoyed the overall structure of the class. I've definitely enjoyed diving deep into the mathematical foundations behind a lot of
+very foundational machine learning techniques. Something that I think would be really cool is if we could.
+Also, when we're exploring these new techniques, maybe read some of the foundational papers that introduce these techniques.
+Like, I know, when I was confused about the lecture of the Lda and Qda. What really helped was actually going and finding and reading a paper that explained the math in great detail.
+I think
+as someone who hopes to go further into machine learning research, gaining understanding through reading literature is a skill that I want to develop further. And it'd be really cool if this class
+helped provide an opportunity to do so.
+Okay, okay, that's good. So I guess in terms of like oh.
+pointers other than to textbooks, it might might be actually good to sometimes give pointers to
+the actual original papers, or even like blog articles or so right that might explain that material
+Yeah, definitely. And I think it would also help us better situate the particular technique that we're learning in the context of the literature
+Sounds good. Sounds good. Okay. Thanks. Prachi. Next up is Pranav
+Yeah, overall experience has been positive.
+I feel like the lectures are quite thorough.
+And we're really getting deep into the mathematics. Behind some of these concepts. Something
+that I also like is that all these lectures are recorded easily accessible on Youtube. That's been a really big plus.
+If I had any kind of requests. It would be, maybe, like practice problems or concept questions at the end of each lectures that are posted, that we could work through. Maybe that could have helped with
+some of the questions on the midterm are just being prepared for it.
+And then, yeah, maybe potentially
+having more hands-on lectures where we get to kind of implement
+some of these concepts. And we see it being done
+Okay, okay.
+Sounds good. Okay. Thank you. Pranav. Rishab
+Yeah. So like material wise, this course went like above and beyond my expectations. My main reason for signing up for this course was to really understand the math behind a lot of these models that we use, and we kind of take for granted, like I was in a previous machine learning class. And we kind of just went, okay, here's the loss function. And then behind the scenes, the frameworks, will, you know, take care of solving the coefficients, and we don't really have to worry about that. But I kind of wanted to understand what's happening and not just rely on the framework in this course.
+did a phenomenal job of that. I love the way that it was done. My only suggestion, as like a future improvement, would maybe to have, as others mentioned a practice problem like, even like outside of homework. So they're not mandatory, just something to like where I could try to implement the things by hand, because I've noticed. Like, if I'm like going over your lecture notes, I can read through and understand. Okay, this is how you did it.
+But maybe if I had the chance to implement it on my own, I might realize that. Oh, like I don't know this as well as I do, but I just think I know it, because I'm reading your lecture notes, and it's outlined step by step. But maybe in the real like, even in the exam. Maybe I don't know how to go from here to here without like just seeing it, and so
+I didn't
+Been useful, for like the midterm, because it like I didn't. I don't think I performed as well as like I expected to given like my past experience in Ml. And I believe, like correct me if I'm wrong. That. It was said that it was easy, so like I kind of went in with. Maybe an overconfident mindset. And yeah, the practice problems would have helped, maybe.
+like, help me see my shortcomings, you know before going through the exam, and then the time crunch, as other others mentioned, was also a bit of a struggle I know, like I think, in the exam like you gave a 10 min extension, which helped but A little more time would have been helpful for some of these problems
+Okay. Okay, yeah. Like, I said, you know, don't over index too much on the
+on the midterm. But I definitely will not. Should not have said that the midterm is
+easy, or at least given. I don't think I said that, but I might have given you the impression that it is.
+and I should definitely not do that. And then again, I think it's an interesting thought about you know, not only giving pointers to.
+you know, other textbooks or chapters, but actually to maybe problems, and so on. And I guess there's so much material now available that
+in almost all cases I might be able to find some
+implementation or some tutorial that actually might
+enable you to get deeper into the subject. The thing is, I always have to try to balance that against trying to give you too much work.
+because, you know, I could potentially give you more homework. And and and I think that's something that we probably could have done, and started assigning homework a little bit earlier and have one extra homework. But okay, thanks.
+thanks, Bishop.
+Let's see, I believe Tian Cheng is next
+Hello! So I think it's really a a very enjoyable journey of machine learning. So we explore a lot of topics, and some of them. We dive into the mass aspects before behind this basic, like, you know, the terminologies which remind me of the complex presentation and other things we may use later in the future. And what I'm expecting is more maybe some more
+right. Recent researches, such as transformers and maybe diffusions, but I see they're already on the schedule. So I'm really excited for that.
+One thing that I may look for is see a more hands on experience we see with the coding, especially so it may be helpful for the future. I think
+So you mean to say that you feel like you need more than what's in the homeworks
+Yes, but I I do understand. It's maybe a huge time investment in a resource investment in that. So I maybe it's more like some analysis of some recent papers, and maybe, like how we can integrate some of these
+codes together. I'm not sure
+Yeah, yeah, yeah.
+I mean, you have to realize that machine learning is such a vast subject. Right? Right? You know, this is just the 1st course in machine learning. And what my goal is to kind of give you
+like background on a diverse set of topics. And you know, you'll see that, you know, like a transformer. It's actually like a giant
+matrix machine. Right? I mean, it basically takes
+embedding, which are vectors, translates them into more embeddings and keeps on doing that. And the transformations are done through
+matrices which translate to attention mechanism. And then there's the feed forward. And then there's some nonlinearities. So I'm hoping that all the the matrix and vector stuff that you're doing will actually make it easier
+to understand that. And you know, we will get to, you know, transformers, and so on. Now
+in class. But again I think I'm hearing again, like, Oh, you know, give us give me more. Give us more little bit more homework, I think.
+and and some pointers in class also to practical stuff.
+Okay, thank you. And I believe next is Michelle
+Hello!
+And yeah, Vishal, I have your I I yeah, I know that you've sent me email with something that I need to reply to. But please go ahead. Yes.
+Yeah. So
+yeah. So my room is, honestly, like a little disorganized. So I'm gonna keep my video off. But let me answer the questions on the that you asked at the beginning of class. So
+my expectations for this class was to just understand like more about Ml, and honestly understand a lot about the mathematics behind. Ml.
+and like, like, just get a theoretical understanding like a lot of people said, I have a lot of like prior knowledge about Emma, but I mean to be honest like I. It was always just kind of like a black box for me like just, oh, you know, like, just call call this library. Something special will happen. I want to learn like the back, find it. And I'd say
+this course did a really good job of doing that
+my favorite part about this course was when we did like optimization so like
+a linear nonlinear optimization. I really like that because I learned
+a lot during that unit. I I
+I really had to like like dive deep into like like. Precisely why like, like all the all of the techniques upon
+that we discussed and like why they work and like like the proofs and stuff. So I really learned a lot. And I really like that. That was probably like my favorite part of the entire course.
+One thing that I think could be improved is maybe
+like more more smaller tests. I think that would
+like like we can break up the midterm, maybe into like like 3 or 3 or 4 like tiny tests, and we could spread them across the semester. Not only would that reduce, like the amount of weightage that the midterm has on the on the final grade. I feel like I was a little bit nervous around the midterm because of that, but also improve retention greatly.
+I feel like like if we continue to like reinforce, like what we learn in class
+with like multiple exams. Like, we'll just retain that information better. And I also feel like, it'll also help us with like understanding theory. Because if it's a midterm, then it's obviously gonna be like like a lot of like theoretical questions. If it's like a paper exam. So I feel like that. Would
+it would help on that front as well. So that's that's my feedback.
+Okay, okay, thanks, Michelle.
+I think the idea of trying to. I mean, usually, I do have like 2 midterms in the course.
+One reason I did not do that is because I didn't want to have too much work at the back end of the course. And then the second part, which
+is that you know this is an online course. But the midterms were in person. So
+I don't see being able to do more than 2. But
+but at least yeah, we could look into possibly having 2 smaller.
+okay, well, I think I've covered everybody if I have not covered any. So if I missed out somebody.
+please let me know. And please let me know your thoughts.
+Okay, I think I've covered everybody. Okay, well, thank you. It's actually took a little bit longer than I thought it would. But I wanted to, you know. Make sure that you were heard, all of you, and
+the session actually, I think, exceeded my expectations, because I think we got a lot of good feedback
+from you, and I will
+hopefully. You know some of the things that many of you have said
+will be addressed in the last part of the class, which is.
+you know, more modern stuff, more state of the art stuff.
+And then some things that you know I probably cannot change at this time we'll implement it for the next course.
+So based upon everything that you've heard anybody wants to say something additional or
+okay. And remember, remember that one of the purposes of this class explicitly was to
+actually give you a mathematical insight and details into many of the techniques that are used because I do find that a lot of the
+machine learning courses that are being taught these days kind of omit those details. And you know, it's probably okay, 90% of the time for you not to know the details. But I do think that what will happen in the future, you know, as
+Llms become better at doing our jobs. Especially the mundane type. The place where you know, I think there will still be a need is when there is kind of specialized knowledge that you might require.
+So let's see, we have 15 min
+now, the next important component of your course, is going to be course projects.
+And so we have prepared like project suggestions. Let me
+share them with you. And I believe that
+Nilesh has already put them on canvas.
+Nilesh! Is that correct?
+Yes, it's part of the homework theory, and it's already upon canvas.
+Yes, okay, good. It's on canvas. Let me see if I can.
+Okay, let me share my screen.
+Okay, hopefully, all of you can see the screen.
+Okay, okay, so 1st of all, final projects, you know, these are the ideas we would like you to turn it in soon as to what projects we do.
+The ideal group size is 4.
+Okay, so 4 students per project.
+okay? And we would like you to decide soon so that you can actually, you know, do a reasonable job by the end of the course.
+Okay,
+hopefully, you all have some idea as to who you would like to partner with for the projects. And of course I'm going to go over some project ideas with you.
+you can also use Ed to if you're interested in a particular project, but you don't have a partner, you can post that. And then, you know, other people can join in the project.
+and you can do that. Okay.
+I'm going to propose 4 projects over here. It's okay. If more than one group chooses the same project.
+Right? If you do have
+a different project than this that you want to do, please approach me and Nilesh as soon as possible.
+We discourage anybody from doing any one person project
+right? Ideal size, like, I said, is 4. You can do projects with 3 people, but ideally, I would like to see 4 per project, or 3 per project.
+so given that any questions
+I have one question, Professor
+Yes.
+So. So what if you know? Like so personally, I'm working on one of the
+project? Which I aim to submit to new rips. It's like kind of work with the with my lab.
+This is something that I can also turn in as a course project as an individual. Yeah. Cause. Since I'm taking this course like
+Without any collaborator, I can just like work on this individual project and submit submitted as a course project. Is it possible
+Yeah, I I would discourage that.
+If that's the last resort you can talk to us
+Right. But I would like you to, even if it is a project that comes from somebody or somebody that's doing it in their research.
+Ideally, you would solicit other partners to work on that project.
+But of course I understand. If you are submitting it for a conference, then it becomes a little bit tricky.
+So so my, so so why don't I go through this these 4 projects right?
+And see if you want to do any of these projects as part of a larger team? Or if it's even related to one of the project that you are currently doing and are planning to submit. Okay, so so like, Nelay said, you know, we have uploaded this on canvas.
+So all the 4 projects are related to kind of, you know, the latest and greatest in terms of Llms.
+And these are projects that we are kind of also interested in, especially in relation. So we can kind of, you know, give you the proper guidance to do these projects.
+Okay? So the 1st one is basically kind of long context where these Llms have.
+you know, long context. And how can you then
+explore and interpret the attention patterns that you get in transformer models when you're learning to? When you are, you know, doing very specific kind of tasks which are called needle in the haystack task.
+So kind of here is the, you know. We don't have time right now to go over the details.
+you know. Take a look. Here's an overview.
+These are some sample objectives.
+This is a potential methodology.
+Okay? So that's kind of project number one.
+project number 2 is kind of building a rag or retrieval augmented generation system for actually, course, material question answering. And you can actually build it on top of the course material for this course. Right? So you have a video of obviously the corresponding audio and then you have the lecture material. So can you actually build
+a system that actually does question answering. And maybe some of the things that you asked for right? So
+tell me, what is, where can I read further in a textbook about this material? Maybe you can actually develop it
+as part of this system.
+So this starts talking about rag.
+So that's the description or the overview.
+The potential objectives over here.
+Potential methodology.
+So that's the second project.
+Then Project 3 is, you know, for using
+or developing like a coding language model. Can you explore different specialized tokenization strategies? If you want this to be specialized for the C plus plus language.
+Okay. So again, here's the overview of the project.
+Here is a potential kind of objective potential methodology.
+Okay? And then the finally, the 4th project is.
+you know, designing and implementing evaluation metrics for assessing hallucinations in Llm. Generated text. Right? So you see, more and more. AI or Llms are being adopted to give answers. So, for example, if you look at Google, there is something called AI overviews that now appears on the top of the pay page that you have queries and
+hallucinations because these language models are kind of generating.
+you know, one word at a time. Can you actually
+assess the hallucinations and have good evaluation metrics for detecting that. So again, kind of description or overview of the project
+potential objectives and potential methodology.
+Okay? And then, you know, there are references along with the oh.
+you know, for the different projects.
+So what we would like you to do is that from you need to choose projects.
+What I need to have is we'll actually make the 3rd homework
+to be a little bit of work initial work on the project
+right? Naresh. When will that be? on canvas?
+Oh, it's already on canvas, and there's a template kind of what kind of questions we are seeking in the proposal that's already there. And then
+people need to submit one to 2 page document on that
+and do some initial background work around that
+Okay. So you need to. Now choose your projects. You need to submit a couple of pages of report to show that you've done some work.
+Remember, the project is due at the end. But we would actually like you to make sure that you don't leave your work till the end.
+Okay? And again, if you have more questions about each of these topics, feel free to ask us.
+feel free to discuss this among themselves among yourselves.
+Now, you do need to form teams.
+So while we have a few minutes left, any questions, anything we should discuss right now about the projects
+Quick question about the proposed projects
+Pardon me.
+Oh, I had a quick question about the proposed projects
+Sure. Go ahead!
+All of them seem related to Llms, and I was just wondering if we'll have
+access to compute resources to run experiments
+Yes, that's a good question. That's something that Milesh and I we're just talking about.
+So we are working on it hopefully, we'll be able to get something from Tech, which is the Texas Advanced computational center.
+And we'll also try to look at some cloud resources to see if we can get you some credits.
+So something that we realize and something that we do need to, we'll need to try to figure out
+Okay. Thank you.
+Sorry, Prajit. Was there anything else
+No, I was just saying saying, Thank you.
+Sure. Thank you. Yeah. Sorry you went out for a minute.
+Okay, anybody else
+Lilash, if the homework is ready, shall we just can you just share that on the screen if you're able to, or
+I'm not. I'm on the phone, so it's a bit hard to share it.
+Right.
+But if you can open the canvas like, it's it's there as home. 3
+I see. Let's see.
+can people see it as homework today?
+I'm able to see it on canvas
+Under assignments.
+Yes, okay, good.
+So let me stop my share.
+Well, there are some chat messages. Let me make sure.
+Okay, Karen, did did you say that you could not find the project
+Yeah, yeah, I got it. Now I got it. Now.
+Okay, can you check? Oh, sorry. I see it now. Sorry. I'm just reading it.
+Okay, okay, good. And then
+sorry. I'm just trying to see which window I should share
+Yeah, I should actually
+Oh, you did share. Okay, okay, I see it. Okay. So here is the the.
+the homework 3. You know. You need to
+figure out your project. You need to list the group members. Right? So that is work that you guys all you all need to do to make sure that you have projects
+and a group that does it state the problem motivation.
+Give the objectives, do a little bit of literature, survey.
+talk a little bit about the methodology that you would use
+and talk a little bit about. You know potential challenges that you might face. And you know you should include compute
+in that, and we'll try to kind of mitigate that.
+And then the expected outcomes. Okay? So
+so you know, I think we have earmarked the last couple of classes for you to give
+your project presentations.
+So it's slightly over a month, right? So
+and I'm already seeing some
+chat. So, Binky, I know that you said you're interested in Project 2.
+Please send me an email. If you're interested, I would also recommend posting it on. Ed. Okay, if you're looking for people. Because, you know, once this window goes away, this might vanish.
+Okay, okay,
+So that's it. For this lecture any other questions about the projects.
+Okay? Great. So then,
+it's time. And thanks for actually sharing your thoughts. I think it was extremely valuable for me.
+and you have the projects. Now project ideas.
+Please choose your partners. Please try and make sure that you try to do
+just in time and be prepared.
+And we'll meet on Wednesday, and I'll basically start the next
+lecture. And I believe that Wednesday's lecture is going to be on like more detail about optimizing neural networks.
+Okay, thank you.

@@ -1,0 +1,687 @@
+Okay, welcome, everybody. Let me see.
+Okay, so couple of announcements. Remember, your homework is due this coming Friday.
+And just somebody can just confirm that they can hear me.
+Yes, we can hear you.
+Okay, thanks. So homework is due this
+Friday, and you have a midterm on Wednesday next Wednesday. So a week from now
+the midterm will be during the class time, and Nilesh has given you the room where the midterm will be held. It is going to be a, you know. Closed Book exam.
+1 h, 15 min. The time for a typical classroom.
+I've kind of already told you a little bit about what to expect in the midterm, and I can give you more information.
+You know, the 1st question will be multiple parts.
+It'll be short answers to each part. There's going to be one question on regression. There's going to be one question on classification.
+And then there's going to be one question on deep learning, forward propagation, backward propagation. So a lot of the stuff that you've done in your homeworks, both in the like questions that you have to answer by pen and paper and the coding questions. Obviously, we're not going to ask you to write any code in the exam. But some of the stuff that you are doing for the coding
+can be, you know, part of the questions that are asked.
+So I hope that is enough information. But do you guys have any questions.
+Will we be allowed to have a calculator during the exam to do any of the math calculations.
+Calculator, no calculator will be needed. And yeah, you should not have a calculator actually.
+Oh!
+There should be no real cut, you know, like, what are you thinking of like? There'll be known. Not that many numbers in the Exam.
+Oh, okay, I was thinking like, if there's like a long gradient where the decimal, where the numbers can be like small decimals and multiplying those. But.
+Yeah, no, no.
+So no calculators.
+Any other question.
+Okay? And you know,
+I will actually be traveling on Monday. And I think it's actually a good time to not have any lecture, because it is going to be before the midterm, so there will be no lecture on Monday.
+And
+no lecture on Monday. Since I'm traveling I can't hold office hours on Monday, as I used to, so, but I will plan to hold office hours on Tuesday
+I will be in London, so I think the time that Nilesh and I worked out is that I can hold office hours at 8 PM.
+London time. If anybody needs to talk and discuss something.
+and we're actually a little unsure what time it'll be here, because there's a time change happening this weekend, and I'm not sure if the time is changing in London or not. So so 8 Pm. London time, and you know I think we'll try to calculate what that is in central time.
+Okay? Any questions.
+Will the exam also cover today's material as well.
+Oh, the material. So yeah, so everything kind of till last lecture.
+we'll be there. And today. I'm going to just wrap up, talking a little bit about. I'll start talking about clustering today, and that material will not be in the.
+We won't ask you any questions on clustering.
+Okay. Thank you.
+Yeah, I mean, just I know that you have a you know course, kind of. In the beginning there was not that much work, and suddenly kind of we are ramping up.
+So, you know, just being mindful of that.
+You won't have class on Monday. And then, you know, today's clustering part will not be in the
+in the exam.
+Excuse me any sample question, maybe from previous.
+Yeah, I thought of that. And you know, I think you can think of the homeworks and the problems that we give as kind of sample questions.
+Thank you.
+Okay, it's not that I haven't like
+taught this course for a lot of years. So we don't have like a lot of material that I can just give to you.
+Okay.
+okay. So you can see my screen. Now, right? So just kind of wanted to talk about something which is sort of important for
+you all to realize in class in regression, right? So we saw clearly that there was
+that there's, you know, loss function, which is the squared loss. And then we talked about bridge regularization, which is squared L. 2, and then also lasso, which is l 1 regularization.
+So that part is very clear, right? That that's what happens in regression.
+And one thing I mentioned at the end of class last time, and I was a little bit hurried. So that's why I want to kind of redo this or just mention it again.
+is that classification also, you can actually write as
+we saw 2 examples, logistical regression and support vector machines, 2 of the very popular. And you know, classifiers that really work well, once you have features.
+and they actually can also be thought of as loss, function, and regularization. And sometimes it may not be clear right? So especially for Svms.
+Right? If you go back. And if I go back and look at the Svm
+primal here, this is the nonlinearly separable one, where we have
+the scies which are the slack variables.
+Right? So
+it turns out that you can. Actually, this is I equal to one to N, so this is over the training data.
+And each I, if you look at it right.
+Each I is, you know, this is Yi, which is the label.
+and this is kind of the prediction right? So this is why I had
+right. So Sci, I has kind of this form, and if you
+go ahead and you know, put y hat
+to be kind of W transpose Xi plus W. Naught over here.
+Then you can see that if you plot yy hat so yy hat. Suppose you have a 2 class problem y is plus one, or
+the labels are plus ones or minus ones
+plus months means you have the kind of correct prediction
+minus one means that you have the incorrect prediction. Right? So the actual classification loss is kind of like a step function
+which is like this.
+And it turns out and you can convince yourself right that since the psi I's are greater than equal to 0,
+you can write the psiis as Max of this quantity.
+Okay, 0 and one minus YI times W transpose XI plus w naught.
+And if you look at this well, if I think of this as
+remember, my X-axis is Yy hat.
+This is one minus the x-axis. So it has a slope of one.
+and at Yy hat it is at Yy hat equal to one. It is 0.
+Okay, at Yy hat equal to 0. It is one.
+Okay? And it is linear. So no loss for correct labels.
+Okay? But then, when you are in the margin, you start having like a linear loss. So you can think of this as an approximation, and it is a convex function, although it is not differentiable at this point.
+So the upshot is that this formulation is very prevalent in supervised learning, both in regression and in classification.
+Okay, so I kind of just wanted to repeat that today.
+Okay, any questions before I move on to clustering.
+Okay? So today I will. Now, we are actually starting something different. So far we've been looking at supervised learning. I don't think I'll talk too much about unsupervised learning in the sense of clustering and principal components. Analysis. But I'll give, you know, a lecture or 2 on this. So let's today talk about unsupervised learning.
+Okay, so remember that in the supervise setting
+we had the training data, and we had the Xi's and the Yi's
+right. And typically Xi is some d dimensional input space. Or you can construct a feature space
+in the unsupervised setting.
+We just have the excise.
+We don't actually have any labels.
+and they belong to Rd, so basically, there are no labels over here
+in supervised learning setting. You need labels. So you know, you need to have some sort of supervision available, whether it's human supervision or somebody's labeled it.
+And one of the issues with supervised learning is that sometimes labels can actually be hard to get.
+Okay.
+they are expensive. But if you just think about a lot of the data, let's say, on the Internet or so on right lots and lots of web pages, lots of documents.
+They may not actually have any supervision. They may not be labeled in any way.
+but there is lots and lots of data that is available. So supervised learning setting sometimes suffers from the fact that there may not be 2 data that has the supervision. But unsupervised learning has a lot of data.
+and you know this was kind of the dominant paradigm in machine learning. Okay? Where you would basically have supervised learning and unsupervised learning.
+What actually has happened in the last 5 to 10 years is super interesting, which is all of you have seen these large language models and so on.
+What's happened over there is that
+unsupervised data, right? So just documents or just sentences, books, and so on. Right? There's no labels associated with it. So in some sense it is the data that traditionally was used in the unsupervised learning setting. But labels have been
+create it right? So, for example, in next word, prediction, which how a lot of the decoder Llms work.
+you think about predicting the next word given.
+Sorry your voice get disconnected.
+We cannot hear you.
+Right can actually be used.
+People will still call it unsupervised data. And sometimes people will call it self-supervised learning. Okay, so we will obviously start talking about Llms and so on later in the class. But today we'll talk about like a very common technique for unsupervised learning, right? And that is, you know, clustering or grouping the data.
+Okay, so kind of, let me just ask you like, suppose I have these points.
+and suppose I'm not notice that I'm not putting any
+crosses and O's. So there's no supervision. All the data does not come with any. Yis, and if I ask you the question, like, how many clusters in the data do you see?
+Right? I think most people would say, well, there are 2 clusters.
+right? One corresponding to this set of points, and the other corresponding to this set of points. So clustering is just kind of like an organization
+to organize that the data that you have given into clusters, where the idea is that items or points within each cluster are more similar to each other than points which are in different.
+Okay, so there are kind of 2 classes of algorithms. One is these hierarchical, agglomerative, clustering methods. And then there are these partitional methods. So let me talk 1st about the hierarchical, agglomerative, clustering algorithms. So the way? So let me 1st write it down. Okay? So it's called hierarchical.
+higher. I already misspelled it.
+Hierarchical.
+Agglomerative.
+Clustering
+okay.
+And first, st let me illustrate on this data that I have. Right?
+So the way the algorithm works is, you basically say that each point is in its own cluster.
+And then the whole idea about, as the name suggests, hierarchical agglomerative is to
+merge clusters. So in the beginning it could be that, hey? You know, these points get merged.
+Then these 2 points get merged.
+Then these 2 points get merged.
+These 2 points get merged. These get merged.
+Okay? So now, if you look at it, you know. Having merged this initially, I started with 123-45-6788 times, 2, 16 points. There were 16 clusters in the beginning, and by performing this, you know 8 merges. I've gotten to 8 clusters right? And then I can still proceed further. Maybe this
+is one cluster. This gets merged into one cluster.
+these get merged into one cluster, this gets merged into one cluster.
+Then you have 4 clusters left. These get merged into one cluster.
+and these get merged into one cluster. So you basically have 2 clusters, which is kind of what we saw in the beginning right? And what you can do is you can actually arrange many times you can arrange these points. So if I label, put these points over here.
+I can actually build a tree out of it. 1, 4, 5, 6, 7, 8, 9, 1011, 1213, 1415, 16. Right? So if I follow the sequence of merges that I had done before. Right, I'm merging 1st I merge these 2, then these 2, then these 2.
+I'm kind of building this tree, and it's a hierarchical tree. And that's why the name hierarchical, agglomerative, clustering, hierarchical because it builds a hierarchical tree and agglomerative, because it is kind of bottom up.
+Okay? And if typically it all goes all the way to when you have just 1 point right, and you can basically
+cut it over here.
+and you will get that these points. So this is not the 2 dimensional representation. This is just building what's called a dendrogram, okay? Or a hierarchical tree.
+Okay, so how would we write the algorithm for this? Well, first, st we are. What we are given is
+endpoints. And remember, each of them is
+d dimensional. Xi belongs to Rd.
+okay, and what we will do is
+the number of clusters we'll initialize to N, like, I said, each point is its own cluster right? And
+see I is the ith cluster.
+So initially. Each point is its own own cluster, and there are N clusters.
+and the way it works is that? Suppose you want to get to K clusters right? So the method, the way it'll do work is while C is greater than equal to K. Where K. Is something like
+2 or 5, or whatever you need it to be
+at each step. What it'll do is it'll find the nearest pair of clusters.
+distinct clusters.
+CI. And CJ.
+And then it'll merge CI. And CJ.
+Okay, and suppose we call the merge cluster
+cluster.
+See? I let me just make sure that
+okay. And we can delete cj.
+because all those points are now in Ci.
+and then we decrement. C, so C goes to C, minus C, minus one.
+And that's the algorithm.
+Okay, so that's how you build an agglomerate. This hierarchical agglomerative clustering proceeds, it's actually quite an expensive method. Right? Because if you, if you look at the method, one of the things that needs to be done is you need to find the nearest pair of clusters. Okay, so in the beginning, how many pairs are there?
+Remember that the number of points is n.
+so there are. N, choose 2 pairs. So order N square pairs. So at each step you actually the 1st step you need to do N square.
+And then you need to do N minus one square, and so on. So the complexity of this is actually cubic.
+So so it's a bit bit a bit expensive. And then, of course, the other big part is
+well, how do you define nearest?
+Well, you could use. You can use a measure of distance like Euclidean distance, or instead of working with distances, you can work with. You know, things like cosine similarity which are used when you
+work with text documents.
+But the issue is more than that, right? It's not like just defining a distance measure. These clusters are not just Singleton points.
+They are going to be subsets of the data.
+So how do you then define
+the the nearness of 2 clusters. Okay? So it turns out.
+that's not kind of an easy question. And you can actually have multiple measures of nearness. Okay, so measures
+of nearness or distance.
+Okay, so one is, you take your
+clusters. So remember that each cluster is a set of points.
+So let's call the set of points in one cluster by
+X and the set of points in the other. Cluster Cj. With x. Prime.
+So if I have x minus X prime.
+So I can take distance. You can take, you know, l. 2 distance l. 1 distance whatever. But remember, X is one of the points in c 1.
+So what you can do is you can take the minimum of these distances.
+X belongs to c, 1 x prime belongs to. Or cj.
+okay, so I'm basically looking at all the points
+in cluster. And I'm looking at the minimum. The pair of points
+that are minimally separated from each other, which have the minimum distance from each other.
+And this is sometimes called Demon CICJ,
+okay. And this is called the single link.
+And it's called single link, because, you know, it really depends only on the smallest distance between the pairs of points.
+Okay, you can. Instead of taking men, you can actually take Max
+X, minus x prime. And this is similarly is called D, Max.
+okay. And this is called complete link.
+And so these, you know, have different characteristics. If you end up looking, for example, you know, at some points like.
+if my points are like this, right? So single link will
+say that. Well, these 2 are close to each other.
+I'd like to say that since this point over here.
+and maybe this, these 2 are close, and I'd like to say that since these 2 points are close to each other, it'll actually merge these.
+Okay? And so it has the this tendency to form. You know, long chains.
+And I, that's kind of why it's called single link.
+Okay? Whereas if you look at the Max.
+it's kind of trying to minimize the furthest pair of points. Remember that this is the distance measure that goes over here.
+Right?
+Right? So you measure the distance, using this, and then you find the nearest pair.
+So you find the minimum among all pairs of Dmax.
+Okay?
+So they have just different behavior. These are very much heuristics. Another one is the mean. So instead of looking at all pairs of points, I can just look at
+CICJ. I can just look at the mean points, MI minus mj.
+so what I'm doing is, I'm basically representing the set of points. Ci, by their means.
+Okay? And the set of points. Cj,
+in Cj, by the corresponding mean, okay, so, MI is the mean of cluster.
+Ci, and similarly, Mj. Is the mean of cluster. Cj.
+and then you have. You know, you can have, you can basically cook up many different things. So one other thing that people use is the average one divided by Ni and J.
+Summation of. So you, instead of taking mean or Max, you sum all the distances.
+and you take the average distance.
+Okay, where?
+And I is the size of cluster Ci and Nj
+is the number of points in cluster. Cj.
+okay, any questions so far.
+And remember, so far, these have all only been heuristics right?
+If you realize this situation is a little unsatisfactory, right? Because
+there is no kind of objective measure so far, right? So, for example, in classification. We saw that, hey, you know, maybe we want to
+minimize the training loss. Maybe that's not always good because of overfitting. So we have a regularization. Right?
+Is there an objective function that we are trying to minimize over here?
+So there are now a whole bunch of other clustering methods
+unlike the ones that I have specified so far where there is actually an objective function.
+So let me give you a very common and popular
+objective function that is used to judge the quality of the clustering.
+Okay, so let me just write it down. And some of you might have seen it.
+I equals one through. K, okay, so objective. Function 4 K clusters.
+So suppose you are given. You know, K
+clusters, each cluster being the set of points.
+Then I'm going to measure the
+width or scatter of each cluster.
+So if X belongs to Ci.
+I'm going to say that this is a measure of the cluster. I okay, so this is.
+you know. Sometimes you can call it scatter or with off close to our okay.
+And the smaller this is the better the clustering is.
+And then you basically do it over all I to K. So one of the things that of course, you should realize is that when I talk about clustering it is a disjoint partitioning
+of the points. So so there is no overlap you can define. You can work with
+things like overlapping, clustering where
+data point might belong to 2 clusters. But for now we are not talking about there being any overlap.
+Okay, so am I.
+Yes, centroid or mean off.
+See I.
+And this is, let's call this J, because we'll need to refer to it.
+This is one of the commonly used objective functions.
+Clustering is actually a very hard problem, right? If you think about it. When we looked at classification, we, you know, so far
+in logistic regression, Svm's least squares regression.
+All our loss functions were convex.
+And so we can actually find the global minimum of the supervised learning objectives
+when it turns out that even this simple objective, you know, this is very hard to find the global minimum. So all the algorithms will end up being
+heuristics, right? Because there's just a exponential number of partitions of a set.
+And it's really not possible to find in polynomial time the minimizer of these objective functions.
+But let's see how we can get a algorithm that is guided by an objective function
+to get to a heuristic, which is, you know, at least you can reason about it. Okay, so one goal we can have.
+Okay is well, I mean the ultimate goal. Let me write that down, find clustering into K clusters that
+minimizes minimizes this objective.
+Okay?
+So like, I said, this is a very hard problem. This is
+an Np-hard problem. So we cannot. Actually, we'll not really be able to get any polynomial time algorithm to give us the
+solution.
+And later on we'll see that there's a more direct method which does which does not do agglomeration, but actually divides the data set. So it's a partitional algorithm, right? It's very famous. It's called the K-means
+algorithm. So we'll come to that later in this class. But right now, let's look at agglomerative clustering.
+And let's see if I can actually take my agglomerative, clustering method and get an algorithm that greedily optimizes
+algorithm that greedily optimizes the objective.
+Okay? Well, what do I mean by that? Right? At every step of the algorithm
+we have this, we are basically merging 2 clusters into one.
+So we can retain the same structure
+so still agglomerative, still hierarchical, agglomerative. But maybe what I can do is this criterion for find the nearest pair of distinct clusters.
+Right? I can actually be a little bit more principled about that. And say that.
+let me try to minimize J. So what do I mean? Okay, suppose I have cluster CI
+let me call its width or quality
+or objective function as JI.
+And that's like I designed before. It's exactly this quantity.
+Okay, so it's, I, sorry X belongs to Ci X, minus MI square.
+okay? And I'm just emphasizing that. You know, this is the 2 norm. That's what is typically used.
+Then I have. Jl, which is the edit cluster
+X minus ML.
+Square.
+Okay, now, suppose we merge. Ci and Cj.
+okay, then we'll get a new meme. Right?
+So remember, this is the mean of cluster. Ci.
+This is the mean of cluster. Cl, okay, but the new new means.
+So remember, so, so just to make sure that you understand or just to give the details right am I?
+Is equal to summation of X. Belongs to sorry
+summation of X. Such that X belongs to Ci.
+and it's 1 divided by Ni.
+And Mj. Is equal to one divided by Nj. So it's the arithmetic mean, X belongs to cj.
+okay, well, when I merge this cluster, CIN, cl, actually, not. J,
+okay, then the new mean will be. Let's see, let's call it MI.
+At right. It'll be the summation of all the points.
+And now the merge cluster right?
+So I can write it as summation of XX belongs to CI.
+Okay, and X belongs to Cj.
+and one divided by Ni, plus Nj.
+right. But I can also write it as in terms of
+MI and ml, okay, so
+here's let me write it out first, st NIMI plus NLML.
+So if you just think about it, this is now getting the summation of all the points.
+This part right? Ni times mi is equal to summation of all the X's
+and and Lml is the summation of all the X's in cluster L,
+and the total number of points is, Ni.
+Ni plus. Nl.
+okay, so that's the new mean.
+And I can actually write it. Let me rewrite it in a way that will make it easy for us to do the manipulation that I want to do right. So I can write it as a modification of Mi.
+okay? And so what I can essentially do is.
+maybe I'll just write it out right? So if I
+if I do the following, and I,
+MI plus nlmi. So I'm just adding, Nlmi plus NLML.
+Minus Nlmi. So I haven't changed anything.
+I've just written it like this.
+I've just added this and subtracted this so I haven't made any change, but that gives us Ni plus nl mi.
+and I can divide it so I can write it as MI, plus
+what do I have over here.
+Nl.
+ML. Minus MI divided by Ni, plus Ni.
+Okay.
+And similarly, I can write it as a modification of Ml.
+okay, and it'll be ML plus Ni divided by Ni plus nl, MI minus m.
+So there are 2 different ways that I can write it.
+Okay before merging.
+Okay, my objective is JI. Plus JL.
+For cluster I and cluster L.
+New objective after merging. So suppose we merge Ci and cl right after merging
+is going to be. The following summation of X belongs to Ci.
+X. Minus M. Sorry too much in a hurry.
+X. Minus MI. Hat square plus summation of X minus M.
+I. Hat. Same thing, except here the summation is over. Cluster. L,
+okay.
+And what I can then do is I can substitute this.
+Okay, remember, MI had, is this value. So in the 1st term, what I'll do is
+so there's a lot I have to write. So let me start
+over here. Oh, maybe not that much.
+So I can write it as summation of X belongs to Ci.
+and you'll see why I'm doing it in a minute. So MoD
+norm of x minus, and I can substitute MI
+minus nl divided by Ni plus nl ML minus MI.
+And then on the other side.
+I can do summation of X minus. So what I am doing is, you know, I had
+basically substituted this over here.
+And now I am substituting this over here.
+Okay? And it is ML,
+minus Ni, divided by Ni plus nl, MI minus ml square.
+Okay? So that's that's the change.
+That's the new objective function.
+Okay?
+And now, what I will do is I'll basically just use the following right? Which is the norm of a minus B square.
+The 2 norm is equal to a minus B transpose a minus B
+is equal to norm of a square plus norm of B squared
+minus 2 times A transpose. B,
+so I'm basically going to apply this
+over here. So let me do that algebra.
+Okay, so be patient.
+So I can do this. I have this. This is corresponds to my.
+This corresponds to my A, this corresponds to my B, okay, so I have
+x minus MI square plus
+b squared, which is NL. Divided by Ni plus nl square
+times. Ml, minus MI square.
+okay? And then I have this, 2 of a transpose. B,
+so 2 of this transpose times, this transpose this.
+So minus 2 times x minus MI transpose ML. Minus MI,
+okay. And then I have this term.
+So let me do that. X belongs to Cl.
+X, minus M.
+L.
+Square plus.
+So remember, all this is within the summation sign.
+Similarly over here.
+Okay, so I have Ni divided by Ni plus nl square.
+Please keep me honest in case I make a mistake, which is very probable.
+Okay? And then I have 2
+times X minus ML. Transpose MI. Minus Ml.
+now notice the following, that over here. This is a sum summation of our all the points right?
+This is just JI.
+This quantity, right along with this summation, is just. Jr, so I can write this 1st term as Ji.
+okay. And why don't I do the following same thing over here this term?
+This term is JL.
+So I have.
+JI, plus JL.
+What about the other terms? Well, the other terms are a little bit more complicated.
+Okay.
+But notice this term over here.
+This Ml. Minus MI is actually constant for the summation sign, and if you think about it.
+summation of X minus MI.
+X. Belongs to Ci is actually equal to 0.
+Because that's actually the very definition of am I right that MI.
+Is equal to one divided by Ni. Of summation of X.
+So since that is 0,
+okay, since that is 0, you know from
+here onwards. Right? So this because of this.
+this whole summation sign will be 0.
+This is equal to 0. And similarly.
+this term, this whole term is going to be equal to 0.
+Is that clear?
+Okay, so hopefully, it's clear that's the definition of mi, right? So because if I
+if I write this out, summation of XX belongs to ci.
+right minus NIMI equal 0.
+So this is that mi is equal to one by mi summation of XX belongs to C. And I. So the mean always has this property that X minus MIX, minus mean
+is going to be 0 when I sum it over all the points.
+Okay, so let's so we've been able to delete these.
+remove these quantities. So now I have this. So remember that this is now
+independent of X belong to Ci. So each term will get added, and I times so it'll be
+NINL. Squared, divided by Ni plus NL squared ML.
+Minus MI square. So that's this term.
+and then this term will give us
+nl, Ni squared, divided by Ni plus nl square MI minus ML.
+Square. So if I look at this.
+okay, it has this in common.
+So I can write this as
+NINL, I can take this out common. Ni plus NL
+square, and then I get, and also ml, minus MI is common.
+and what I get is NL plus Ni nl from here, and Ni from here.
+Okay. And since I have nl plus Ni here, it cancels out. So this is JI plus jl.
+plus NINL divided by Ni plus ml, MI minus MJ.
+Let's quit.
+So notice what happens right whenever you merge 2 clusters. My width is actually going to increase
+right? Because it's a bigger cluster.
+Right?
+So when I'm merged, Ci and cl, I get this increase
+right? So I can say that this is my distance measure.
+or the square root of this. So d opt.
+So when you try to optimize, the subjective function
+is square root, NINL, divided by Ni plus nl, times, MI minus. Mj.
+okay, so this is another distance measure.
+And if you look at it
+well, it's actually kind of close to some of the heuristics. So one heuristic we talked about right? Which was
+this one over here?
+Here we were doing just mi and mj.
+but what we've seen is that if we
+say that this is my objective function, that I want to try to minimize, that's the definition. In some sense we are positing for the quality of a cluster.
+Then
+you're vision.
+The yep lightly modified a dual which is
+okay, like I said, I'm not going to spend a whole lot of time talking about clustering. There's a question in the chat.
+Is he cutting out for anyone else? I see. Am I cutting out.
+Yes, a bit.
+So what's happening.
+Visible.
+A cursor is not visible when you point out to.
+Oh, really, okay.
+yeah, sorry. I'm actually using a different laptop today. It's a slightly different arrangement. And I have my.
+usually what I have is, I have my ipad connected to my laptop to my usual laptop
+But today, actually, I've set it up so that I have 2 different connections.
+So one from my ipad and one from my laptop. So apologies if you're seeing kind of a little bit of breaking up or cutting out.
+But you know, I'm just working with a different laptop today. So hopefully, it's not too bad, and looks like from the comments that maybe it's only sometimes when it gets worse. I did get a notification on my laptop saying, or on my ipad, saying there was a low bandwidth connection for some time, so it could be that, you know, it was a momentary issue.
+Okay? So well, we've seen that.
+you know, we've seen we
+the definition of a or one definition of a good clustering. Right? So let's let's now talk about
+not agglomerative algorithms. But I think algorithms which are.
+you know, quite popular, you know, partitional algorithms.
+Okay?
+And these are sometimes called top down clustering.
+or as opposed to bottom up clustering. Which was the agglomerative algorithm.
+Okay? So there's a very popular method which
+you know any machine learning students should know about.
+And that's called the K-means algorithm.
+And even in deep learning, in various aspects of deep learning. Sometimes you use k-means to either preprocess the data, or do you know some something else? So it's it's it's actually a good
+method to know about.
+So sometimes when people talk about K. Means. So, as the name says, it's, you know, trying to get K clusters, and it uses means or centroids which we've already done, even in the context of agglomerative
+methods.
+But the K-means algorithm is going to be a divisive or sorry. Maybe I shouldn't use that word. But a top down. Clustering method, right? Divisive as in it, breaks things up into multiple parts, right or partitional. Right? And then there is a K-means objective.
+And you should actually realize that there's a difference between them.
+So the K-means objective function is exactly what I mentioned below before.
+It's exactly the same as over here.
+Okay, so let me just write it again over here.
+K. Means objective is J is equal to
+summation of. I equals one through K.
+Summation of X belong to Ci X minus MI square.
+Okay? And remember, just remind you, Xi belongs to rd.
+okay, okay.
+And these are quite different. So the K-means algorithm tries to directly minimize the K-means objective.
+But like I said, the K-means objective is
+is a hard objective to optimize. It turns out that any, that it's an Np complete problem like this
+method that we talked about. The agglomerative was only using this objective in merging the clusters.
+But the key means method actually
+tries to directly optimize this. So let's see how it does it. Okay? And first, st let me just kind of give the algorithm. It's very, you know, in a way somewhat intuitive. Okay, so let me give the K-means algorithm first.st
+Okay?
+So it starts with some partitioning
+of the data into K. Clusters.
+K. Clusters. Okay, and let me call them c. 1.
+And with superscript I'll note, I'll denote, you know, in some sense, the iteration number.
+So right at the beginning, it is.
+These are the clusters.
+Okay, so remember, there are K clusters.
+Okay, and I'll set T equal to 0. And T is basically the superscript that I'm using. Okay.
+given these clusters.
+Okay, you already have a clusters. What it does is it computes the so it calculates the mean centroid
+of each cluster.
+CID, okay, so I have clusters at iteration. T,
+and I basically compute the mean of the Iet cluster.
+Okay? And I'll put the superscript T.
+One divided by NIT.
+Summation of XX belongs to
+CIT, okay. And remember that Ni
+is just the number of elements in the cluster.
+All right.
+Okay, so I basically do this, for I equals
+1, 2 K, there are K clusters.
+So given a partitioning, I compute the means?
+Okay?
+And then each data point asks the question, okay.
+which is, what mean? Am I closest? What mean? Vector? Am I closest to?
+And then, depending upon the answer, it reassigns itself
+to the nearest cluster centroid. Okay, so let me write out what I said, for each X
+find it's nearest, so find its I'll just call it the Cluster index.
+So let me call I star as the cluster index. So the I Star X,
+I star 4 point X, I'm going to look at the all the distances X minus MI
+from all the K clusters. And I'm going to take the minimum
+and the minimum index is the argument.
+Okay? And I'll illustrate this. And then what it does is, if, then, updates the clusters.
+CIT.
+Is basically all the points X such that the cluster index is I, and then it repeats, steps
+2, 3, and 4 until and we can. We will talk a little bit about it until convergence.
+And the convergence is typically when points, maybe they don't move at all from one cluster to another.
+Or you could have some other criteria.
+Okay, so this is the algorithm
+kind of simple algorithm, but not that
+easy to always understand what is going on. Right? So let me kind of just take
+Let me just take an example where you have this.
+Well, let me make it a little closer.
+Okay?
+Or so. I'm making it that far. So how many clusters do you see?
+Most people will say that, you know it's 2 clusters, one here, one here, right.
+But suppose my clustering at some that time. T. So let me just also draw it over here.
+right? Which is, let me see if I can actually do this.
+Okay, and I copy it.
+I paste it. Oh, I did it.
+Okay, so
+okay, so at time, T, at iteration T,
+and what we'll see what happened that iteration, t plus one and iteration. T, suppose that my clustering was
+this.
+Okay, so this is the I cluster at iteration T,
+and this is the Jth cluster at iteration. T,
+okay, let's just think about the algorithm? Right? So the algorithm, I have some clustering.
+and it computes the mean of each cluster.
+So what is the mean of this cluster? Ci.
+Well, it'll be somewhere over here, right?
+So this would be, maybe, you know, maybe I'm being generous. Maybe it's actually a little bit.
+It's the average of all the points right in this cluster. So maybe it'll be a little bit over here.
+Okay, so this will be MIT.
+And this will be Mjt.
+So step 2 is done, and then step 3.
+So for each point.
+So let's say we have this point, what is the clearer centroid?
+Is this right?
+So it will look at the distance from here to here, the distance from here to here.
+and it'll just say, Okay, this I, Star X is equal to I,
+I Star X, equal to I, because this distance is smaller than this distance.
+And so for all these points it'll be the same.
+What about this point?
+It computes the distance to Mi
+computes the distance to MJ.
+And so in this case the distance to Mj is actually smaller.
+Okay, so what will happen is at this point, I, Star X.
+Will become equal to J, which means that. And and over here. All these points will also have
+this centroid being closer than this centroid.
+So add the next step.
+Step 4 will give these clusters.
+Okay, so this is an example where this algorithm actually works doesn't always work.
+Because, like I said, it's an Np-hard problem.
+But in this case it gives us the right right? Answer
+any questions on the method so far.
+Okay, now, the question is, what does this method do? Right? I mean, yeah, we saw in this particular example that it does the right thing.
+But what can we say in general? Okay, so K-means has a property.
+Okay? Which is that K means monotonically
+decreases
+the objective function.
+And remember, my objective function was J,
+so you know, I can. I can just say, property.
+Okay, that doesn't mean that it gets to the global minimum. It can be a descent method. But it may not reach the global minimum. And that's what happens over here. Okay, so let's see. Okay, so what we are saying is
+that jt, the objective function at iteration T is
+summation of, I equals one to K summation of
+X below. I'm just using the definition of J,
+okay. And the claim is that JT. Plus one
+is less than equal to jt, and that's the question. Mark.
+Okay, so let me give you a proof.
+Now, that is indeed the case.
+Okay, let me use my newfound power and copy this.
+Yep, copy paste perfect.
+Okay, so jt, is a definition. Okay?
+And now let's see, I have this step in the method, right? Which is that
+at T plus one iteration, or when you found the cluster index, then it is the minimizer
+minimum among all the distances to the centroids.
+Okay?
+So what you can then see is that if I replace this, okay, bye.
+So I do the same kind of thing.
+except I will change this X minus MI to be X minus MI. Star X.
+The same ordering of points. Summation of I equals one through T.
+Summation of X belongs to CIT.
+So I'm considering all the points. X's in the same order as they were done before.
+but instead of this, I've replaced it with this. But since I, Star X
+is the index of the closest centroid.
+I know that this inequality holds.
+Is that clear?
+Right? I've just replaced I
+with I Star X and remind, remember that I Star X is defined as the index of the nearest centroid. Okay, so this is by step 3
+of the gaming algorithm.
+Okay, now, I'm just going to rearrange everything. Okay? So instead of writing it in terms of
+this, was, I equal to one to K, okay, so
+what I will do is, you know, I'm still considering K clusters. But I'm actually now going to consider the order of the points according to the cluster at
+step t plus one.
+Okay? So that's all I'm doing.
+Okay. So I'm just, I just rearranged all everything.
+Okay?
+And now because of the property. So you must think, okay, why were we taking the mean
+of all the points? Why not do something else? Right? I mean.
+maybe I could have done some other statistics like Median or something, or whatever you want to do right, some other operation. But
+if I have a collection of points.
+okay. So if I have a collection of vectors right.
+Suppose I have a collection of vectors? I have y, 1 y, 2 YN,
+and I look for I try to solve this problem, minimize
+Z summation of I equals one through N.
+YI. Minus z, then the optimal Z is just the mean.
+So the mean is the best representative. And this is the reason why.
+That's why it's kind of like the center of gravity or so, right?
+So because of this property.
+If I now take this and I rewrite the right hand side, as I equals one through K.
+Okay. X. Belongs to ci, t plus one. Remember, ci t plus. One is defined as all the points
+I star X equals. R, yeah. So now I am recalculating the mean for all these points.
+And because of this property, the new mean, okay, sorry I made a typo. The new mean is MI of T plus one
+this holds.
+And this quantity is exactly J of T, plus one.
+Okay?
+So that completes the proof. Hence, okay, means algorithm.
+So remember, I made a distinction between the K-means algorithm and the K-means objective. Hence the K-means Algorithm monotonically
+minimizes
+the K-means objective function.
+Okay? And then there are other properties that K-means has. So in particular, K-means separates data by linear surfaces.
+Okay, and in particular hyperplanes, and the way to see it is, you know, suppose K. Equals 2.
+If I then look at you, know the locus of all the points which are equidistant to
+locus. Of all the points equidistant
+to m. 1 and M. 2. Sorry m. 1
+and M. 2, right. It'll be x minus m. 1 square equals X minus M, 2 square.
+Okay? And that is the equation of a hyperplane, because the quadratic term will cancel out.
+Okay? So K-means is a kind of a very widely used algorithm.
+it has some nice properties. It also has actually quite a lot of drawbacks. So many times people will.
+Sometimes you can get empty clusters.
+The algorithm. Whenever you run it, it'll give you a different
+result if you change the ordering of the points. But still, it is a very widely used algorithm and something that you know everybody should know about.
+Okay. So that comes to the end of today's lecture on clustering any questions on the material.
+Any heuristic of how to pick a K.
+Oh, yeah, that again is a very, very difficult question. So theoretically, you can come up with different heuristics.
+Practically, it actually becomes very difficult. I actually have done quite a lot of research in that area a long time ago.
+and it's very difficult. So one of the kind of like the heuristics is that you know, as you increase K,
+the objective actually declines right because you are now getting so take the extreme end of N clusters. The objective function will actually be 0.
+Right?
+So the objective declines. And typically, you know, as you so objective function.
+And K, the objective kind of declines like this, and many times people say, Oh, you know you should choose K. To be somewhere around here, which is like the is also called the knee of the curve.
+But in practice this is actually very hard to get it to work. So typically people will just use either they'll know what K. They are looking for, or they'll use some arbitrary K,
+and then, remember, you can always hierarchically divide things
+right? So you can actually get a tree by doing partitions repeatedly.
+Thank you.
+Any more questions.
+Okay, so let me, yeah. Sorry. Was there another question.
+Ask a question about the the previous material, like the Svm.
+Sure.
+The Svm. You know, we can do the kernel trick.
+and therefore the advantage over the perceptrons is that we can do nonlinear, you know, separable problems.
+Yes.
+Is there any way to
+to basically pull off the the kernel trick in the perceptrons?
+That was just one.
+Oh, yeah, you can.
+I haven't thought of it a long time. But yeah, I believe you can.
+I believe you can. But I actually am. Now that I'm
+I may look into it and let you know, but actually, maybe not. Huh!
+Because a perceptron explicitly considers constructs like W. Right.
+Right.
+And the W is in the feature space.
+I remember looking at this a long time ago.
+there may be an alternate algorithm that is like an online version of
+kernel. Svm, because if you think about perceptron it. So so so
+yeah, I mean, I'm going on a little detour. But I'm trying to answer Hormone's question. Right? So it turns out that there is a variant of perceptron called eratron.
+that actually gives you the maximum margin hyperplane.
+Okay, so you can think of that. There is an online Svm algorithm, right? That gives you
+the Svm, which is very, it is like the perceptron.
+Okay? So I'm thinking that there's probably an online version of the Dual Svm
+that actually gives you the maximum margin hyperplane. And there I suspect that you could use the kernel trick.
+because for the primal problem, you see, the thing is that you don't want to explicitly construct the feature space.
+Exactly, because that was.
+Yeah, yeah, that was what? So I but I think so, I think there is.
+There is a there is probably an online kernel, Svm method.
+which is similar to the perceptron. And so what that'll do is construct, alphas! And it will visit each point repeatedly and modify
+the decision right. It won't explicitly construct A. W.
+But you know, honestly, hormos, you know I haven't thought about research in Svms for 10 years, because everything is deep learning. Now.
+Yeah, make sense. Thank you.
+So so I can think about it and get back to you. And actually, you know that kind of concludes this lecture. And you know in the we've already talked about, you know, deep learning a little bit, and the second half of the course will be much more about deep learning, and then you'll also do your projects.
+So just a reminder. Your homework is due on Friday. Please make sure you complete it on time, especially this homework, because you have a midterm coming up next Wednesday. Midterm is
+closed. Book in person. Exam.
+75 min. I've already given you some indications of kind of the questions that will be asked.
+And so that's it. And then from so and remember, next this coming Monday, because you have quite a lot of work. And it. Actually, you know, I'm also traveling. We will not have a lecture on Monday, and we'll make these announcements and send send out a notice.
+Okay, okay, thank you. All. Good luck in submitting your homeworks and good luck in your midterm.
+Thank you.
