@@ -1,0 +1,86 @@
+
+CS391L: Machine Learning — Spring 2025
+Lecture: Perceptron and Support Vector Machines (February 19, 2025)
+====================================================================
+
+THE GEOMETRY OF CLASSIFICATION
+-------------------------------
+For binary classification, the decision boundary is a hyperplane:
+    wᵗx + b = 0
+
+Signed distance from a point xᵢ to the hyperplane:
+    d(xᵢ) = yᵢ(wᵗxᵢ + b)
+
+If d(xᵢ) > 0 ⇒ correctly classified, else misclassified.
+
+PERCEPTRON ALGORITHM
+---------------------
+Goal: Find a separating hyperplane for linearly separable data.
+
+Perceptron Criterion:
+    Minimize the sum over misclassified examples:
+    D(w) = −Σ yᵢ (wᵗxᵢ)   over misclassified (yᵢ(wᵗxᵢ) ≤ 0)
+
+Algorithm:
+1. Initialize weights w = 0
+2. Repeat until convergence:
+   For each training sample (xᵢ, yᵢ):
+       If yᵢ(wᵗxᵢ) ≤ 0:
+           w ← w + η yᵢ xᵢ
+
+- This is **stochastic gradient descent**, not batch GD.
+- Guaranteed to converge for linearly separable data.
+- May require many updates.
+- Sensitive to data order and fails for non-linearly separable data.
+
+SUPPORT VECTOR MACHINES (SVM)
+------------------------------
+Key idea: Find a hyperplane that not only separates the data but **maximizes the margin**.
+
+Let margin = 1 / ‖w‖
+Objective:
+    Minimize: ½‖w‖²
+    Subject to: yᵢ(wᵗxᵢ + b) ≥ 1 for all i
+
+This leads to a convex **quadratic optimization problem**.
+
+PRIMAL FORMULATION (Hard-margin SVM):
+--------------------------------------
+    min ½‖w‖²
+    s.t. yᵢ(wᵗxᵢ + b) ≥ 1 for all i
+
+DUAL FORMULATION:
+------------------
+Introduce Lagrange multipliers αᵢ ≥ 0 and construct the Lagrangian.
+
+L(w, α) = Σ αᵢ − ½ Σ Σ αᵢ αⱼ yᵢ yⱼ xᵢᵗ xⱼ
+
+Subject to:
+- Σ αᵢ yᵢ = 0
+- 0 ≤ αᵢ ≤ C (for soft-margin SVM)
+
+Optimal w is given by:
+    w = Σ αᵢ yᵢ xᵢ
+
+Support vectors are the data points for which αᵢ > 0.
+
+GENERAL CONSTRAINED OPTIMIZATION:
+----------------------------------
+For a general problem:
+    min f(x) subject to:
+        gᵢ(x) ≤ 0, hⱼ(x) = 0
+
+We define the Lagrangian:
+    L(x, λ, μ) = f(x) + Σ λᵢ gᵢ(x) + Σ μⱼ hⱼ(x)
+
+Strong duality holds if:
+    - Dual and primal feasible solutions exist
+    - Complementary slackness holds
+
+SVM optimization falls into this framework and benefits from dual formulations.
+
+SUMMARY:
+---------
+- Perceptron is simple, online, and converges for separable data.
+- SVM introduces the concept of margin maximization for better generalization.
+- SVMs can be solved using primal or dual optimization, with strong duality guarantees.

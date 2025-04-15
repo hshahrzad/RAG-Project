@@ -1,0 +1,76 @@
+
+CS391L: Machine Learning — Spring 2025
+Lecture: SVD and Regression (January 27, 2025)
+==========================================================
+
+SINGULAR VALUE DECOMPOSITION (SVD):
+-----------------------------------
+For a matrix A ∈ ℝ^{m×n}, the SVD is:
+    A = U Σ Vᵗ
+
+Where:
+- U ∈ ℝ^{m×m} contains left singular vectors (orthonormal)
+- V ∈ ℝ^{n×n} contains right singular vectors (orthonormal)
+- Σ ∈ ℝ^{m×n} is diagonal with singular values (σ₁ ≥ σ₂ ≥ ... ≥ 0)
+
+Properties:
+- UᵗU = I, VᵗV = I
+- AᵗA = V ΣᵗΣ Vᵗ ⇒ eigenvalue decomposition of AᵗA
+- AAᵗ = U ΣΣᵗ Uᵗ ⇒ eigenvalue decomposition of AAᵗ
+
+The singular values are the square roots of the eigenvalues of AᵗA or AAᵗ.
+
+THIN OR REDUCED SVD:
+---------------------
+If rank(A) = r < min(m, n), we can write:
+    A = U_r Σ_r V_rᵗ
+Where:
+- U_r ∈ ℝ^{m×r}
+- Σ_r ∈ ℝ^{r×r}
+- V_r ∈ ℝ^{n×r}
+
+FUNDAMENTAL SUBSPACES OF A:
+----------------------------
+SVD provides orthonormal bases for:
+- Column space of A: span{u₁, ..., u_r}
+- Row space of A: span{v₁, ..., v_r}
+- Null space of A: span{v_{r+1}, ..., v_n}
+- Null space of Aᵗ: span{u_{r+1}, ..., u_m}
+
+SVD IS A POWERFUL TOOL:
+------------------------
+- Used in numerical analysis, statistics, and machine learning
+- Called the "Rolls Royce and Swiss Army Knife" of decompositions
+
+TRUNCATED SVD AND LOW-RANK APPROXIMATION:
+------------------------------------------
+- For any k < r, A_k = U_k Σ_k V_kᵗ is the best rank-k approximation to A
+- Minimizes Frobenius norm: ‖A − A_k‖_F is minimized
+
+LEAST SQUARES USING SVD:
+-------------------------
+Given system Xw = y, with SVD: X = U Σ Vᵗ
+
+Solution:
+    w = V Σ⁻¹ Uᵗ y
+
+When X is not full rank or ill-conditioned, SVD allows a stable solution.
+
+GEOMETRIC INTERPRETATION:
+--------------------------
+- Project y onto column space of X via U
+- Transform using Σ⁻¹
+- Rotate into solution space using V
+
+Projection:
+    X X⁺ y = U Uᵗ y  (X⁺ is the pseudo-inverse)
+
+Orthogonal projection captures the component of y in the range space of X.
+
+------------------------------------------------------------
+SUMMARY:
+---------
+- SVD decomposes any matrix into orthogonal components
+- Provides insights into structure, rank, and stability
+- Enables optimal low-rank approximations
+- Offers stable least-squares solutions for regression

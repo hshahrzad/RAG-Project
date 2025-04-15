@@ -1,0 +1,94 @@
+
+CS391L: Machine Learning — Spring 2025
+Lecture: Probability Theory Background (February 5, 2025)
+=========================================================
+
+JOINT DISTRIBUTIONS:
+---------------------
+For variables X and Y, the joint distribution is:
+    p(X, Y)
+
+MARGINALIZATION (Sum Rule):
+----------------------------
+    p(X) = Σ_Y p(X, Y)
+    p(Y) = Σ_X p(X, Y)
+
+CONDITIONAL PROBABILITY:
+-------------------------
+    p(Y | X) = p(X, Y) / p(X)
+    p(X | Y) = p(X, Y) / p(Y)
+
+BAYES’ THEOREM:
+---------------
+    p(Y | X) = [p(X | Y) * p(Y)] / p(X)
+    posterior ∝ likelihood × prior
+
+INDEPENDENCE:
+-------------
+- X and Y are independent if:
+    p(X, Y) = p(X) * p(Y)
+- Conditional independence:
+    p(X | Y, Z) = p(X | Z)
+
+EXAMPLE (Two boxes with fruits):
+--------------------------------
+- Box A: 40% apples, Box B: 60% apples
+- Use Bayes’ theorem to infer which box a fruit came from based on observation
+
+CONTINUOUS VARIABLES:
+----------------------
+For X ∈ ℝ, use probability density functions (pdfs):
+    p(x) ≥ 0
+    ∫ p(x) dx = 1
+
+EXPECTATION:
+-------------
+- E[f(x)] = ∫ p(x) f(x) dx
+- E[x] = mean (μ)
+- E[x²] gives second moment
+- Variance: Var(x) = E[(x - μ)²] = E[x²] - (E[x])²
+
+PROPERTIES:
+-----------
+- Linearity: E[aX + b] = aE[X] + b
+- E[f(x) + g(x)] = E[f(x)] + E[g(x)]
+
+COVARIANCE:
+-----------
+cov(X, Y) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y]
+
+If X and Y are independent ⇒ cov(X, Y) = 0
+
+CORRELATION:
+------------
+- corr(X, Y) = cov(X, Y) / (σ_X σ_Y)
+- Zero correlation if X and Y are independent
+
+MULTIVARIATE GAUSSIAN DISTRIBUTION:
+-----------------------------------
+- Mean vector μ = E[X]
+- Covariance matrix Σ = E[(X - μ)(X - μ)ᵗ]
+- Σ is symmetric and positive definite
+
+Definition:
+    X ∼ N(μ, Σ)
+
+Density:
+    p(x) = (1 / (2π)^{d/2} |Σ|^{1/2}) * exp[−½(x − μ)ᵗ Σ⁻¹ (x − μ)]
+
+If Σ is diagonal ⇒ variables are uncorrelated
+
+EIGENVALUE DECOMPOSITION:
+--------------------------
+- Σ = VΛVᵗ
+    - V: matrix of eigenvectors
+    - Λ: diagonal matrix of eigenvalues
+
+This gives principal axes of Gaussian ellipse.
+
+SUMMARY:
+---------
+- Core rules: sum rule, product rule, Bayes' rule
+- Key tools: expectations, variance, covariance
+- Gaussian: foundational for modeling continuous distributions
+- Multivariate Gaussian: central in high-dimensional ML modeling

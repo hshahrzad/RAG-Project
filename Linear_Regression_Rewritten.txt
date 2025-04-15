@@ -1,0 +1,79 @@
+
+CS391L: Machine Learning — Spring 2025
+Lecture 1: Linear Regression (January 15, 2025)
+Instructor: Inderjit Dhillon
+======================================================
+
+WHAT IS REGRESSION?
+------------------------------------------------------
+Regression is the task of predicting a real-valued output y given input features x.
+
+Examples:
+- Predicting prostate-specific antigen (PSA) levels from medical measurements
+- Predicting user ratings (e.g., Netflix) for unseen movies
+- Predicting whether an email is spam (if output y is categorical → classification)
+
+------------------------------------------------------
+LINEAR REGRESSION
+------------------------------------------------------
+Assume a linear relationship:
+    y ≈ w₀ + w₁x₁ + w₂x₂ + ... + w_d x_d = wᵗx̅
+Where x̅ includes a bias term: x̅ = [1, x₁, ..., x_d]ᵗ, w ∈ ℝ^{d+1}
+
+Training data: {(x₁, y₁), (x₂, y₂), ..., (x_n, y_n)}
+Goal: Find w that minimizes prediction error.
+
+Objective:
+    Minimize sum of squared residuals:
+    F(w) = Σ (yᵢ - wᵗxᵢ)² = ‖Xw - y‖²
+
+Where:
+- X ∈ ℝ^{n×(d+1)} is the design matrix (rows = x̅ᵢᵗ)
+- y ∈ ℝ^n is the vector of outputs
+
+------------------------------------------------------
+NORMAL EQUATIONS
+------------------------------------------------------
+Set gradient of F(w) to zero:
+    ∇F(w) = 2XᵗXw - 2Xᵗy = 0
+    ⇒ XᵗXw = Xᵗy
+
+This is a linear system of (d+1) equations in (d+1) unknowns.
+
+If XᵗX is invertible:
+    w = (XᵗX)⁻¹ Xᵗy
+
+------------------------------------------------------
+GEOMETRIC INTERPRETATION
+------------------------------------------------------
+- The solution w is a linear combination of the columns of X.
+- Projection of y onto the column space of X minimizes the residual ‖y - Xw‖².
+
+------------------------------------------------------
+SOLVING THE NORMAL EQUATIONS
+------------------------------------------------------
+Direct methods:
+- Gaussian Elimination (LU Decomposition)
+- Cholesky Decomposition (XᵗX must be symmetric positive definite)
+  Steps:
+    1. Solve Lz = b using forward substitution
+    2. Solve Lᵗw = z using backward substitution
+
+Computational cost: O(nd² + d³)
+
+------------------------------------------------------
+NUMERICAL ISSUES
+------------------------------------------------------
+- If XᵗX is close to singular (poorly conditioned), direct inversion is unstable.
+- Better alternatives:
+    - QR Decomposition of X
+    - Singular Value Decomposition (SVD)
+      Most accurate but computationally expensive
+
+------------------------------------------------------
+SUMMARY
+------------------------------------------------------
+- Linear regression models continuous targets using a linear function of inputs.
+- Objective is to minimize squared error between prediction and true outputs.
+- Normal equations give an analytical solution, but require care with conditioning.
+- QR and SVD offer numerically stable alternatives when XᵗX is ill-conditioned.

@@ -1,0 +1,61 @@
+
+Clustering - Lecture Notes (March 5, 2025)
+===========================================
+
+Topic: **Unsupervised Learning and Clustering**
+
+In unsupervised learning, we are given data points x in R^d, and we aim to find hidden structures in the data — such as clusters.
+
+------------------------------------------------------------
+Agglomerative Clustering
+------------------------------------------------------------
+
+This is a bottom-up hierarchical clustering algorithm. It starts with each point in its own cluster and merges the closest pairs until a stopping criterion is met.
+
+Algorithm Steps:
+1. Start with each data point as a separate cluster.
+2. While there is more than one cluster:
+    a. Find the pair of clusters (Ci, Cj) that are nearest to each other.
+    b. Merge them into a new cluster C.
+    c. Delete Ci and Cj from the list of clusters.
+3. End when desired number of clusters (k) is reached.
+
+Measures of Cluster Nearness:
+- **Single Link**: Minimum distance between any two points from the two clusters.
+- **Complete Link**: Maximum distance between any two points from the two clusters.
+- **Mean (Average Link)**: Distance between the centroids of the two clusters.
+
+Note:
+- Single Link can result in long, chained clusters.
+- Mean Link is based on cluster centroids.
+
+Objective:
+- Find a clustering into k clusters that minimizes an objective function J.
+
+------------------------------------------------------------
+k-Means Clustering
+------------------------------------------------------------
+
+k-Means is a partitional clustering algorithm that aims to minimize intra-cluster variance.
+
+Objective Function:
+J = sum over all clusters of sum over all points in cluster of (distance from point to cluster mean)^2
+
+Algorithm:
+1. Initialize k cluster centers (means) randomly.
+2. Repeat until convergence:
+    a. Assign each point to the nearest cluster center.
+    b. Update each cluster center as the mean of points assigned to it.
+3. The objective function J decreases monotonically with each iteration.
+
+Notes:
+- The algorithm stops when the cluster assignments no longer change.
+- The final clusters are separated by linear boundaries (hyperplanes).
+- For k = 2, the boundary is the set of points equidistant to the two means (i.e., a hyperplane).
+
+Mathematical Note:
+- The condition "||x - mi|| = ||x - mj||" defines a hyperplane separating clusters i and j.
+
+Summary:
+- Agglomerative Clustering builds a hierarchy of clusters, useful for data with a nested structure.
+- k-Means provides a flat clustering optimized for compact, spherical clusters separated by linear boundaries.

@@ -1,0 +1,71 @@
+
+CS391L: Machine Learning — Spring 2025
+Lecture: Regularization in Regression (January 29, 2025)
+==========================================================
+
+LINEAR REGRESSION REVIEW:
+--------------------------
+Prediction: 
+    y ≈ w₀ + w₁x₁ + w₂x₂ + ... + w_d x_d = wᵗx̅
+
+For polynomial regression, we can represent features as:
+    z = [1, x, x², ..., x^M]
+Then regression is linear in z:
+    y ≈ wᵗz
+
+SOLUTION FOR w (Closed Form):
+-----------------------------
+Using matrix notation:
+    X ∈ ℝ^{n×d}, y ∈ ℝ^n
+    w = (XᵗX)⁻¹ Xᵗy
+
+Predicted outputs on training data:
+    ŷ = Xw = X(XᵗX)⁻¹ Xᵗy
+
+SINGULAR VALUE DECOMPOSITION (SVD) OF X:
+-----------------------------------------
+Let X = UΣVᵗ, then:
+    w = V Σ⁻¹ Uᵗ y
+
+ISSUE:
+------
+- Small singular values (in Σ) can inflate the effect of noise
+- This leads to overfitting and instability in solution
+
+REGULARIZATION TO THE RESCUE:
+==============================
+1. **Ridge Regression (L2 Regularization)**:
+    Minimize:
+        ‖Xw − y‖² + λ‖w‖²
+
+- Adds penalty on large weights
+- Equivalent to soft-shrinking small singular values
+- Solution becomes:
+    w = (XᵗX + λI)⁻¹ Xᵗy
+
+2. **Lasso (L1 Regularization)**:
+    Minimize:
+        ‖Xw − y‖² + λ‖w‖₁
+
+- Encourages sparsity (i.e., many coefficients w_j = 0)
+- Leads to **parsimonious models**
+- Equivalent constrained form:
+    min ‖Xw − y‖²  subject to ‖w‖₁ ≤ t
+
+GEOMETRIC INTERPRETATION:
+--------------------------
+- Ridge (L2): contours are circular (smooth)
+- Lasso (L1): contours are diamond-shaped, promoting sparse solutions at corners
+
+OTHER INSIGHTS:
+---------------
+- Ridge = soft shrinkage
+- Truncated SVD = hard shrinkage (discards smallest components)
+- Use Lasso when feature selection is desirable
+
+------------------------------------------------------------
+SUMMARY:
+---------
+- Regularization helps prevent overfitting by constraining model complexity
+- L2 (Ridge): smooths the model, good for correlated features
+- L1 (Lasso): encourages sparsity, performs feature selection

@@ -1,0 +1,104 @@
+
+CS391L: Machine Learning — Spring 2023
+Lecture 2: Linear Algebra Review (January 18, 2023)
+Lecturer: Inderjit Dhillon
+==========================================================
+
+KEYWORDS:
+Vectors, Matrices, Eigenvalue Decomposition, Singular Value Decomposition (SVD)
+
+----------------------------------------------------------
+1. NOTATION
+----------------------------------------------------------
+- ℝ: Set of real numbers
+- ℂ: Set of complex numbers
+- ℝ^d: d-dimensional real vectors (column vectors)
+- ℝ^{m×n}: m by n real matrices
+- x ∈ ℝ^d written as a column vector; xᵀ is its transpose (row vector)
+
+----------------------------------------------------------
+2. VECTOR NORMS
+----------------------------------------------------------
+- Norm ∥x∥ measures the "size" of vector x and must satisfy:
+  1. ∥x∥ ≥ 0 and ∥x∥ = 0 iff x = 0
+  2. ∥αx∥ = |α| ∥x∥
+  3. ∥x + y∥ ≤ ∥x∥ + ∥y∥ (triangle inequality)
+
+Common Norms:
+- Euclidean norm (L2): ∥x∥₂ = sqrt(Σ|xᵢ|²)
+- L1 norm: ∥x∥₁ = Σ|xᵢ|
+- L∞ norm: ∥x∥_∞ = max |xᵢ|
+- Lp norm: (Σ|xᵢ|^p)^{1/p}
+
+Inner product (dot product): xᵀy = Σxᵢyᵢ = ⟨x, y⟩
+
+Cauchy-Schwarz inequality:
+|xᵀy| ≤ ∥x∥ ∥y∥
+
+Orthogonality:
+x ⊥ y ⇔ xᵀy = 0
+
+----------------------------------------------------------
+3. LINEAR INDEPENDENCE
+----------------------------------------------------------
+Vectors y₁, ..., y_n are linearly independent if:
+Σ αᵢ yᵢ = 0 ⇒ α₁ = α₂ = ... = α_n = 0
+
+- span(y₁, ..., y_n): set of all linear combinations
+- Basis: maximal set of linearly independent vectors
+- Dimension: number of vectors in the basis
+
+----------------------------------------------------------
+4. MATRICES, EIGENVALUES, AND EIGENVECTORS
+----------------------------------------------------------
+Matrix A ∈ ℝ^{m×n} maps vectors x ∈ ℝ^n to Ax ∈ ℝ^m
+
+Matrix Norm (2-norm): ∥A∥₂ = max_{x ≠ 0} ∥Ax∥₂ / ∥x∥₂
+- Equals the largest singular value of A
+
+Eigenvalue λ and eigenvector q (q ≠ 0) satisfy: A q = λ q
+- Characteristic equation: det(A - λI) = 0
+- A symmetric ⇒ real eigenvalues + orthogonal eigenvectors
+- Positive definite ⇒ all λ > 0
+
+Eigenvalue Decomposition (EVD):
+A = Q Λ Qᵀ, where Q = [q₁ ... q_n], Λ = diag(λ₁, ..., λ_n)
+Can also be written: A = Σ λᵢ qᵢ qᵢᵀ
+
+As k → ∞: (A^k)x / ∥(A^k)x∥ → q₁ if λ₁ > λ₂ and q₁ᵀx ≠ 0
+
+----------------------------------------------------------
+5. SINGULAR VALUE DECOMPOSITION (SVD)
+----------------------------------------------------------
+Applies to all matrices A ∈ ℝ^{m×n} (m ≥ n)
+
+SVD: A = U Σ Vᵀ
+- U ∈ ℝ^{m×n}, V ∈ ℝ^{n×n} orthogonal
+- Σ = diag(σ₁, ..., σ_n), σ₁ ≥ σ₂ ≥ ... ≥ σ_n ≥ 0
+- U: left singular vectors
+- V: right singular vectors
+
+A = Σ σᵢ uᵢ vᵢᵀ  (sum of rank-1 matrices)
+
+Truncated SVD (rank-k):
+A_k = Σ_{i=1}^k σᵢ uᵢ vᵢᵀ
+- Best rank-k approximation of A under 2-norm
+
+----------------------------------------------------------
+6. FURTHER PROPERTIES
+----------------------------------------------------------
+- A Aᵀ and Aᵀ A are symmetric and positive semi-definite
+
+Theorem 1: A Aᵀ and Aᵀ A have identical non-zero eigenvalues.
+If q is an eigenvector of A Aᵀ, then Aᵀq is an eigenvector of Aᵀ A.
+
+Theorem 2: All eigenvalues of A Aᵀ are non-negative.
+
+Theorem 3: If λ is an eigenvalue of A Aᵀ, then λ^k is an eigenvalue of (A Aᵀ)^k.
+  - (A Aᵀ)^k q = λ^k q
+  - hk = (A Aᵀ)^k h₀ / ∥(A Aᵀ)^k h₀∥ → q₁ (principal component)
+
+----------------------------------------------------------
+REFERENCE:
+- For a classical introduction, see MIT Linear Algebra lectures by Gilbert Strang:
+  http://web.mit.edu/18.06/www/Video/video-fall-99.html

@@ -1,0 +1,92 @@
+
+CS391L: Machine Learning — Spring 2025
+Lecture: Logistic Regression (February 12, 2025)
+==========================================================
+
+GOAL:
+-----
+Learn a function to classify inputs into discrete categories (e.g., spam vs. not spam), especially when outputs are categorical.
+
+LINEAR DISCRIMINANTS:
+---------------------
+We can try to apply a linear model:
+    y = w₀ + w₁x₁ + w₂x₂ + ... + w_d x_d = wᵗx̅
+Where:
+    - x̅ = [1, x₁, ..., x_d] (augmented with bias)
+    - w ∈ ℝ^{d+1}
+
+This linear fit works well for regression, but has limitations in classification — especially when the target variable y is categorical or binary.
+
+WHY NOT LEAST SQUARES FOR CLASSIFICATION?
+-----------------------------------------
+- If we encode classes as indicator vectors or 0/1 values and apply linear regression,
+  the predicted outputs are not constrained between [0, 1].
+- This violates the interpretation of probabilities.
+
+LOGISTIC REGRESSION:
+---------------------
+We model the **probability** of class C₁ given input x as:
+
+    p(C₁ | x) = σ(wᵗx) = 1 / (1 + e^{-wᵗx})
+
+    where σ(z) is the logistic sigmoid function:
+        σ(z) = e^z / (1 + e^z)
+
+    And:
+        p(C₂ | x) = 1 - p(C₁ | x)
+
+For multi-class classification (k > 2):
+    Use the **softmax** function:
+        p(Cᵢ | x) = exp(wᵢᵗx) / Σⱼ exp(wⱼᵗx)
+
+PARAMETER ESTIMATION:
+----------------------
+Let D = {(xᵢ, yᵢ)}, where:
+    - yᵢ ∈ {0, 1} for binary classification
+    - yᵢ = 1 if xᵢ ∈ C₁, and 0 if xᵢ ∈ C₂
+
+The likelihood for the data:
+    L(w) = Πᵢ [p(xᵢ)]^{yᵢ} [1 - p(xᵢ)]^{1 - yᵢ}
+
+The log-likelihood:
+    log L(w) = Σᵢ [yᵢ log p(xᵢ) + (1 - yᵢ) log (1 - p(xᵢ))]
+
+We aim to **maximize log-likelihood** to find optimal w.
+
+NO CLOSED-FORM SOLUTION:
+-------------------------
+There is no analytical solution. Instead, we use numerical optimization:
+
+1. **Gradient Descent** (or Ascent):
+    - Update rule: w ← w + η ∇ log L(w)
+
+2. **Newton’s Method**:
+    - Uses second-order (Hessian) information for faster convergence
+
+3. **Stochastic Gradient Descent (SGD)**:
+    - Scales better to large datasets (O(1) per update)
+
+GRADIENT OF LOG-LIKELIHOOD:
+----------------------------
+The gradient with respect to w:
+    ∇L(w) = Σᵢ xᵢ (yᵢ - σ(wᵗxᵢ))
+
+This is used in the optimization updates.
+
+REGULARIZATION:
+---------------
+To prevent overfitting, add a penalty term:
+    - L2 Regularization (Ridge): λ‖w‖²
+    - L1 Regularization (Lasso): λ‖w‖₁
+
+Final objective becomes:
+    Maximize log L(w) - λ‖w‖² (for L2)
+
+----------------------------------------------------------
+SUMMARY:
+---------
+- Logistic regression models p(y | x) using the logistic/sigmoid function
+- Uses maximum likelihood for parameter estimation
+- No closed-form solution: solved via gradient-based optimization
+- Regularization helps with generalization
+- Extensible to multi-class problems via softmax

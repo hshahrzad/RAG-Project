@@ -1,0 +1,90 @@
+
+CS391L: Machine Learning — Spring 2025
+Hands-On Machine Learning with PyTorch and Weights & Biases (wandb)
+====================================================================
+
+Instructor: Prof. Inderjit Dhillon
+Presented by: Nilesh Gupta (TA)
+
+This notebook walks through the lifecycle of a machine learning experiment using PyTorch and Weights & Biases.
+The task: Binary image classification (Cats vs Dogs) using a subset of CIFAR-10.
+
+--------------------------------------------------
+STAGES OF AN ML EXPERIMENT
+--------------------------------------------------
+
+1. Problem Definition
+   - Task: Predict whether an image is a cat or dog.
+   - Dataset: CIFAR-10, using labels 3 (cat) and 5 (dog).
+   - Evaluation metric: Accuracy (percentage of correct predictions).
+
+2. Defining a Solution
+   - Input (x): 3D Tensor (Channels, Height, Width)
+   - Output (y): A scalar (0 for cat, 1 for dog)
+   - Dataset (D): Pairs of (x, y)
+   - Success Measure: Model accuracy
+
+3. Data Preparation
+   - Normalize images
+   - Create a filtered dataset using only cat and dog classes
+   - Split into training, validation, and test sets
+   - Use DataLoader for batch loading and shuffling
+
+4. Model Definition
+   - Model: A simple neural network (SimpleBinaryNet or NNLinearBinaryNet)
+     - Input layer → Hidden Layer (ReLU or Sigmoid) → Output Layer
+   - Loss Function: Binary Cross-Entropy with Logits
+   - Optimizer: Stochastic Gradient Descent (SGD)
+
+5. Logging and Tracking
+   - wandb is used to log:
+     - Metrics (loss, accuracy)
+     - Hyperparameters
+     - Model architecture and gradients
+
+6. Training Loop
+   - Forward pass → Loss computation → Backward pass → Parameter update
+   - Metrics logged to wandb per batch and per epoch
+
+7. Evaluation
+   - Evaluate performance on validation/test sets
+   - Log evaluation metrics and sample predictions to wandb
+
+--------------------------------------------------
+AUTOMATED HYPERPARAMETER TUNING
+--------------------------------------------------
+
+Hyperparameter Sweep Setup:
+- Uses `wandb.sweep` to explore different configurations
+- Method: Grid or Bayesian optimization
+- Parameters:
+    - Learning rate: [0.001, 0.0001, 0.01]
+    - Batch size: [32, 64, 128]
+    - Hidden size: [64, 128, 256]
+    - Epochs: 3 (for fast experimentation)
+
+Each configuration is trained and evaluated, and the best result can be selected based on validation accuracy.
+
+--------------------------------------------------
+EXAMPLE PERFORMANCE
+--------------------------------------------------
+
+- Training Accuracy improved steadily over 10 epochs (up to ~74%)
+- Validation Accuracy hovered around 63%
+- Test Accuracy reached ~64%
+- Hyperparameter tuning with sweeps showed accuracy improvements up to ~60.6%
+
+--------------------------------------------------
+SUMMARY
+--------------------------------------------------
+
+This practical walk-through illustrates:
+- How to define, build, and iterate on an ML model
+- The use of PyTorch for model development
+- The integration of wandb for tracking and optimization
+- The impact of model architecture and hyperparameters on performance
+
+Resources:
+- PyTorch: https://pytorch.org/
+- wandb: https://wandb.ai/
+- Notebook link: https://utcs-ml-course.github.io/resources/hands_on_ml/

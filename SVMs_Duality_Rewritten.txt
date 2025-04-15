@@ -1,0 +1,73 @@
+
+CS391L: Machine Learning — Spring 2025
+Lecture: Support Vector Machines and Duality (February 24, 2025)
+=================================================================
+
+CONSTRAINED OPTIMIZATION:
+--------------------------
+General Form:
+    min f(x)
+    s.t. g_i(x) ≤ 0  for i = 1,...,m (inequality constraints)
+         h_j(x) = 0  for j = 1,...,p (equality constraints)
+
+Lagrangian:
+    L(x, λ, μ) = f(x) + Σ λ_i g_i(x) + Σ μ_j h_j(x)
+
+- λ_i are Lagrange multipliers for inequalities
+- μ_j are for equalities
+- Called dual variables
+
+Lagrange Dual Function:
+    g(λ, μ) = inf_x L(x, λ, μ)
+
+Dual problem:
+    max g(λ, μ)
+    s.t. λ ≥ 0
+
+DUALITY:
+---------
+Weak duality: g(λ, μ) ≤ f(x*) for all feasible x*
+Strong duality: g(λ*, μ*) = f(x*) when certain conditions hold
+
+KKT CONDITIONS (for convex problems):
+--------------------------------------
+1. Primal feasibility: g_i(x) ≤ 0, h_j(x) = 0
+2. Dual feasibility: λ_i ≥ 0
+3. Complementary slackness: λ_i g_i(x) = 0
+4. Stationarity: ∇f(x) + Σ λ_i ∇g_i(x) + Σ μ_j ∇h_j(x) = 0
+
+SUPPORT VECTOR MACHINE (SVM) DUAL:
+----------------------------------
+Primal SVM formulation:
+    min ½ ||w||²
+    s.t. yᵢ(wᵗxᵢ) ≥ 1 for all i
+
+Lagrangian:
+    L(w, α) = ½ ||w||² − Σ αᵢ [yᵢ(wᵗxᵢ) − 1]
+
+Dual function:
+    g(α) = Σ αᵢ − ½ Σ Σ αᵢαⱼyᵢyⱼ xᵢᵗxⱼ
+    s.t. αᵢ ≥ 0
+
+Optimal w:
+    w = Σ αᵢ yᵢ xᵢ
+
+Only support vectors (αᵢ > 0) contribute to w
+
+SOFT-MARGIN SVM:
+-----------------
+Allow slack in constraints:
+    yᵢ(wᵗxᵢ) ≥ 1 − ξᵢ, where ξᵢ ≥ 0
+
+Primal:
+    min ½ ||w||² + C Σ ξᵢ
+    s.t. yᵢ(wᵗxᵢ) ≥ 1 − ξᵢ, ξᵢ ≥ 0
+
+Slack variables allow for misclassification but penalize it via C
+
+SUMMARY:
+---------
+- Lagrangian duality converts constrained problems to simpler duals
+- KKT conditions certify optimality
+- SVMs use this framework to find optimal separating hyperplanes
+- Soft-margin SVMs extend to non-linearly separable data

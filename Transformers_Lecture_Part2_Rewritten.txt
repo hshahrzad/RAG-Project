@@ -1,0 +1,109 @@
+
+CS391L: Machine Learning WB — Spring 2025
+Lecture: Transformers and Attention, Part 2 (April 7, 2025)
+Instructor: Inderjit Dhillon
+==================================================================
+
+RECAP: TRANSFORMERS OVERVIEW
+------------------------------
+- Transformer architecture relies entirely on attention (no RNN/CNN)
+- Introduced in *"Attention Is All You Need" (Vaswani et al., 2017)*
+- Self-attention is the core mechanism
+- Applications:
+    - BERT (NLP pretraining, 2018)
+    - Vision Transformers (ViT, 2020)
+
+ENCODER-DECODER STRUCTURE
+---------------------------
+- Encoder processes input tokens in parallel using self-attention and feedforward layers
+- Decoder uses:
+    - Self-attention on output tokens
+    - Cross-attention to focus on encoder output
+
+SELF-ATTENTION (RECAP)
+-----------------------
+- Input vectors x₁, ..., xₙ
+- Compute queries Q, keys K, values V via learned linear transformations
+- Attention scores: qᵢᵗkⱼ → softmax → use to weight value vectors
+
+Matrix form:
+    Q = XW_Q, K = XW_K, V = XW_V
+    Z = softmax(Q Kᵗ)V
+
+- Multi-head attention: multiple attention operations run in parallel and concatenated
+
+POSITIONAL ENCODING
+---------------------
+- Transformers lack inherent sequence modeling
+- Use position encodings (sin/cos or learned embeddings)
+
+PRETRAINING IN NLP
+-------------------
+**Motivation:** Abundant unlabeled text, limited labeled data
+
+**Goal:** Learn meaningful representations via unsupervised/self-supervised pretraining
+
+WORD EMBEDDINGS
+----------------
+Train vector representations of words using co-occurrence:
+
+1. **Bag-of-words counts** → count how often word w appears with context c
+
+2. **PMI and PPMI:**
+    PMI(w, c) = log [P(w, c) / (P(w) P(c))] ≈ log [#(w, c)|D| / (#(w)#(c))]
+    PPMI(w, c) = max(PMI(w, c), 0)
+
+    → Results in sparse matrix M with words as rows, contexts as columns
+
+3. **SVD or low-rank factorization:**
+    M ≈ W Vᵗ → rows of W are word embeddings
+
+4. **Glove:**
+    Adds bias terms, uses weighted loss
+    M ≈ W Vᵗ + b_w + b_c
+
+5. **Word2Vec (Mikolov et al., 2013):**
+    - CBOW: predict target word from context
+    - Skip-gram: predict context from target word
+    - Uses softmax or negative sampling
+
+Each word has:
+    - vᵢ: vector when it's the target
+    - uᵢ: vector when it's in the context
+
+CONTEXTUAL EMBEDDINGS
+----------------------
+Traditional embeddings (Word2Vec, Glove) are static (same for all contexts)
+
+Contextual embeddings vary based on sentence context
+
+1. **CoVe (McCann et al., 2017):**
+    - Use encoder from machine translation model as embedding
+    - Limitations: requires paired data, task-specific
+
+2. **ELMo (Peters et al., 2018):**
+    - Train forward and backward LSTMs on large text
+    - Use token-level hidden states as contextual word embeddings
+
+3. **BERT (Devlin et al., 2018):**
+    - Transformer-based model trained on masked language model (MLM)
+    - Two pretraining tasks:
+        - MLM: predict masked word from context
+        - NSP (Next Sentence Prediction): determine if sentence B follows A
+
+    - BERT models:
+        - BERT base: 110M parameters
+        - BERT large: 340M parameters
+
+FINE-TUNING BERT
+-----------------
+- Pretrained BERT model reused
+- Add task-specific layers (classification, QA, etc.)
+- Fine-tune all weights on downstream task
+
+SUMMARY
+--------
+- Self-attention enables efficient modeling of token relationships
+- Transformers dominate modern NLP
+- Pretraining techniques (Word2Vec, Glove, BERT) enable generalizable representations
+- Contextual embeddings adapt meaning to sentence usage

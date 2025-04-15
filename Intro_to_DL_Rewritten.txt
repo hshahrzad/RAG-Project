@@ -1,0 +1,111 @@
+
+CS391L: Machine Learning — Spring 2025
+Lecture 9: Introduction to Deep Learning
+=========================================
+
+Instructors: Nilesh Gupta (TA), Prof. Inderjit Dhillon
+
+---------------------------------------------------------
+WHAT IS DEEP LEARNING?
+---------------------------------------------------------
+Deep Learning (DL) is a subfield of Machine Learning that uses deep neural networks to model data. 
+It automates feature learning directly from raw inputs.
+
+---------------------------------------------------------
+WHY DEEP LEARNING?
+---------------------------------------------------------
+DL reduces the need for hand-engineered features and scales with large data and powerful compute.
+
+Enablers of DL:
+- GPUs
+- The Internet (massive data availability)
+- ML frameworks: PyTorch, TensorFlow, JAX
+
+---------------------------------------------------------
+APPLICATIONS OF DL:
+---------------------------------------------------------
+- Object recognition
+- Autonomous driving
+- Game playing
+- Chatbots
+- Media generation (images, videos)
+- Toward artificial general intelligence (AGI)
+
+---------------------------------------------------------
+KEY COMPONENTS IN DEEP LEARNING
+---------------------------------------------------------
+1. Model — a neural network mapping input to prediction
+2. Loss — a scalar quantifying model error
+3. Optimization — adjusts model parameters to minimize loss (usually via gradient descent)
+
+---------------------------------------------------------
+NEURAL NETWORK BASICS
+---------------------------------------------------------
+A neural network is made up of connected units (neurons or perceptrons):
+
+- Inputs: multiple scalar values
+- Weights: associated with each input
+- Summation: weighted sum of inputs
+- Activation function: introduces non-linearity
+
+Common activation functions:
+- ReLU
+- Sigmoid
+- Tanh
+- Softmax
+
+Deep Neural Networks (DNNs) are multi-layered arrangements of these neurons.
+
+---------------------------------------------------------
+WHY NON-LINEARITY?
+---------------------------------------------------------
+- Without non-linear activations, stacked neurons behave like a single linear function.
+- Non-linear activations make neural networks much more expressive.
+
+Universal Approximation Theorem:
+A neural network with one hidden layer and sufficient neurons can approximate any continuous function.
+
+---------------------------------------------------------
+LOSS FUNCTIONS
+---------------------------------------------------------
+Loss measures how well the model performs. Common examples:
+- MSE (Mean Squared Error): regression tasks
+- Binary Cross Entropy (BCE): binary classification
+- Cross Entropy (CE): multi-class classification
+
+---------------------------------------------------------
+EXAMPLE TASKS
+---------------------------------------------------------
+Task 1: Is there a cat in the image? → Use BCE
+Task 2: Estimate the age of the cat → Use MSE
+Task 3: Classify cat vs. dog vs. bird → Use CE
+
+---------------------------------------------------------
+OPTIMIZATION IN DL
+---------------------------------------------------------
+Goal: Minimize loss by adjusting parameters using gradient descent.
+
+Gradient Descent Steps:
+1. Compute the loss
+2. Compute the gradient (∂L/∂w)
+3. Update weights: w = w - η * ∂L/∂w
+
+Backpropagation:
+- Efficiently computes gradients using the chain rule, working backwards from output to input layer.
+
+---------------------------------------------------------
+FULL TRAINING ALGORITHM
+---------------------------------------------------------
+1. Forward Pass — compute activations and outputs
+2. Loss Computation — compare output with true label
+3. Backward Pass — compute gradients via backprop
+4. Parameter Update — apply gradient descent
+
+Repeat until convergence.
+
+---------------------------------------------------------
+PRACTICAL TIPS
+---------------------------------------------------------
+- Use mini-batch gradient descent for efficiency
+- Tune learning rate (can be adaptive)
+- Use regularization (dropout, weight decay, early stopping) to improve generalization

@@ -1,0 +1,87 @@
+
+CS391L: Machine Learning WB — Spring 2025
+Linear Algebra Review (January 22, 2025)
+=========================================
+
+-----------------------------------------------------
+VECTOR SPACES AND NORMS
+-----------------------------------------------------
+- Vectors in R^d: Represented as x = [x₁, x₂, ..., x_d]^T
+- Vector Norm ‖x‖: Measures the "size" or "length" of a vector
+
+Properties of Norms:
+1. Nonnegativity: ‖x‖ ≥ 0
+2. Homogeneity: ‖αx‖ = |α|‖x‖
+3. Triangle Inequality: ‖x + y‖ ≤ ‖x‖ + ‖y‖
+
+Common Norms:
+- L2 norm (Euclidean): ‖x‖₂ = sqrt(Σxᵢ²)
+- L1 norm: ‖x‖₁ = Σ|xᵢ|
+- L∞ norm: ‖x‖_∞ = max|xᵢ|
+- Lp norm: ‖x‖_p = (Σ|xᵢ|^p)^{1/p}
+
+Dot Product and Angle:
+- xᵀy = ‖x‖‖y‖cos(θ)
+- Cauchy-Schwarz Inequality: |xᵀy| ≤ ‖x‖‖y‖
+- Orthogonality: xᵀy = 0 ⇔ x ⊥ y
+
+-----------------------------------------------------
+MATRICES AND MATRIX NORMS
+-----------------------------------------------------
+- Matrix A ∈ R^{m×n}
+- Matrix Norm ‖A‖ satisfies:
+  1. Nonnegativity
+  2. Homogeneity
+  3. Triangle Inequality
+
+Examples:
+- Frobenius Norm: ‖A‖_F = sqrt(ΣAᵢⱼ²)
+- Spectral Norm (2-norm): ‖A‖₂ = largest singular value of A
+
+Condition Number:
+- κ(A) = ‖A‖ * ‖A⁻¹‖ = σ_max / σ_min
+- Measures sensitivity to perturbations
+
+-----------------------------------------------------
+EIGENVALUES AND EIGENVECTORS
+-----------------------------------------------------
+- A ∈ R^{n×n}, λ is an eigenvalue and x is an eigenvector if:
+  A x = λ x
+- Characteristic Equation: det(A - λI) = 0
+- A symmetric matrix A has:
+  - All real eigenvalues
+  - A full set of orthonormal eigenvectors
+
+Eigenvalue Decomposition (EVD):
+- For symmetric A: A = VΛVᵀ, where
+  - V: matrix of orthonormal eigenvectors
+  - Λ: diagonal matrix of eigenvalues
+
+Positive Semi-Definite (PSD) Matrix:
+- A is PSD ⇔ xᵀAx ≥ 0 ∀ x
+- Positive Definite ⇔ xᵀAx > 0 ∀ x ≠ 0
+- All eigenvalues ≥ 0 for PSD matrices
+
+-----------------------------------------------------
+SINGULAR VALUE DECOMPOSITION (SVD)
+-----------------------------------------------------
+- For A ∈ R^{m×n}, the SVD is:
+  A = U Σ Vᵀ
+  - U ∈ R^{m×m}, orthogonal (UᵀU = I)
+  - V ∈ R^{n×n}, orthogonal
+  - Σ ∈ R^{m×n}, diagonal matrix of singular values (σ₁ ≥ σ₂ ≥ ... ≥ 0)
+
+- SVD exists for all matrices.
+- Used for low-rank approximation, compression, and numerical stability.
+
+-----------------------------------------------------
+SUMMARY
+-----------------------------------------------------
+This review covered essential linear algebra concepts used in ML:
+- Vector and matrix norms
+- Dot product, angles, and orthogonality
+- Eigenvalue decomposition for symmetric matrices
+- Positive definiteness
+- Singular Value Decomposition (SVD)
+
+Understanding these foundations is crucial for analyzing optimization, generalization, and dimensionality reduction in machine learning.

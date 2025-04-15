@@ -1,0 +1,70 @@
+
+CS391L: Machine Learning WB — Spring 2025
+Lecture Summary: Classification (Feb 10, 2025)
+=========================================================
+
+GOAL OF CLASSIFICATION:
+------------------------
+Learn a function f(x) that predicts the class label y for a new test point x.
+
+LINEAR DECISION BOUNDARIES:
+----------------------------
+Suppose we have two class centers: m1 and m2.
+
+- The set of points equidistant from m1 and m2 lies on a hyperplane.
+- The equation of this hyperplane: (x - m1)^T (x - m1) = (x - m2)^T (x - m2)
+- This simplifies to a linear equation: w^T x + w0 = 0, where:
+  - w = m1 - m2 (normal to the hyperplane)
+  - w0 = constant term derived from the centers
+
+The **signed distance** from a point x to the hyperplane is:
+  (w^T x + w0) / ||w||
+
+CLASS PROBABILITIES AND BAYES DECISION RULE:
+--------------------------------------------
+We consider the class-conditional likelihoods and priors:
+
+- p(x | Ck): likelihood of data x given class Ck
+- P(Ck): prior probability of class Ck
+- Posterior: p(Ck | x) ∝ p(x | Ck) * P(Ck)
+
+Using **Bayes Rule**, we get:
+
+    MAP estimate (Maximum A Posteriori):
+    ŷ = argmax_Ck p(Ck | x)
+       = argmax_Ck log p(x | Ck) + log P(Ck)
+
+GAUSSIAN CLASS-CONDITIONAL MODELS:
+----------------------------------
+Assume p(x | Ck) ~ N(μk, Σ)
+
+- log p(x | Ck) = -0.5 * log|Σ| - 0.5 * (x - μk)^T Σ^(-1) (x - μk)
+
+Add log prior: log P(Ck)
+Total score: log p(x | Ck) + log P(Ck)
+
+THREE CASES FOR Σ:
+-------------------
+
+Case I: Shared identity covariance Σ = I
+  - Simplifies to linear decision surface:
+    w = μ1 - μ2
+    w0 = -0.5 * (μ1^T μ1 - μ2^T μ2) + log(P(C1)/P(C2))
+    Decision boundary: w^T x + w0 = 0
+
+Case II: Shared arbitrary covariance Σ
+  - Still leads to a linear decision surface:
+    w = Σ^(-1)(μ1 - μ2)
+    w0 derived similarly, with covariance included
+
+Case III: Class-specific covariances Σ1 ≠ Σ2
+  - Decision surface becomes **quadratic**:
+    Terms like x^T Σ^(-1) x do not cancel, leading to a general quadratic form.
+
+CONCLUSION:
+-----------
+- When class covariances are equal, decision boundaries are linear.
+- When covariances differ, boundaries become nonlinear and quadratic.
+- The MAP rule allows classification by comparing log-likelihoods and priors.
+
+This lecture sets the foundation for generative models for classification and introduces the connection between geometric intuition and probabilistic modeling.

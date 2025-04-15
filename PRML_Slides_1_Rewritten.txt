@@ -1,0 +1,131 @@
+
+Pattern Recognition and Machine Learning
+Chapter 1: Introduction
+=======================================================
+
+TOPICS COVERED:
+---------------
+- Polynomial curve fitting
+- Overfitting and regularization
+- Probability theory and rules
+- Gaussian distributions
+- Maximum likelihood and MAP
+- Bayesian methods
+- Model selection and decision theory
+- Entropy and information theory
+
+HANDWRITTEN DIGIT RECOGNITION:
+-------------------------------
+Example ML task: recognize handwritten digits from images.
+
+POLYNOMIAL CURVE FITTING:
+-------------------------
+Fit a curve y(x, w) to data {(x_n, t_n)} using polynomials of varying order.
+
+- Error function: Sum-of-squares:
+    E(w) = ½ Σ (y(x_n, w) - t_n)²
+
+- Overfitting observed with high-degree polynomials (e.g., 9th order)
+  on small datasets.
+
+- Root-Mean-Square (RMS) Error used to evaluate generalization.
+
+REGULARIZATION:
+---------------
+Penalize large weights to control model complexity:
+    E(w) = ½ Σ (y(x_n, w) - t_n)² + λ/2 Σ w_j²
+
+This reduces overfitting.
+
+PROBABILITY THEORY:
+-------------------
+- Marginal: p(x)
+- Conditional: p(x|y)
+- Joint: p(x, y) = p(x|y)p(y)
+
+Rules:
+- Sum rule: p(x) = Σ_y p(x, y)
+- Product rule: p(x, y) = p(x|y) p(y)
+- Bayes’ Theorem: p(y|x) ∝ p(x|y) p(y)
+
+PROBABILITY DENSITIES:
+----------------------
+- Change of variables affects density via Jacobian
+- Expectation and variance definitions
+- Covariance matrix encodes joint variability
+
+GAUSSIAN DISTRIBUTIONS:
+------------------------
+- Univariate Gaussian: N(x | μ, σ²)
+- Multivariate Gaussian: N(x | μ, Σ)
+
+Gaussian parameter estimation:
+- Use maximum likelihood (ML)
+- Log-likelihood is easier to work with
+
+CURVE FITTING REVISITED:
+------------------------
+- ML leads to minimizing sum-of-squares error
+- MAP introduces regularization:
+    E_MAP(w) = E(w) + λ/2 Σ w_j²
+
+BAYESIAN CURVE FITTING:
+------------------------
+- Integrate over all model parameters to get predictive distribution
+- Predictive distribution accounts for uncertainty in w
+
+MODEL SELECTION:
+-----------------
+- Use validation error (e.g., cross-validation)
+- Avoid overfitting by balancing model complexity
+
+CURSE OF DIMENSIONALITY:
+-------------------------
+- High-dimensional spaces are sparse
+- Gaussian densities become unintuitive in high dimensions
+
+DECISION THEORY:
+----------------
+- Separate inference (compute p(t|x)) from decision (choose t)
+
+Loss functions:
+- 0-1 loss: minimize misclassification rate
+- General loss: minimize expected loss
+
+REJECT OPTION:
+---------------
+Useful when:
+- Cost of incorrect classification is high
+- Class priors are unbalanced
+- Confidence in prediction is low
+
+DECISION THEORY FOR REGRESSION:
+-------------------------------
+- Predict t by minimizing expected loss under a squared error
+- Best prediction: conditional mean E[t|x]
+
+GENERATIVE VS DISCRIMINATIVE MODELS:
+-------------------------------------
+- Generative: Model p(x, y) and use Bayes
+- Discriminative: Model p(y|x) directly
+
+ENTROPY:
+--------
+- Measures uncertainty: H(x) = −Σ p(x) log p(x)
+- Max entropy when distribution is uniform
+
+DIFFERENTIAL ENTROPY:
+---------------------
+- Continuous analog of entropy
+
+KL DIVERGENCE:
+--------------
+- Measures difference between two distributions:
+    D_KL(p || q) = Σ p(x) log (p(x) / q(x))
+
+MUTUAL INFORMATION:
+-------------------
+- Measures how much knowing x reduces uncertainty about y:
+    I(x; y) = D_KL(p(x, y) || p(x)p(y))
+
+=======================================================

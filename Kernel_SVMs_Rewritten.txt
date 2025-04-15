@@ -1,0 +1,80 @@
+
+CS391L: Machine Learning — Spring 2025
+Lecture: Non-linearly Separable Data and Kernel SVMs (March 3, 2025)
+======================================================================
+
+SVMs WITH NONLINEAR DECISION BOUNDARIES
+----------------------------------------
+Standard SVM formulation for linear classification:
+    Find w, b such that:
+        yᵢ(wᵗxᵢ + b) ≥ 1 for all i
+        Minimize: ½ ||w||²
+
+When the data is **not linearly separable**, we need to consider a different approach.
+
+DUAL FORMULATION OF THE SVM
+----------------------------
+We form the **Lagrangian** and derive the dual problem.
+
+Dual form:
+    Maximize over α:
+        L(α) = Σ αᵢ - ½ ΣΣ αᵢαⱼyᵢyⱼ xᵢᵗxⱼ
+    Subject to:
+        Σ αᵢyᵢ = 0
+        0 ≤ αᵢ ≤ C
+
+The solution gives:
+    w = Σ αᵢ yᵢ xᵢ
+
+Decision function:
+    f(x) = Σ αᵢ yᵢ xᵢᵗ x + b
+
+NONLINEAR FEATURES AND THE KERNEL TRICK
+----------------------------------------
+Rather than explicitly mapping x to a high-dimensional space φ(x), we define a **kernel function**:
+
+    K(x, z) = φ(x)ᵗ φ(z)
+
+Examples of Kernels:
+---------------------
+1. Polynomial kernel (degree d):
+       K(x, z) = (xᵗz + c)^d
+
+2. Radial Basis Function (RBF) or Gaussian kernel:
+       K(x, z) = exp(−||x − z||² / (2σ²))
+
+3. Sigmoid kernel:
+       K(x, z) = tanh(α xᵗz + c)
+
+This allows us to operate in the high-dimensional space **implicitly**, without computing φ(x) directly.
+
+ADVANTAGES OF KERNEL SVM:
+--------------------------
+- Enables nonlinear decision boundaries
+- Can model complex data without feature engineering
+- Choice of kernel controls model flexibility
+
+LIBSVM / LIBLINEAR
+-------------------
+Popular software for SVM training:
+- LIBSVM supports kernels (RBF, poly, sigmoid)
+- LIBLINEAR is efficient for linear SVMs
+
+COMPARISON OF REGRESSION AND CLASSIFICATION MODELS
+----------------------------------------------------
+Loss Functions:
+- Ridge Regression: squared loss + L2 regularization
+- Lasso: absolute loss + L1 regularization
+- Logistic Regression: logistic loss + regularization
+- SVM: hinge loss = max(0, 1 − yᵢ(wᵗxᵢ + b))
+
+Regularization:
+- Helps prevent overfitting
+- L1 encourages sparsity, L2 gives smoother solutions
+
+----------------------------------------------------
+SUMMARY
+----------------------------------------------------
+- The dual form of SVM enables efficient optimization and leads naturally to kernelization.
+- Kernels allow for learning in high-dimensional feature spaces without explicit transformation.
+- SVMs with kernels are powerful tools for nonlinear classification tasks.

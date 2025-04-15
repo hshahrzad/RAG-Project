@@ -1,0 +1,91 @@
+
+CS391L: Machine Learning — Spring 2025
+Lecture: Matrix Factorization for Recommendation (February 3, 2025)
+====================================================================
+
+TOPIC: Recommender Systems using Matrix Factorization
+------------------------------------------------------
+
+PROBLEM SETTING:
+----------------
+We are given a partially filled **ratings matrix** R, where:
+- Rows correspond to users
+- Columns correspond to items (e.g., movies)
+- Rᵢⱼ is the rating given by user i to item j
+- Many entries are **missing** (i.e., not all items are rated by every user)
+
+Goal:
+- Predict the missing values in R
+- Recommend items a user is likely to enjoy
+
+APPROACH:
+---------
+Matrix Factorization:
+We approximate R ≈ U Mᵀ where:
+- U ∈ ℝ^{n×k} — user feature matrix (each row is a low-dimensional representation of a user)
+- M ∈ ℝ^{m×k} — item (movie) feature matrix (each row is a low-dimensional representation of an item)
+- k ≪ n, m — the **latent dimension** or number of hidden factors
+
+Then:
+    Rᵢⱼ ≈ uᵢᵗ mⱼ
+Where:
+- uᵢ is the i-th row of U (user i's embedding)
+- mⱼ is the j-th row of M (movie j's embedding)
+
+HOW TO LEARN U AND M:
+----------------------
+Define the set K = {(i, j)} where Rᵢⱼ is known (i.e., training data)
+
+Optimization Objective:
+    Minimize:
+        J(U, M) = Σ_{(i,j) ∈ K} (Rᵢⱼ - uᵢᵗ mⱼ)²
+
+This is a **matrix completion** problem.
+
+In theory, if R was fully known, we could use truncated SVD:
+    R_k = U_k Σ_k V_kᵗ
+
+But with only partial observations, we cannot compute full SVD.
+
+SOLUTION STRATEGY:
+-------------------
+**Alternating Minimization (ALS)**:
+    1. Fix U, optimize M
+    2. Fix M, optimize U
+    Repeat until convergence
+
+Each step reduces to solving a ridge regression problem for each user/item:
+
+Fix M, solve for uᵢ:
+    Minimize over uᵢ:
+        Σ_{j ∈ Iᵢ} (Rᵢⱼ - uᵢᵗ mⱼ)²
+    where Iᵢ = indices of movies rated by user i
+
+    This becomes a least squares problem with closed-form:
+        uᵢ = (Mᵢᵗ Mᵢ)⁻¹ Mᵢᵗ rᵢ
+
+    Computational Cost:
+        - Forming Mᵢᵗ Mᵢ: O(k² |Iᵢ|)
+        - Solving linear system: O(k³)
+
+Repeat symmetrically for M.
+
+Total cost: O(k² × number of ratings) per iteration
+
+ALTERNATIVE METHODS:
+---------------------
+1. **Stochastic Gradient Descent (SGD)**:
+    - Update uᵢ, mⱼ using gradients for a single (i,j) pair at a time
+    - Scales well to large, sparse datasets
+
+2. **Coordinate Descent**:
+    - Optimize one variable at a time while holding others fixed
+
+---------------------------------------------------------
+SUMMARY:
+---------
+- Matrix factorization learns latent embeddings for users and items
+- Predicts missing ratings as dot products of these embeddings
+- ALS and SGD are common optimization strategies
+- Regularization can be added to prevent overfitting
+- Useful in building scalable and personalized recommender systems

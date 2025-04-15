@@ -1,0 +1,84 @@
+
+CS391L: Machine Learning WB — Spring 2025
+Final Project Ideas (Lecturer: Inderjit Dhillon, Date: March 24, 2025)
+================================================================================
+
+PROJECT 1: Exploring and Interpreting Attention Patterns in Needle-in-a-Haystack
+--------------------------------------------------------------------------------
+Overview:
+Study how transformer-based language models retrieve specific information ("needle") hidden in large contexts ("haystack").
+This is important for understanding attention mechanisms and retrieval capabilities of modern LLMs like Gemini 1.5 Pro.
+
+Objectives:
+- Implement the needle-in-a-haystack task using a transformer model.
+- Visualize attention layers and heads across different context lengths and needle positions.
+- Analyze correlations between attention weights and retrieval success.
+- Test retrieval performance when multiple needles are embedded.
+- Compare models if multiple architectures are available.
+
+Suggested Methodology:
+Use tools like the `needlehaystack` package or custom code.
+Visualize attention with heatmaps or network graphs.
+Vary haystack lengths, needle positions, and number of needles.
+Perform both quantitative (e.g., average attention weight) and qualitative (visual pattern) analyses.
+
+PROJECT 2: Retrieval-Augmented Generation (RAG) System for Course QA
+----------------------------------------------------------------------
+Overview:
+Develop a QA system using RAG architecture where responses are grounded in external course materials.
+Improves factuality and domain specificity of LLM responses.
+
+Objectives:
+- Process and index course materials for retrieval.
+- Build a retriever that finds relevant content based on user queries.
+- Construct prompts combining user questions and retrieved context.
+- Use an LLM to generate answers based on the prompt.
+- Evaluate system performance and explore different configurations.
+
+Suggested Methodology:
+Convert course docs to text and chunk them semantically.
+Use an embedding model for vector representations.
+Store embeddings in a vector database for similarity search.
+Retrieve top-k chunks per query and combine with the query as input to the LLM.
+Evaluate with metrics like precision, recall, and contextual relevance.
+
+PROJECT 3: Tokenization Strategies for C++ Code Language Models
+---------------------------------------------------------------
+Overview:
+Evaluate how different tokenization strategies affect the performance of LLMs on C++ code.
+
+Objectives:
+- Implement and compare several tokenization methods.
+- Analyze outputs on a range of C++ code samples.
+- Assess handling of syntax complexities (e.g., operators, templates).
+- Measure downstream model performance with each strategy.
+
+Suggested Methodology:
+Use code from varied sources representing C++ idioms.
+Implement regex-based, compiler-style, and subword methods (e.g., BPE).
+Compare results based on token count, token granularity, syntactic parsing accuracy.
+Optionally, train a small LM using each method and evaluate on coding tasks.
+
+PROJECT 4: Evaluation Metrics for LLM Hallucinations
+-----------------------------------------------------
+Overview:
+Design metrics to detect and quantify hallucinations in LLM-generated content (i.e., fabricated or factually incorrect outputs).
+
+Objectives:
+- Review and categorize existing hallucination metrics.
+- Design new or combine existing metrics for nuanced assessment.
+- Evaluate hallucination rates across models and datasets.
+- Compare new metrics with established ones.
+- Analyze alignment with human judgment of factuality.
+
+Suggested Methodology:
+Choose a task (e.g., QA, summarization) and gather data with ground truth.
+Implement evaluation techniques:
+  - Log-probability inspection
+  - Semantic similarity with ground truth
+  - Automated fact-checking
+Propose improved or hybrid metrics. Compare across models and correlate with human feedback.
+
+================================================================================
+
+Each project involves a mix of implementation, analysis, and potential innovation. Choose based on your interest in language models, retrieval systems, interpretability, programming languages, or evaluation methods.

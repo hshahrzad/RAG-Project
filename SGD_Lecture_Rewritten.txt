@@ -1,0 +1,118 @@
+
+CS391L: Machine Learning WB — Spring 2025
+Lecture: Stochastic Optimization (March 30, 2025)
+Instructor: Inderjit S. Dhillon
+===================================================================
+
+STOCHASTIC GRADIENT DESCENT (SGD)
+----------------------------------
+Goal: Minimize the average loss over training examples:
+    f(w) = (1/N) Σ ℓ(h_w(x_n), y_n)
+
+In practice, computing the full gradient ∇f(w) is expensive for large datasets.
+
+Idea: Use an approximation based on a mini-batch B ⊂ {1, ..., N}:
+    ∇f(w) ≈ (1/|B|) Σ ∇_n f_n(w)
+
+Update rule:
+    w ← w − η_t * (1/|B|) Σ ∇_n f_n(w)
+
+Extreme case: |B| = 1 (true SGD)
+
+LOGISTIC REGRESSION BY SGD:
+----------------------------
+Loss: f(w) = (1/N) Σ log(1 + exp(−y_n * wᵗx_n))
+
+Gradient: ∇f_n(w) = −y_n x_n / (1 + exp(y_n * wᵗx_n))
+
+SGD update:
+    w ← w − η_t * ∇f_n(w)
+
+WHY SGD WORKS:
+---------------
+- The stochastic gradient is an unbiased estimator of the full gradient
+- Introduces noise that may help escape saddle points and sharp minima
+
+SGD STEP SIZE AND CONVERGENCE:
+-------------------------------
+- Fixed step size → may not converge
+- Step size η_t should decrease to zero (e.g., η_t ~ 1/t^a, a > 0)
+
+LEARNING RATE SCHEDULING:
+--------------------------
+- Step decay
+- Cyclic schedules
+
+SGD VS. GRADIENT DESCENT:
+--------------------------
+Pros of SGD:
+- Lower per-iteration cost
+- Faster initial progress
+
+Cons:
+- Noisy
+- Slower to converge near minima
+- Requires learning rate tuning
+
+MOMENTUM:
+---------
+Update rule:
+    v_t = β v_{t−1} + (1−β) ∇f(w_t)
+    w_{t+1} = w_t − α v_t
+
+Benefits:
+- Smooths noisy updates
+- Accelerates convergence
+
+NESTEROV ACCELERATED GRADIENT:
+-------------------------------
+Look-ahead version:
+    v_t = β v_{t−1} + α ∇f(w_t − β v_{t−1})
+    w_{t+1} = w_t − v_t
+
+ADAGRAD (2010):
+---------------
+- Adapts learning rate per coordinate
+- Update:
+    G_t[j] = G_{t−1}[j] + g_t[j]^2
+    w_{t+1} = w_t − η * g_t[j] / sqrt(G_t[j] + ε)
+
+ADAM (2015):
+------------
+- Combines momentum + adaptive learning rate
+- Update:
+    m_t = β₁ m_{t−1} + (1−β₁) g_t
+    v_t = β₂ v_{t−1} + (1−β₂) g_t²
+    m̂_t = m_t / (1 − β₁^t)
+    v̂_t = v_t / (1 − β₂^t)
+    w_t = w_{t−1} − α * m̂_t / (√v̂_t + ε)
+
+BATCH SIZE AND LARGE SCALE TRAINING:
+-------------------------------------
+- Larger batch sizes reduce variance, enable parallelism
+- But may converge to sharper minima → worse generalization
+
+SHARP VS. WIDE MINIMA:
+-----------------------
+- Large batch SGD may converge to sharp minima
+- Sharp minima generalize poorly
+
+LEARNING RATE SCALING:
+-----------------------
+- Variance of gradient ~ 1/|B|
+- Scale LR with √|B| or |B| to compensate
+
+LAYER-WISE ADAPTIVE LR SCALING (LARS/LAMB):
+-------------------------------------------
+- Scale learning rate per layer
+    w^{(i)} ← w^{(i)} − η * (‖w^{(i)}‖ / ‖g^{(i)}‖) * g^{(i)}
+- LAMB uses Adam-style updates instead of raw gradient
+
+Used in training BERT with thousands of GPUs/TPUs.
+
+SUMMARY:
+---------
+- SGD is a workhorse of modern ML optimization
+- Many variants exist: momentum, Nesterov, Adagrad, Adam, LAMB
+- Important to choose appropriate learning rate, batch size, and scheduler
+

@@ -1,0 +1,114 @@
+
+CS391L: Machine Learning WB — Spring 2025
+Lecture: Language Modeling — RNNs, Attention, and Transformers (April 1, 2025)
+Instructor: Inderjit Dhillon
+================================================================================
+
+REPRESENTATION FOR TEXT:
+-------------------------
+1. **Bag of Words (BoW):**
+   - Sentence/document → vector x (xi = count of word i)
+   - High dimensional: size = vocabulary
+   - No order/sequence captured
+
+2. **n-gram Features:**
+   - Adds local context (e.g., word pairs)
+   - Explodes dimensionality
+
+3. **TF-IDF Representation:**
+   - tf(doc, word) = freq of word in doc / total words
+   - idf(word) = log(N / n_w), where N = total docs, n_w = docs with word
+
+4. **Linear Models and Neural Networks:**
+   - y ≈ sign(wᵗx), or a fully connected net: f(x) = WL σ(WL-1 ... σ(W0x))
+   - W0 serves as a word embedding matrix
+   - Still lacks sequence modeling
+
+RECURRENT NEURAL NETWORKS (RNNs):
+---------------------------------
+- Input: sequence x₁, x₂, ..., x_T
+- Output: sequence y₁, y₂, ..., y_T or single y
+
+Hidden state:
+    s_t = f(U x_t + W s_{t−1})
+    o_t = argmax(V s_t)
+
+Trained via SGD/Adam on:
+    loss = Σ_t loss(V s_t, y_t)
+
+Applications:
+- Language modeling (predict next word)
+- POS tagging
+- Time series forecasting
+- Text classification (only use final output)
+
+Limitations:
+- Struggles with long-term dependencies
+- Suffers from vanishing gradients
+
+Solutions:
+- LSTM (Long Short-Term Memory)
+- GRU (Gated Recurrent Units)
+
+NEURAL MACHINE TRANSLATION (NMT):
+----------------------------------
+- Input sentence → latent vector via encoder (RNN)
+- Output sentence → decoder (RNN)
+- Attention introduced to let output focus on relevant input parts
+
+ATTENTION IN NMT:
+------------------
+- Decoder state u and encoder states v₁, ..., v_n
+- Attention weight: p = softmax(uᵗv₁, ..., uᵗv_n)
+- Context vector: Vp = Σ pᵢ vᵢ
+
+TRANSFORMERS:
+--------------
+Introduced in: *“Attention is All You Need” (Vaswani et al., 2017)*
+
+Key differences:
+- No recurrence (RNN/CNN)
+- Purely attention-based
+
+Transformer components:
+------------------------
+1. **Encoder-Decoder architecture**
+2. **Self-attention** (within encoder, decoder)
+3. **Cross-attention** (decoder focuses on encoder output)
+4. **Feedforward network** after attention
+5. **Positional encoding** to capture sequence order
+
+SELF-ATTENTION:
+---------------
+- Input: X = [x₁, ..., x_n]
+- For each xᵢ:
+    - Query: qᵢ = xᵢ W_Q
+    - Key: kᵢ = xᵢ W_K
+    - Value: vᵢ = xᵢ W_V
+- Attention score: qᵢᵗ kⱼ → siⱼ = softmax(qᵢᵗk₁, ..., qᵢᵗk_n)
+- Output: zᵢ = Σ_j siⱼ vⱼ
+
+Matrix form:
+    Q = XW_Q, K = XW_K, V = XW_V
+    Z = softmax(Q Kᵗ) V
+
+MULTI-HEAD ATTENTION:
+----------------------
+- Multiple (Q, K, V) sets → parallel attention heads
+- Outputs concatenated and passed through a linear projection
+
+POSITIONAL ENCODING:
+---------------------
+- Needed since Transformers have no recurrence
+- Types:
+    - Sinusoidal (original paper): smooth, fixed
+    - Learned embeddings: flexible, data-driven
+    - Neural ODE embeddings: smooth and learned
+
+CONCLUSION:
+-----------
+- RNNs model sequence with recurrence
+- Transformers use attention and parallelism to scale better
+- Attention enables better context capture for each token
+- Transformers dominate modern NLP
+
