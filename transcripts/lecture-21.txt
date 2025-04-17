@@ -1,0 +1,518 @@
+Rohan was a distinguished engineer at Google. And he's done, he did, you know, like a variety of things at Google, including optimizers, self distillation wrote a great paper with Jeff Hinton on the benefits of distillation which have actually, you know, online distillation, which have come out to be pretty true, worked on optimizers like shampoo
+Which were second order optimizer, which was actually put into many Google products. And all this was before the Llm. craze happened. And then then he was the lead for the text pillar of for the
+Gemini models. Some of the Gemini models that were released last year. Rohan actually led the pre-training for those models the Gemini flash model that was announced in I/O in May and the subsequent Gemini, 2.0 flash that was announced or released sometime, I think, in January.
+Rohan then ended up taking up a new adventure. And he's now a distinguished engineer at Meta, where he is leading the pre-training of the llama models, and, as you might be aware, you know, Lama 4 was released
+not this past weekend, but the weekend before that. So Rohan, of course, has been extremely busy navigating through not only, you know, a change in companies change in colleagues, changing jobs, changing infrastructure.
+but in spite of that he graciously kind of agreed to come and give a talk on my in this class. Rohan and I have, you know, collaborated on various projects together. So it's a great pleasure to have Rohan come and give the talk so over to you, Rohan.
+Yeah, thank you very much. And I actually would like this talk to be very interactive, and amid slides to make it introductory for folks who may have not trained a transformer, but can think logically through sequence of steps on how to parallelize a transformer across
+whatever Gpus or Tpus, and feel free to raise your hand, and we can make this interactive or interjeet. You could ask questions as well as I go through it for clarification. I think that will be the best way I can communicate, and maybe, like my hope after this talk is that
+you're able to get started on taking from 1st principles on how to optimize transformers on top of Gpus or Dpus, and then I will also talk about some of my research as interjeet has mentioned, like some of the pre-existing open research that I had done in the past, and then hopefully
+get you excited about doing new types of research in this area.
+Say.
+share. So I'm gonna share my, let's see documents.
+I will share my screen.
+Oh, I have to quit and reopen Zoom to share my screen, so I'll be back in a second.
+While we are kind of waiting on Rohan. And oh, okay, there he is.
+I was. Gonna take a poll in the class, like how many people have you know, heard of Lama for, or tried it out, or at least seen with the various things that happened.
+But, Ron, you're here, so go ahead.
+Can you see my screen.
+Oh, yeah, and you can make it full screen if you want.
+Yes, let's see.
+It should be a screenplay screen.
+It's like.
+So this is a very basic introductory tutorial on transformers.
+Just a question like, I guess a quick poll. Is it easy to pull like. How many of you have trained transformers
+here.
+I think everybody is really quiet. So Nilesh, you can tell them about the homework that they are doing right now, or.
+Yeah. So just to answer the question I have. And they are actually doing their homework, for which is about
+pre training or very small transformers on our lecture transcripts. So they do have some familiarity. If they have started with it. But yeah, nothing.
+Okay. Then.
+Even close to what you do.
+So no, this talk is actually perfect, because I think this just like opens up like a little bit of the details and lets folks think about, hey? Like, once you finish training this transformer, how do you scale this up to like very large number of gpus and get even better results. So all of it started out with this paper
+from 2017 2018. Attention is all you need now very famous, and I have these 3 links that I think are very important for this class. I hope, like you all can take a look at this and do self study. If you are interested in looking at, like how to scale transformers beyond single gpu and getting into the nitty, gritty details.
+And my hope after this talk is to get you familiarized with this content, like I've taken some of the content from these.
+From these tutorials, and then, like me, assembled my own.
+So how did we all start this 2020 paper showed the following, you can throw massive amount of computation as part of pre-training. Think of it! Training on a lots and lots of text data.
+and you can continue to improve
+like your test laws and continue to get much better model performance. So this is the pre-training, scaling Maximalist
+plot from 2020 on, like X-axis. You have flops, so you can. But this just told us like you can just buy more and more compute train, bigger and bigger models, and get better and better results. Of course, then all of engineering was spent on figuring out what is the shape of the model that we should train. What is the exact details of the transformer? What type of data should be trained on? How to clean the data.
+etc.
+So so, Rohan, since you encouraged questions, I'll keep on asking the questions on, on, in the behalf of this team. So I see that there are various power laws, right or laws, which are there for compute in the plot you have seen in, divided by 2.3 times 10.8,
+and so on.
+So how did they come up with these? I guess they just empirically looked at the performance, and then they fit these power, law, coefficients, right.
+Exactly so. The so. Each of these blue plots are different. Training runs with different
+amount of compute parameter size like model settings, and they fit their empirical data. And so
+this trend, and what this basically just tells you is that you can keep
+scaling and getting better and better results. Right? So that's like the extrapolation that's happening.
+And then how seriously should we take these coefficients? I mean, I'm sure, that these coefficients have evolved. And it's probably like, maybe even different in different.
+This is a great point, because since that paper people have improved on these coefficients over time.
+clearly the experimental methodology dictates what type of coefficients you get like, what data set do you train on? How do you set up the transformer? How many tokens do you train on all of that matters. And over time people have started improving on these results and gotten different coefficients that are like more efficient. For example, chinchilla
+scaling law rules which show you like, you know, you should use a lot more tokens.
+I think the original paper on pre-training Scaling also had problems around not decaying learning rate schedules, so that created some like reduction like they could have gotten even better results than if they had did the learning rate scale
+reduction. So there are like details, but in very like general terms, this more compute
+gives you better models on a lot of data. Now.
+what I can say is that this is true if you have infinite data. But as you get to a data constrained regime like these, things break down and maybe, like the research to do next is to figure out how to make use of existing data
+better, like finding architectures that are more data, efficient, finding methods that are more data efficient.
+Thanks.
+So. And now we're, I think, like going to this next paradigm, where you have a single model.
+But you're using more inference time, compute to get better and better results. So these are like the thinking models. Opdi demonstrated it on this Amy accuracy, for o, 1 models where they showed that instead of pre-training a model, you can take existing models that are trained to reason
+and produce long reasoning chains of thoughts to produce higher accuracy on benchmark. And this is like what the industry is currently looking at like. There is now at least 2 paradigms, one paradigm that allows us to build
+more intelligent models by spending more computation on pre-training
+another paradigm where you can spend inference, time, compute and get better benchmark scores as well, and these 2 are, I would say, orthogonal in the following sense, we both are trying to build more intelligent models. What inference time scaling is sort of showing us now is that you can build smaller models.
+spend more inference time, compute and likely beat
+larger and larger pre-trained models on these benchmarks.
+So this Doc, we'll go through a high level overview of training a transformer.
+Look at the basic building blocks of a transformer and some of my rules of thumb and think of ways to optimize like, say, a transformer forward, pass across many machines.
+And also I'll plug some of my existing work that are relevant today as well.
+So probably have seen this plot figure a lot. So on the right is the original at
+transformer figure from attention is all you need.
+Essentially transformer is basically 2 components attention and feed forward layers and you stack them across many, stack them to make it very deep transformer. And that's all you do.
+Attention has many variations, global attention, essentially, attention that looks at all the tokens that have in the past local attention that looks at tokens that are nearby
+and feed for feed forward layers the regular
+feedforward stack from the original paper and gated version of it.
+But one thing that strikes us in the research community is that
+there hasn't been much changes since 2017 on the basic transformer block. Of course there have been improvements.
+but the basic structure has exist like stayed to like the test of time. So far.
+for example, the regular, the feed forward layers are still 2 layers
+only. The only modification that is known to work is the gated Galu, which adds another layer, which is a gating function.
+So the last, like perhaps, like 6 or 7 years, have been spent in optimizing transformers on different hardware.
+And that's where the distributed training comes in
+and my top tips, which we will go through some of the exercise, for this is to think of the shapes of your computation. So the inputs and outputs
+think of those dimensions as things you can parallelize over.
+and certain axes are easy to parallelize over certain axes will result in communication.
+Then the question to ask yourself is, how do you optimize that communication over those many Gpus, that you're training on
+the second one is like thinking about roof line estimation, like so
+figuring out. Given a particular shape of a transformer, could you tell.
+How long would it take to at least like if you could you get a back of the envelope of
+On a single gpu? How long would it. Take to run a forward pass. For example.
+the second one is this notion of overlapping computation and communication.
+So the more you can exploit this in whichever setting you're running your transformer on the better. The overall result is. And a lot of the engineering goes into that as well.
+Well, oh, Rohan, I had one question. So you said something about local attention.
+Can you? Like the way you described it, you said that you basically take attention only among your maybe K neighbors, is that how it works that K is fixed? And so the attention matrix you get is in some sense a K banded matrix? Or is it different than what I'm saying.
+That's exactly right. And when it becomes a K banded matrix, it's a sliding window. Local attention, because it's banding
+in a sliding fashion. There are variations that are blockified attention where
+chunks of the attention is over like same same number of tokens, and then the chunk changes like slides by a certain amount. So there are variations of local attention.
+But maybe an intuition is that
+for most processing of text you only need content that are nearby.
+So global attention obviously has that already, like you, look at nearby tokens. But you also look at every token that you have seen so far.
+So what people have found is that when you do local attention, it's like giving an inductive bias to the model to perform better for text modeling.
+An interesting insight is that local attention, like it's like sparsification. But it's very explicit specification and it for the data that we are modeling. This is a very good inductive bias. So it models like a lot of models. Now, like Mistral, the latest llama models command a all use some form of local attention, and it actually generally improves the model.
+And and typically, how many local attention layers do you have, and how many global attention layers
+So for the different models implement different types of local attention. So like Mistral did one. If I remember correctly, this was like a year or 2 years ago, did one sliding window local attention followed by one global attention. The latest llama 4 is 3 sliding window.
+Sorry, not sliding window the block, if they call it chunk local attention, followed by one global attention command data, sliding window as well. And these are these are these are hyper parameters that different engineering team trades off to
+get different inference performance, different training performance and different quality
+for the model. Right? So you can change this these hyper parameters for the data that you're modeling.
+But this would be a very cool exercise to implement on the text modeling task that you have for pre training over
+the lecture notes. See if local attention, every every other layer improves your quality of the model right? So
+Yeah. 2 clarification questions. Here one is
+Maybe just one.
+because we are running out of time. So here, like in the distributed training setup like you have given these points like, can you? Give a go? What's a good mental model of the Gpu setup that we should think of that. Okay, like, we have n, Gpu nodes.
+And maybe like, on the order of this much time, like operation on Gpu takes and on. Okay, maybe you're coming to it.
+So I did try to build that mental model. So I just wanted to. If you haven't heard of these collectives definitely read about them, but I'll give. Go over them, because these are the bread and butter of talking about distributed training.
+Once you know these primitives, everything else, I promise you will become an exercise you do once, and then you become as good as the world's expert on or close to an expert on distributed training.
+So the first.st So what am I showing here? This is from the Jack's scaling book.
+So you you have data like that are colored, and you have 3, Gpus say, here, 0, 1 or 2. So like indexed. So there are 3. Gpus indexed by 0 1 and 2. Okay.
+the 1st one is on the left is all gather. That's a primitive that does the following operation.
+It gathers all the data together from every gpu
+and puts it together, and concatenates concatenates it.
+So every now every gpu has the same data, which is a concatenated red, green, and blue block together.
+That's an all gathered operation.
+Indrajit, you're muted.
+Sorry. So it's like a broadcast. But then, it arranges the data in such a way that it's consistent across all the GPS.
+All the gpus. One thing, when you look at these collectives, this is like I leave it as an exercise is to look at what is the amount of data that are transferred from
+in this collective operation.
+and how to optimize that data movement across whichever number of Gpus you have, right. So the complexity as you go to bigger and bigger number of gpus is that or not, all Gpus will be connected with each other, using a fast communication link.
+So you have to start thinking about clever algorithms to do the transfer.
+And there are many, and those are implemented. And then you can use them.
+But you have to start thinking of that. So that's like one thing. That's the extra layer of complexity like it's not as simple as 3, Gpus like. If you say an example is, if you have 1,000, Gpus, not all of them are connected together, using extremely fast connections. Right? So you can't exchange that fast.
+The second one is this notion of reduce, scatter, so like it could be reduced. Scatter sum, for example.
+where all we are doing is taking. In this case you have an array of 3 elements, and they are on 3 Gpus.
+and then you have a reduction operation operator like sum.
+and you're collecting the 1st element from each of the arrays that are in the each of the gpu and summing them together.
+So the outcome of this, if it's a sum would be 3, 6, and 9 if that makes sense.
+So every Gpu will have a scalar result
+like a single element, and the 1st 0 Gpu will have 3 as the result.
+Second, Gpu will have 6 as the result, and the 3rd Gpu will have 9 as the result.
+and the last one is this operator all to all.
+So you can see you have 1, 2, 3, which is the array in the 1st Gpu, 1, 2, 3, which is in the second and the 3rd one, and you get the 1st elements together. But now, instead of summing them together, you concatenate them into an array of size. 3.
+So reduce, scatter, and all to all in this particular example.
+are sort of similar in terms of the operation, except at the end. At very end. There is no
+reduction right?
+But all to all now can be used in different ways. There are more complexity around it. But this is the basic collective that you should think about whenever you think about the operations in a transformer.
+And all you have to figure out is how to put those right operations together to get the end result. So think of these are the communication primitives that you can put in in your code to send data around
+to do some operation.
+There's a question on the chat.
+And we
+the question is, how do you scale other hyper parameters while scaling the batch size on multiple Gpus for faster training
+or adaptive optimizer. So it seems like it's going really.
+Yeah, I can like.
+But maybe you can answer it towards the end of the class.
+Yeah, so, absolutely, like, yeah, like.
+I'll ask that question again later on.
+That's it.
+So now let's look at the tension very quickly. just make we have half an hour more right? So like so so.
+We have, we actually have 45 min.
+So let's look at attention right so in attention, for every token, so batch time, sequence, length.
+like those are the number of tokens that are in your batch.
+You have for every head so number of head, you have a vector which is of the size key size. So it could be 128, or 2, 56,
+and you have to take these dot products like on the right, like this is the attention qk, transpose, and that produces a big matrix. And then you have to do a softmax over it across the axis. And that's your attention, operator. And then you have to do it for every head
+independently and concatenate the results.
+So now question to everyone, how do you parallelize this operation? The Qk. Transpose
+so you can see that the Qk transpose makes use of
+the sequence length. So you can. If you do it over, batch, you can do data parallel, because these are independent.
+but you can't do it over sequence length, because it's all dependent on each other.
+You can do it over number of heads, because they are completely independent. So at least you find you can find 2 axes which are naively parallel.
+So it means that there is no communication. You can just do this operation independently.
+So a quick question here like even for local attention, this sequence length, parallelism won't work right like if you have a sliding window.
+No, sorry it won't work, so you can optimize over sequence length, but it will just imply there is communication involved.
+Right right.
+So I'm just saying parallel where there is no communication between Gpus would be over batch and heads.
+And you could potentially modify local attention right where you could do sliding window and then blockify so that
+there is no communication
+You can parallel.
+Potentially right potentially.
+That's awesome. You think you solved the local attention parallelism? That's the
+but there will be a question.
+Okay.
+So 1st thing is like context, parallelism, right? Like. So so like, I hope, like the way I'm presenting this is helpful. Because these are questions you should ask yourself when you do implement the transformer, and once you ask these questions and look at it from like which axes are things you can parallelize, which axes are the ones you can
+communic like which access will result in communication. What does that communication
+operator look like? Then you can start optimizing for that program and then say, this is how we should optimize. And then the details of whether you are on a Gpu or a Tpu actually doesn't matter. I came from a Tpu world now, on a Gpu world is roughly like the same like you. The terminologies differ, but it's identical, like. Once you have this base level of understanding, it becomes super easy to move between different hardware, and then you have to look at. As I said previously, like different
+groups of Gpus, may be connected differently than groups of Tpus. Right? So those are things that are details.
+Now, this is a context, parallelism, exercise like, how do you parallelize the Qk transpose over the sequence dimension?
+So I just wrote like some basic code here.
+you get the Q vector, K vector, and V vector, over bh, tk, where B is the batch. T is the sequence. H is the heads, and K is a key size.
+And then you get these logits, which are which you obviously do softmax over. And then my question to you all is, how do you parallelize this.
+So so just to kind of ask the question again, right parallelism will in involve
+thinking about how the data is distributed, and also how the model is distributed right, the model over here being QKV. And of course the other parameters.
+Wait. So
+I think like we, I don't know whether this like makes sense or is right, but like I think, like to paralyze over sequence like
+like, whenever you're multiplying like 2 matrices by each other, you can take like you can paralyze by taking, like the row of the second matrix, multiplying it by like a column of the 1st matrix.
+So I think, like, you can maybe like paralyze like that. But I don't. I don't know whether that makes sense.
+You, you're pretty close, actually. So I'm just gonna go back to the previous slide right? Just to. So I just said, clue work across the query, query, sequence dimension.
+So let's think about what an attention operation is. Right. So for every query like, say, you have.
+Say your lecture notes has 1,024 tokens.
+Right?
+So for every position you have to take a dot product with everything before that position. So query and key, right? So
+query at position 55. Takes a dot product at with key at position 55,
+and key at position 54 all the way to position one alright.
+so you can. Naively parallelizing. I can parallelize over the query, dimension, query, sequence, length.
+right. I am creating a attention output which is sequence, length by sequence length.
+Right? So then, I can say across the sequel, one of the axis. I can just do do them independently, but it has a problem.
+Could you guess what the problem is?
+I need the full key matrix everywhere.
+That's 1. But say that you have the full key matrix everywhere.
+That's that's okay. Like, let's just look in terms of not computation, not memory. That's a great point as well, for, like later.
+The problem is because usually when you have a causal mask, it's not load balanced. The last query has to take
+1,024 dot products, whereas the 55, one only has to take dot products among 55
+vectors.
+So if you parallelize naively, what happens is one of the Gpus will be done while the other one is like still processing everything.
+So would a solution be that you kind of broadcast
+the 55th one to the others, and then, do the computation or.
+Or is there a way to so like when now forgetting transformers and everything like parallel programming, we always want to load balance the work right?
+Is it possible to instead chunk the thing so that you get load balanced comp amount of computation? One of them is MoD sharding. So what I said was.
+I divide the sequence this way. But what if I just take every k
+together? So like Zeroth query goes so I have 8, Gpus. Zeroth position. Query goes to Gpu, 0 position 9 goes to Gpu. 0 position 17 goes to Gpu 0 all the way. Now I almost load balanced all the work, because all the work is roughly proportional.
+So, Rohan? But like, when you are implementing this this attention with causal mask, like
+I thought, the way you implement is, is irrespective of the causal mask that the causal mask is something that you apply, but you end up doing the same amount of computation. Just that with some padded tokens. So is this not true.
+So if so, that's like an implementation like, you can implement with the mask, you can implement without the mask all those but like the actual work that we need is the triangle and the
+of the attention.
+Right.
+Wrangle.
+Right.
+My question was, how do you make the lower triangle amount of work to be load balanced.
+Right.
+Right, and that is by taking like different gpus operating over similar size length. So for the La one Gpu uses takes the entire sequence. 1,024. The other Gpu has to use 1,000. 23,000. 22,021. So that's how you can load, balance the work right.
+Good night.
+And that's.
+So then, so then, typically, you want the
+I guess the dimension to be like a multiple of the number of gpus or the number of Gpus to be like, you know, factory.
+That is correct, and that is one of the most painful odd number of GPS.
+Right? Right? That's why you kind of see, you know, model dimension being like 5, 12, 1,024, and the number of Gpus being some lower power of 2.
+Yeah, anytime, we add some weird multiplier like everything.
+Yeah, okay, quickly.
+Because you can fix it by padding. But then it becomes extra code you have to write, and all that becomes too complicated to manage. But here this is so. But this exercise hopefully tells you like, well.
+attention is the basic operator. You could obviously parallelize over batch and heads. And they're called different terminologies. Data parallel head is, I think, like attention parallel, or I don't know what the people call it, but then they can also parallelize over the sequence dimension as well, because you're computing outputs, which is like a square and like only up lower triangle of the square, and then
+you can load, balance the amount of work across many gpus. And I think this is the type of thinking. You may want to start applying when you write the code for transformers, because once you start looking at all the operations and started trying to parallelize, everything
+becomes easier if you're starting out now.
+So the second one is the fee forward layer.
+So like largely most models have gone to using gated galoo layer. So I only use gated galoo in my
+plot here or in my slides here. So x is. The input
+X is multiplied by some matrix W,
+and then an activation function called Galu is applied, which is this operation over a single scalar.
+Then you take a Hadamar product with another output, which is X multiplied by another matrix V,
+and that's the gating operation. So like the Gelu can switch on and off different activations. Essentially. And that's why called gated galoo.
+Then it's followed by another matrix. Multiply, which is W. 2, which is there.
+So here X is the batch. Tim X has the following shape, it has a shape of
+batch, dimension, sequence, length and model dimension. So model dimension is your like, you know inputs like this size.
+One thing that's interesting about feedforward layer is that you not interesting like, it's basically operating over individual tokens. There is no dependence on the sequence. Attention is the only thing that mixes sequence positions together.
+Feedforward layers are running independently on every token.
+independent of the other. So you can. Massive parallelization. Gpus, love it right? It's batch, time, sequence, length, number of
+your effective batch size is batch, time, sequence, length, because they are completely, naively parallel independent operations.
+Then you have model dimension, and you have a hidden dimension. Those are 2 dimensions that you have to think about.
+Model dimension and hidden dimensions are typically related. Hidden dimension usually is a factor like 2 x or 4 x. Larger than the model dimension.
+Alright.
+So if so, then this is good. So now, if you have a single gpu. You probably, and you you train. If you have multiple Gpus. If you have a very small model, like models where the hidden and model dimensions can fit the memory of individual Gpus. Then you can just purely do data parallel training each Gpus independently, work on independent amount of work, and then
+do a forward pass. But, as I said, like the engineering aspects of this have made the models like you can get better result by making models bigger. Now the dimensions of these models have become so large that it doesn't actually fit a single gpu. I mean, it would be hard to fit all the layers on a single gpu.
+So then, people have thought, Hey, how do we split these weight matrices across multiple gpus so that you can fit? But the problem with splitting the matrix across multiple gpus is that you incur communication cost
+right? So there is no free lunch like you have either you can put it on a single gpu, or you can split it. If you split it. You have to start adding communication
+to your forward pass or backward pass.
+Yeah, I have one more question.
+So, for example, if you would not have Galu right? I guess in the original transformer it was, you know. Think of the Galoo operation as just being like all once.
+Yep.
+Right.
+Yep.
+So the one thing that worries me, you know, from a
+So so when? Because you do, Galu, you are.
+Sorry. Sorry.
+Almost taking the squares of elements right? For which pass the galoo, so would it be better to just have a 0 1 mask instead of a galoo. I don't know.
+That's a good.
+Is there any stability? Things that happen when you.
+Where is it? Where?
+Yeah, yeah.
+it's a great area for research, because I do know that folks are using relu squares instead of Galu to make it super sparse, and having that sparsity helps accelerate the matrix, multiply the W 2 multiply really fast, because now your activations are sparse.
+So if there's a certain hardware you can exploit that sparsity.
+Let's see.
+This is like an awesome line of work. Research. You can do one. Maybe an insight I can give is that it almost feels like these 3 forward layers and encode like the activity vector you get is like,
+it's like a multihord vector
+that's looking so like this gated get like. I don't know if you can see my cursor. You can.
+Yes, we can.
+This this operator gives you. You can think of this operator giving you some kind of like
+very hidden dimension sized activity vector where different bits are on. So it's like, say in your in the example you gave, it's like one or 0.
+Yes.
+So that's like, in allowing you to index into some other matrix. W. 2, which is like an embedding table.
+Yeah.
+And then you're summing up these embeddings. Then you can start seeing how like the transformers are encoding information into these free forward layers, using approximate something like a hash table. There's many work that talk about. How then transformers encode stuff in there. This is one way to think about it
+right. If you forward layers are creating these like storing information in these weights.
+Right. I see no.
+And this is true for all days. Or this is like, maybe in the middle. That's the way like you start seeing this more and more.
+Oh, no, I meant to say this is when you say I didn't talk about layers yet, but just the
+feed forward like just the feed forward component. It's repeated 8 times.
+Right.
+Whether which section of the deep transformer does it encode? Which knowledge like? Yes, that's different. Question. Here.
+No, but but this sparsity occurring like I would assume that maybe in the input layer, like, things are looking like much more murky. But like as you go, deeper and deeper like, it becomes more peaky, and K. Hot.
+This will be an awesome research thing to run on the.
+We don't.
+As like, because you get to see some of these behaviors, and what I can see is what you see sometimes on the low, small scale actually hold at the larger scale. So you may find some insights about training transformers using the class project as well. So like, I agree with you, but like the reason I'm not going in there is like I can't. I don't recall all the research about which layer is
+doing what? So
+God, I should have you had this lecture earlier.
+I think it's a bit late for the class projects to change, but.
+Yeah, sorry.
+So, as I said, like, you know, batch and sequence is fine. But then you have model and hidden dimension, and what I found like looking at it from 1st principles is that I think Vishal, I think, mentioned it like you can multiply matrix 2 ways, and once you know them.
+that's all people do. But they're called different things in different code, base or different frameworks and thinking just
+purely from the base operator. And how do you parallelize a matrix? Multiply? Is all you need to
+do large-scale pro-training.
+Everything else is like
+names associated with different of operator, and they could be named differently based on which line of research or which company you are in. And that's been an interesting learning for me.
+So this is from the Jack scaling book.
+your data parallelism when there's something called as fully sharded data parallelism. There's tensor parallelism. It's also called megatron sharding. It's also called model parallelism. It's like really hard to like. Understand when you like. If someone tells you, if you didn't know earlier. Oh, I do, megatron, I do. 0 3.
+Be like what is going on like. It's too confusing. So I want to pop one level up the stack and talk about matrix multiplies.
+and then you all should build a mental model of how
+each one of those map to one of these things in the literature.
+So you got 2 matrices. I sorry for the visualization. I made it last minute, but it should convey the message hopefully. You all understand.
+There's a green and 2 matrices, the green one and the red one you take act as the matrix multiply. You're taking
+matrix one times, matrix 2.
+So the naive question to ask is, How do you parallelize this? I can split the 1st matrix.
+Sorry it's the second matrix along the output dimension into N pieces right?
+And then do them independently and then concatenate the results.
+So now I said a few things. First, st I said, the output matrix is shattered, so the second matrix is shattered along the output dimension
+or divided among the output dimension.
+Then I need to collect all of them together at the very end. After a matrix multiply.
+The collection operation is some a collective that we've I've mentioned earlier, the All gather
+right. If different. Gpus were doing this work independently, and every Gpu needs now the output of the full thing you can do an all gather operator.
+This is clear, right, like this, at least an app at an abstraction level. This is clear, like
+the second way to make multiply a matrix. You can divide the 1st matrix into the rows.
+the 1st dimension, and also the output, and and then multiply it so.
+And then you can. You have to sum all of them together to get the output.
+So there are 2 ways to basically multiply a matrix output dimension or input dimension.
+Now look, let's look at this one. Right here.
+We're taking a matrix, splitting it across rows.
+another matrix splitting it across columns.
+And you're taking a matrix multiply between these partial
+row, matrix and partial column matrix.
+The output size of that matrix will be the full size, right? It'll the output of this.
+Sorry. I I think I might have messed up the pig figure right.
+So I think you want you wanted to probably do an outer product right? So you wanted to
+write it as, yeah, you want to. Exactly.
+I'm very sorry, but this is good. Nobody actually asked me anything so like I was almost taking the wrong.
+But basically, you can think of
+matrix multiplication in different ways, right inner products, which is what you did before. And this is the outer product.
+Products. Now, the thing about outer products is
+So the thing about outer products is that when you do these outer products, you get the full
+output, and you need a way to sum them together across all the gpus.
+A way to sum them is called an alt reduce operator
+right. But now like these like. So I went back here, and here you can see how like
+different you look. Think of the operator in terms of shapes. Think of how you want to split it across, and then think of if you did split it across many gpus, which communication primitives do you need to connect together to get the final result.
+If you, if you wanted the fastest way to do matrix multiply, you would stick with storing everything locally.
+We could not store everything locally because the models got too big.
+So now you have to pay for communication cost, and there are 2 ways to split these things together.
+And that's what people have been optimizing for so fully sharded. Now, back to these terminologies.
+the fully sharded data parallelism. The inputs
+in in this is a slightly different version where the inputs are shattered across rows.
+This thing is shaded across rows as well. And then to get the output, you have to gather everything together. The tensor panelism is much, maybe a bit more
+obvious where you have b times. Dy the thing that I mentioned, and then.
+you can either divide your input
+across D or Fy. I guess each one will produce a different result, so you can like shard it differently. But this is where I was mentioning this many ways, you can shard, and the way you shard is based on what is most efficient.
+and then going back to transformers particularly.
+So I did point out one thing right. You have, like a natural 2 matrices like you get this output, and then you multiply by W. 2.
+So the how you shard W. And V could be different from how you shard W. 2, so that the innermost multiply can the communication can be reduced. So there is variations here as well.
+But I would let you all look at the literature to map out how to map feedforward layers in different configurations, and think about different cost and communication trade off for each one.
+There are many variations, as you can imagine, and some variations are faster, and some are slower, some are better for memory, some are worse for memory, but better for compute.
+So.
+So, Abiram, your audio is a little garbled.
+Okay, I'll I'll send a message in the chat.
+Oh, feel free to ask your question. I think it became better when when you just spoke, but earlier it was a little girl.
+Okay, is it? Is it good? Now.
+yeah. So the 1st method involved multiplying a matrix by a vector, but like, I'm just wondering, like
+the most like highest parallel. Maybe most memory efficient is like, what if you had, like
+each like a vector by vector multiplication.
+like for each element? I guess.
+Yeah, that's like the order product where each of your the size of the output dimension is one input is one. And then you're doing.
+as Indrajit said, right. The order products of many of these.
+Maybe the reverse of that. So what you had originally was like the output is one element right?
+Right. So I think you can take, for example, this picture that Rohan drew right. You can take the left matrix, which is the green matrix.
+and if you now divide it up into, you know M. Rows.
+then I think it'll get to what you are asking right.
+Yeah, yeah, I'm just saying, Yeah, that's what I was wondering. Is that like.
+Yeah, exactly. So, in some sense, that is kind of included in this. I think.
+Oh, okay. Good.
+Is like.
+So, yeah,
+so this. That was a great question. Right? Like, you can reduce memory. But then you may
+effectively utilize the gpus not so nicely because Gpus, like really large matrix multipliers so utilization.
+I see.
+Something that you also think about.
+So like that. That's like all the trade off that people make on a daily basis to train big transformers efficiently.
+You have to reduce memory. So things fit. You want to make sure your Gpu is utilized so that you have sufficient work
+per call to a matrix multiply.
+and you make these trade-offs together.
+And there there is more interesting things you can now do, which is like the next layer of complexity
+is that as you do these operators, you, there are communications that you have to do right. But this communication can be done
+overlapped with computation.
+If that makes sense. You don't have to wait for every part, like all the results to appear before you start summing things together. That's like one optimization.
+So another layer of like, when, if you go deep into this is like figuring out how to interleave communication with computation, so that overall time taken is super fast like is cheap.
+If you have to wait for communication to happen, that will take a long time, and that will slow you. Reduce your total utilization.
+And with these 2 things, then you have essentially a transformer.
+and you can train on as many
+gpus as you want. Now, the interesting aspect is each of the choice that you did in terms of sharding in the forward pass will result in a different way of computing the backward pass.
+I think I've like did not talk about the backward pass here at all. But that's the next layer of complexity. Right? You've got your forward pass written. It's really efficient. It's good in the backward pass. You have to also use these collectives to compute the partial gradients and then compute the full gradient, then compute the weight update.
+One question, Rohan, like so you've talked about kind of splitting these matrices up or shorting them. Either row wise or column. Wise right? You know, back in the Hpc days, right? So when
+that libraries like scale a pack and so on, which I actually worked on when I was a grad student, mind you, they said that the optimal way of sharding is actually block cyclic.
+So you subdivide the left matrix into blocks
+in a cyclic way and the right matrix, and also a cyclic way. And that kind of minimize the communication, and so on. So so has that already been considered in in implementation or.
+Perhaps right. So I come from the Tpu world, and where.
+Yes.
+That might be less efficient to do on a tpu.
+I see.
+May perhaps, on the Gpu world that has been considered. But this is, I actually don't know the answer.
+I see. I see it may be embedded under the Cuda library like, that's right on the Gpu. Yeah, okay.
+So I think I wanted to mention, like
+given all the work like thoughts on research, this is my own personal thoughts, so like, you know, you have to form your own as you do research or engineering.
+like the most successful ideas in the last. Several like years that I've been doing. Research has been the ones that utilize computer scissors more.
+When I started research, there was this prior for me to make things more efficient, which was great.
+but if I picked the wrong project, I would work on making something more efficient which would not stay the test of time in the sense. Within a year it won't be useful, like an example is low memory optimizers. I worked on it for a year.
+It was great for a couple of years. But then all the gpus now have lots more memory than when we started when I started. We only had 8 gigs of memory. Now we have, I think, B. 200, as in 192 gigs of memory or something I don't know, like something very large. So always work on things that make use of more computers is something that I've learned.
+Do not discard ideas. It's not like a full on, like you have to make things efficient. But think of making things efficient, and have a nice way to go from efficient version to more compute version, because compute will continue to increase over time.
+So your methods could use our computer to get better quality. Whatever you're going for, right? That's 1
+like, don't think of efficiency as a single point on a single GA particular point. But think of it as a spectrum that you can change the knob.
+Hardware advances absolutely can unlock new algorithms. When I started working on shampoo we had
+really slow tpus. Now we have extremely fast ones, and I saw the transition over 7 years. So the 1st 2 years we were trying to make existing tpus work with second order methods and took a bunch of shortcuts to get it working. And we did. And it was very useful. But over time. Now it's possible for like chronicle factor methods which I'll talk about next is to actually run quite efficiently on hardware, and
+you can scale trans, like, when I started transformers, we were training like less than 100 million. Now, we are training hundreds of 1 billion size transformer. And when I it wasn't quite clear, like we would hit hundreds of billions when we were working on 100 million parameter size models.
+So always think about using more computation to make better
+outcomes. So I don't know. This is just my prior.
+Think definitely, think of a deficiency. But don't think of efficiency as a single point.
+Okay, so this is the part of the talk where I was talking about transformer, forward pass. And the last next bit, I don't know how long we have. I guess we only have 10 min.
+Is about the cool research that I did, which is still relevant that hopefully over time. I can now publish a lot more cool research, but, like the ones I can talk about, I put in these slides.
+You know, the 1st one is distributed shampoo. We will work when we started. Nobody like not a lot of people thought this was interesting. Now that are like with Intraji, Tsai and others have come up with more cooler versions, and then there have been methods now making it super fast like move on. So how do you optimize neural networks more efficiently and faster distributed shampoo
+when we started core distillation. This I remember like talking about, hey, what is the limits of batch size? We're going to hit the limits of batch size at some point. And then we need methods that can use more computation to improve training efficiency
+right? And when Jeff and George post that question I was like, Come on like, we're not going to hit the limits of batch size like soon. This is obviously hypothetical future, and we have hit. Now the limits of batch size, and these methods have become more useful right like. So this was one example where it was kind of like
+we're trying to think of like kind of a bit further ahead in terms of what the limits are, and try to come up with something that's more relevant. And then now it's very practically useful.
+And of course, distillation is generally useful for getting more efficient models. We use code distillation type techniques for the latest llama models.
+And so that was very interesting, like learning as well. Nilesh.
+Yeah, I was just asking when you're saying the limits of batch size. You mean the benefits we get in better models when we scale bat size, right.
+So let me define it, following right when we define it here. It was like, so you can train at some batch size. B.
+Business.
+K. Number of Gpus. If I were to give you 2 K. Number of gpus, like I double your number of gpus, can you train faster.
+It turns out. Actually, there is a point at which, adding more, Gpus will not make your. You cannot train
+like equally fast. For example, if I give you 2 x more, Gpus, you can't train 2 x faster.
+And it starts breaking down very quickly, and there is a point at which there's no more benefit, adding more gpus.
+And this is because of communication.
+No algorithmic state of the art. Optimization algorithms cannot
+continue providing linear returns for linear increase in batch size, convergence.
+I see.
+So I I guess what you're saying is that you know, computationally.
+you could linearly increase batch size with the number of gpus and in terms of work involved, they would scale. But the algorithms, the the online algorithms don't. The the optimization algorithms start performing worse
+when you start increasing bad sites.
+And that's like that's like an important, very relevant topic. If you think about
+in my current lecture, I've talked about parallelism and the naivest parallelism you can exploit as batch size. So if you could scale to very, very large batch size, then you can use a lot more, Gpus, and scale your model better. So the question is, how do you unlock that? So any line of research that attacks it is pretty relevant. It's a very hard research topic
+to attack right and co-distillation is an orthogonal approach where
+the idea was, hey, let's train 2 models instead of one, and exchange information between these 2 models, where one is the teacher to the other, the other is a teacher to this one, and then train, and that gives you con like faster convergence
+and allows you to use more computation, because in general, like you, you can use like, if
+in a lot of cases, computation is not what limits us right, like you want models trained faster.
+So I'm like folks are willing to give us more, Gpus, if it means that I can cut the total training time by half.
+But that doesn't happen today, even for really large language models. And the question is, how do you unlock? And that's a very.
+So in the and so in the core distillation work you were considering, like one smaller student model and one larger teacher model, correct.
+No, no! Then the corticulation works, both models were. This was a fascinating.
+Slides. I see.
+Same size. And there's like interesting research to be done on teacher, student Gap.
+What we found is that if you train models which are roughly the same size where they're both like ahead of each other slightly, because of seeing slightly different data, you can actually accelerate convergence in each model gets much better
+like. If the student was weaker than the teacher, then distillation benefit pretty like significantly lower. Actually, it gets worse.
+If the teacher is bigger than the student. Obviously, we all know distillation works. This challenges that not challenges like it gives in that
+the teacher student framework doesn't dictate how large the teacher should be. And this one kind of shows that you actually need
+just the teacher to be sufficient, like slightly better. It doesn't need to be substantially better.
+Yeah. And I. And I guess you could even like I'm and I'm guessing that this is going to be research topics, right? That instead of like having
+2 models. Right? Be, let's say, of the same size and then doing core distillation. You can actually have like one large model. And then you can have, like K. Smaller models, and then you can do kind of some ensemble.
+Good.
+In going forward. I would love collaboration around this topic because I do believe that
+ensemble distillation, different ways to parallelize across multiple Gpus with
+mechanic distillation as a base mechanism has some impact today in current like Llm training.
+and there is a lot to be gained, especially with language models, because the data mixture really affects what kind of things these models learn. And especially if you can vary the data mixture, you can create experts very quickly, like you can kind of get a really good code model
+without spending as much flops as a single big model by making it more specialized to code. And then hope is that you can distill that back to the base model does mean
+many areas like there's many questions to ask and many things to formulate. Here.
+Oh, I see. Okay, really, interesting. Okay, cool.
+So you mean, like a mixture of expert approach. But each expert is sort of distilling knowledge to
+every other expert.
+Every other expert. So exactly, and make sure. Yes, current mixtures of expert is very focused on Ffn. If I had more time I would also, maybe next time I give this lecture, I can provide like how moes are done currently. But this is maybe at a higher level, at model level experts. Right?
+Yeah.
+And then local prop was this idea with Manfred Vermouth and Hassan around this idea of like the problem with, like, how do you improve backprop. And we've been working on. Obviously, optimization.
+But Backdrop has a sequential dependency. And like, I remember Jeff mentioning once when we were in brain like backdrop is so inefficient or optimization with deep learning. You take a batch and you take one gradient step and you throw away the batch. Humans learn way more per example than neural networks. So the question is, can you actually like another way to think of is like, can you learn more from a single batch of example and local prop kind of gets there by
+decoupling these updates to be per layer. And you run multiple iterations on the same batch.
+And there's connection with the shampoo line of work. We find that it's related to a preconditioner, and you get better results. Unfortunately, local prop is still in the toy like we've got a deep autoencoder to work quite well, but hasn't really scaled beyond that. But it is a line of research that a lot of people kind of still pursue, because.
+like, if you can parallelize as you if I like.
+But this is saying that you can split your layers across many gpus and do more compute, which are independently local and get better results faster convergence.
+right so. And some of the difficulty today, with many of these things is implementation complexity. But now, maybe in the next few years, these type of algorithms may shine right?
+I think we have only 2 min. So I don't. There's a have a lot of material around Shampoo Co distillation and local. But if I maybe I can should stop here and ask for questions right, and maybe give this part of the talk later, because I don't think we will finish.
+Yeah, yeah, sounds good. So I know we sorry we interrupted you a lot, because I think.
+No, that's all.
+Buddy
+very interesting. So you know, we have, just a few minutes left. Anybody wants to answer. Ask a question.
+I guess maybe I can repeat Sunny's question now.
+Actually, I have a better question, Professor. If.
+Okay, go ahead. Go ahead, Tanish. You are replacing your question.
+Really sorry to bother you so, Rohan. I was wondering that this for adaptive optimizer, you should have your increase the batch size by K with Adam. You do it root K for the learning rate, you know. But but the problem is, does that scale like in your experience in maybe in Gemini, or maybe in llama, does that actually scale? Or it has limits? Sorry to like, yeah.
+Only talk about llamas in llamas particularly.
+or in like in in also the external research.
+like, we do find that you can increase batch size to some point, and after which we start actually having negative, like, increasing batch size is negative
+to scaling the model, as in you get worse quality.
+like we find that as you increase batch size.
+there's a point at which, like training becomes extremely unstable. You get these spikes.
+The model does converge to some point, but it's much worse than
+using a smaller batch size for the same number. Total tokens. Does that answer your question?
+Yeah. Thank you very much for basically, how do you know you hit a critical batch size? Is this, how? How you know you hit a critical batch size.
+Yeah. So like, yes. So like, I think, llamas particularly employ this technique called meta, P, like, it's a variation of Mu P. To set learning rates, you'll learn more about it in the paper. It?
+It's yeah. So then there are studies that show like, there's a point at which, like scaling beyond, actually is negative to the model. And there's like a nice curve showing that.
+Thank you very much.
+Okay, any more questions.
+Do we get access to this presentation? Because.
+like, there was links that you mentioned, and all these papers and stuff so.
+Yeah, I can send it to you all interjeet after this, and absolutely.
+Yeah. So we'll make it available just like we've made other.
+Yeah, I would. I would really go through these 3
+document links, and it has a lot more material. But I'm hoping my talk
+gives you like a high level overview to grok these tutorials better.
+Okay, any more questions.
+Okay? So again, you know, I think, thank thank you, Rohan. I think this was like a treat to this class to learn from somebody who's actually, you know, in the right in the thick of Pre training these very, very humongous models, you know, currently for Meta, and I know that Rohan is kind of very busy, and.
+you know, has many, many pressing things to deal with. So again kind of pleased that, you know. He accepted our invitation and actually kept it, because I know what has happened in the last 2 weeks for him, and I'm sure.
+This week was pretty. Yeah, last week was pretty interesting, but I'm hoping that we have given the world open models and people make use of them?
+Hopefully going forward?
+like, like. Hopefully, you all take some of these lessons in your class projects and tinker with them. So like the best outcome would be.
+You all like, find different ways to parallelize and contribute back right? So because I don't think it's a solved area, right? It's not an area where it's like the most efficient methods have been discovered. Yet.
