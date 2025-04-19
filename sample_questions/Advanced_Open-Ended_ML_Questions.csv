@@ -1,0 +1,40 @@
+question,answer
+"Why is the matrix X^T X sometimes not invertible in linear regression, and what are the implications?","It is not invertible when the columns of X are linearly dependent, which implies that the least squares solution is not unique."
+"What is the condition number of a matrix, and why does a high condition number pose problems in regression?","The condition number measures sensitivity to numerical errors; a high value indicates the matrix is close to singular, leading to unstable solutions."
+How does the geometric interpretation of least squares regression relate to orthogonal projections?,"It finds the projection of the response vector y onto the column space of X, minimizing the perpendicular (residual) distance."
+Explain why minimizing the L1 norm is not as straightforward as minimizing the L2 norm in regression.,"The L1 norm is not differentiable at zero, making the optimization non-smooth and more complex to solve."
+Why does adding a regularization term in ridge regression help with multicollinearity?,"It stabilizes the inversion of X^T X by penalizing large weights, effectively reducing variance from correlated predictors."
+"In perceptron learning, what guarantees convergence of the algorithm, and under what condition?",The perceptron convergence theorem guarantees convergence only if the data is linearly separable.
+Why is solving linear regression via SVD more stable than using the normal equations?,"SVD avoids squaring the condition number and does not require matrix inversion, making it more numerically stable."
+"What is the role of the kernel trick in SVMs, and how does it avoid explicit feature mapping?","It computes inner products in high-dimensional space via kernel functions, enabling nonlinear separation without computing φ(x)."
+How does the dual formulation of SVMs naturally lead to the use of support vectors?,Only points with nonzero Lagrange multipliers (support vectors) affect the decision boundary in the dual formulation.
+"What is the significance of the margin in SVMs, and how is it mathematically defined?",The margin is the distance between the decision boundary and the nearest data points; it equals 1/||w|| in the hard-margin case.
+Why do Gaussian class-conditional models with different covariances lead to quadratic decision boundaries?,"The log-likelihoods include x^T Σ⁻¹ x terms that don't cancel, resulting in a quadratic function."
+Explain why the projection of y onto the column space of X minimizes the squared error.,"Because the residual vector is orthogonal to the column space, minimizing the Euclidean norm of the error vector."
+Why does high variance in model predictions usually imply overfitting?,"Because the model is overly sensitive to small changes in the training data, leading to inconsistent generalization."
+What is the main difference between QR decomposition and Cholesky for solving linear regression?,QR works on X directly and is more stable; Cholesky assumes X^T X is positive definite and is faster but less stable.
+How does forward and backward substitution work in solving triangular systems from Cholesky decomposition?,"Forward substitution solves Lz = b, then backward substitution solves L^T w = z, using sequential updates."
+Why is the decision boundary in k-means clustering linear?,"It is the perpendicular bisector of the segment between two cluster centers, defined by equal distance."
+"In Bayesian classification, why does using log probabilities help numerically?",It avoids underflow from multiplying small probabilities and converts products into sums.
+How does the prior distribution affect the MAP classifier in Bayesian inference?,"It biases the decision toward classes with higher prior probability, even if the likelihood is lower."
+Why is SVM considered a large margin classifier?,Because it maximizes the margin between the classes while minimizing misclassification.
+What is the role of support vectors in determining the SVM decision boundary?,They are the only points that affect the optimal hyperplane; other points are irrelevant once the margin is maximized.
+Why can solving the normal equations become problematic when features are nearly collinear?,"Because X^T X becomes ill-conditioned, leading to large numerical errors during inversion."
+What is the difference between generative and discriminative models in classification?,Generative models model P(x|y) and P(y); discriminative models directly model P(y|x).
+Why does perceptron fail on non-linearly separable data?,Because it updates weights endlessly without convergence since no linear separator exists.
+What is the significance of orthogonality of residuals in least squares?,It ensures the error vector is minimized in L2 norm by being perpendicular to the fitted space.
+How does the use of high-dimensional kernels affect overfitting in SVMs?,"It increases flexibility but also risk of overfitting, especially without proper regularization."
+What is the objective function optimized in logistic regression?,The negative log-likelihood of the logistic function (cross-entropy loss).
+Why is gradient descent preferred over closed-form solutions for large datasets?,Because closed-form methods like inversion become computationally expensive at scale.
+What property must a kernel function satisfy to be valid?,It must produce a positive semi-definite kernel matrix (Mercer's condition).
+Why is L1 regularization more likely to result in sparse solutions than L2?,Because it encourages exact zeros in weights due to the nature of the absolute penalty.
+How does SVM handle noisy data points in soft-margin formulation?,By introducing slack variables that allow margin violations with penalty.
+Why does the SVD of a matrix reveal its rank?,Because the number of non-zero singular values equals the rank.
+In what scenario would k-means clustering fail to find meaningful clusters?,When clusters are non-spherical or differ significantly in size or density.
+What happens to the optimization landscape when using ReLU activation vs sigmoid?,ReLU avoids vanishing gradients but introduces non-smooth points; sigmoid has smooth gradients but saturates.
+Why does a high validation loss with low training loss indicate poor generalization?,It suggests the model overfits training data and cannot perform well on unseen data.
+Why does QR decomposition work well for least squares problems?,"Because it decomposes X into orthogonal and triangular matrices, improving numerical stability."
+How does early stopping act as a form of regularization?,It halts training before overfitting occurs by monitoring validation performance.
+What does it mean if the residuals of a regression model are correlated?,It indicates that the model has failed to capture some structure in the data.
+Why might we use batch normalization in deep networks?,To stabilize and accelerate training by normalizing intermediate outputs.
+How does the choice of activation function affect the expressiveness of a neural network?,"Certain functions like ReLU enable piecewise linear modeling, while others limit the function space."

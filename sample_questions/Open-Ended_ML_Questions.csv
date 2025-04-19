@@ -1,0 +1,41 @@
+question,answer
+What is the main goal of linear regression?,To learn a function that predicts a real-valued output y from input features x.
+"In a regression problem, what kind of values do the labels (y) take?",Real numbers.
+How are classification problems different from regression problems?,"Classification problems have categorical outputs, while regression has real-valued outputs."
+What is the form of a linear model used in regression?,A linear combination of input features: y = w^T x + w0.
+Why is a bias term included in linear models?,To allow the prediction function to have a non-zero intercept.
+What is the objective function used in least squares regression?,The sum of squared differences between predicted and actual values.
+Why is the squared error used instead of absolute error in linear regression?,Because it is differentiable and leads to a closed-form solution.
+What is overfitting in machine learning?,Overfitting occurs when a model fits the training data too well and performs poorly on new data.
+How do you avoid overfitting in regression?,By using regularization techniques like ridge or lasso.
+What is the normal equation used in least squares regression?,w = (X X^T)^-1 X y.
+Why is matrix inversion not always safe in numerical computation?,Because it can be unstable when the matrix is ill-conditioned or nearly singular.
+What is an alternative to matrix inversion in solving regression?,Cholesky decomposition or QR decomposition.
+What is the geometric interpretation of linear regression?,Projection of the target vector y onto the column space of X.
+What does the gradient of the least squares loss function represent?,The direction of steepest increase in loss.
+What is the perceptron algorithm used for?,Binary classification with a linear decision boundary.
+How does the perceptron update rule work?,It adjusts the weights whenever a data point is misclassified.
+"In perceptron learning, how is classification correctness measured?",Using the sign of y(w^T x + b).
+What does it mean for two vectors to be orthogonal?,Their dot product is zero.
+What is the goal of k-means clustering?,To partition data into k clusters minimizing intra-cluster variance.
+What is the difference between supervised and unsupervised learning?,Supervised uses labeled data; unsupervised finds structure without labels.
+How does agglomerative clustering start?,By treating each data point as its own cluster.
+What is the key operation in agglomerative clustering?,Merging the closest pair of clusters.
+How is the cluster 'nearness' defined in single-link clustering?,As the minimum distance between any two points in the clusters.
+How does the k-means algorithm update clusters?,By assigning points to the nearest cluster center and recalculating the means.
+What condition defines the decision boundary between clusters in k-means?,Equal distance from a point to two cluster centers.
+What kernel in SVM allows learning in a high-dimensional space implicitly?,The radial basis function (RBF) kernel.
+What is the dual formulation in SVMs used for?,To optimize a quadratic objective with constraints and allow kernelization.
+What does the SVM hinge loss function look like?,"max(0, 1 - y(w^T x + b))."
+What is regularization and why is it used?,It penalizes model complexity to prevent overfitting.
+What is the advantage of using L1 regularization (lasso)?,It encourages sparsity in the model coefficients.
+What is a vector norm?,A measure of a vector's size or length.
+How is the Euclidean (L2) norm defined?,As the square root of the sum of squares of vector components.
+What is the dot product of two vectors?,The sum of products of corresponding elements.
+What does SVD stand for?,Singular Value Decomposition.
+How does SVD help in solving linear regression?,It provides a numerically stable way to invert or approximate matrices.
+What is the universal approximation theorem?,A neural network with one hidden layer can approximate any continuous function.
+Why are nonlinear activation functions used in deep networks?,To increase the expressiveness of the model.
+What is the backpropagation algorithm?,An efficient method to compute gradients in a neural network.
+What are the stages of a machine learning experiment?,"Problem definition, data preparation, modeling, training, evaluation."
+What tool is used to track metrics and experiments in the ML course?,Weights & Biases (wandb).
