@@ -1,0 +1,51 @@
+id,question,answer
+1,What is the main goal of linear regression?,To learn a function that predicts a real-valued output y from input features x.
+2,"In a regression problem, what kind of values do the labels (y) take?",Real numbers.
+3,How are classification problems different from regression problems?,"Classification problems have categorical outputs, while regression has real-valued outputs."
+4,Why is a bias term included in linear models?,To allow the prediction function to have a non-zero intercept.
+5,What is overfitting in machine learning?,Overfitting occurs when a model fits the training data too well and performs poorly on new data.
+6,Why is matrix inversion not always safe in numerical computation?,Because it can be unstable when the matrix is ill-conditioned or nearly singular.
+7,What is an alternative to matrix inversion in solving regression?,Cholesky decomposition or QR decomposition.
+8,What does the gradient of the least squares loss function represent?,The direction of steepest increase in loss.
+9,How does the perceptron update rule work?,It adjusts the weights whenever a data point is misclassified.
+10,What is the goal of k-means clustering?,To partition data into k clusters minimizing intra-cluster variance.
+11,What is the difference between supervised and unsupervised learning?,Supervised uses labeled data; unsupervised finds structure without labels.
+12,How does agglomerative clustering start?,By treating each data point as its own cluster.
+13,What is the key operation in agglomerative clustering?,Merging the closest pair of clusters.
+14,How is the cluster 'nearness' defined in single-link clustering?,As the minimum distance between any two points in the clusters.
+15,What kernel in SVM allows learning in a high-dimensional space implicitly?,The radial basis function (RBF) kernel.
+16,What does the SVM hinge loss function look like?,"max(0, 1 - y(w^T x + b))."
+17,What is the advantage of using L1 regularization (lasso)?,It encourages sparsity in the model coefficients.
+18,How is the Euclidean (L2) norm defined?,As the square root of the sum of squares of vector components.
+19,What does SVD stand for?,Singular Value Decomposition.
+20,What is the universal approximation theorem?,A neural network with one hidden layer can approximate any continuous function.
+21,Why are nonlinear activation functions used in deep networks?,To increase the expressiveness of the model.
+22,What is the backpropagation algorithm?,An efficient method to compute gradients in a neural network.
+23,What does the 'condition number' indicate about a matrix?,It indicates how close a matrix is to being singular or non-invertible.
+24,What is the significance of the kernel trick in SVM?,It implicitly maps inputs into high-dimensional feature spaces without explicit computation.
+25,Define a hyperplane in the context of classification.,A hyperplane is a decision boundary defined by w^T x + w0 = 0 separating different classes.
+26,Describe the role of activation functions in neural networks.,"They introduce non-linearity, allowing networks to approximate complex functions."
+27,What is the main goal of classification problems?,To predict the class label for a new test point.
+28,What happens to the decision boundary if class covariances differ?,"The decision boundary becomes nonlinear, specifically quadratic."
+29,Define agglomerative clustering.,A hierarchical method merging closest clusters iteratively until a stopping criterion is met.
+30,What is the impact of large condition numbers in linear regression?,It can lead to numerical instability and large computational errors.
+31,What distinguishes supervised from unsupervised learning?,Supervised uses labeled data; unsupervised finds structure in unlabeled data.
+32,Explain what regularization is in machine learning.,A technique to prevent overfitting by penalizing model complexity.
+33,How does QR decomposition benefit solving linear equations?,It decomposes matrices to simplify solving linear systems numerically.
+34,What is a confusion matrix used for?,Evaluating the performance of a classification model.
+35,Explain forward substitution in solving linear equations.,"Sequentially solving linear systems from the top down, starting with the first equation."
+36,Why use cross-entropy loss in classification?,It effectively measures discrepancy between predicted probabilities and actual class labels.
+37,"Why is the matrix X^T X sometimes not invertible in linear regression, and what are the implications?","It is not invertible when the columns of X are linearly dependent, which implies that the least squares solution is not unique."
+38,"What is the condition number of a matrix, and why does a high condition number pose problems in regression?","The condition number measures sensitivity to numerical errors; a high value indicates the matrix is close to singular, leading to unstable solutions."
+39,How does the geometric interpretation of least squares regression relate to orthogonal projections?,"It finds the projection of the response vector y onto the column space of X, minimizing the perpendicular (residual) distance."
+40,Explain why minimizing the L1 norm is not as straightforward as minimizing the L2 norm in regression.,"The L1 norm is not differentiable at zero, making the optimization non-smooth and more complex to solve."
+41,"In perceptron learning, what guarantees convergence of the algorithm, and under what condition?",The perceptron convergence theorem guarantees convergence only if the data is linearly separable.
+42,"What is the role of the kernel trick in SVMs, and how does it avoid explicit feature mapping?","It computes inner products in high-dimensional space via kernel functions, enabling nonlinear separation without computing φ(x)."
+43,Why do Gaussian class-conditional models with different covariances lead to quadratic decision boundaries?,"The log-likelihoods include x^T Σ⁻¹ x terms that don't cancel, resulting in a quadratic function."
+44,Why does high variance in model predictions usually imply overfitting?,"Because the model is overly sensitive to small changes in the training data, leading to inconsistent generalization."
+45,What is the difference between generative and discriminative models in classification?,Generative models model P(x|y) and P(y); discriminative models directly model P(y|x).
+46,Why does perceptron fail on non-linearly separable data?,Because it updates weights endlessly without convergence since no linear separator exists.
+47,How does the use of high-dimensional kernels affect overfitting in SVMs?,"It increases flexibility but also risk of overfitting, especially without proper regularization."
+48,Why is gradient descent preferred over closed-form solutions for large datasets?,Because closed-form methods like inversion become computationally expensive at scale.
+49,Why does the SVD of a matrix reveal its rank?,Because the number of non-zero singular values equals the rank.
+50,Why does a high validation loss with low training loss indicate poor generalization?,It suggests the model overfits training data and cannot perform well on unseen data.
